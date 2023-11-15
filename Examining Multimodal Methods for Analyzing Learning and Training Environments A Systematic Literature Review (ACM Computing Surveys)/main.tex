@@ -264,10 +264,6 @@
 \section{Introduction} \label{sec:intro}
 
 % Architecture diagram and explanation
-% Caleb: May be good to use an existing architecture from one of the big names in the field. For example, this paper from Ochoa has some nice figures that we can adapt: https://solaresearch.org/wp-content/uploads/hla22/HLA22_Chapter_6_Ochoa.pdf
-% Caleb: This paper also has some good figures: https://wires.onlinelibrary.wiley.com/doi/full/10.1002/widm.1458
-% Caleb: https://www.sciencedirect.com/science/article/pii/S0268401218312751
-% Eduardo: https://docs.google.com/presentation/d/1RuZXndKMRlnM9J_GVaoR7EK_3JrRtXZi/edit#slide=id.p3
 
 % Introduction to LA and MMLA and its impact on everyday lives (why should we care)
 %   LA: Empowering educators and assisting students in real-world situations
@@ -306,6 +302,9 @@ The scope of this review extends to any publication leveraging multimodal techni
 %   Congruent taxonomy and framework
 %   Novel Citation graph method for corpus reduction
 %   Categorization and description of MMLA literature via citation communities
+%   Qualitative analysis of subdomains
+%   Advantages of multimodal approaches over unimodal alternatives
+%   Current SOTA and challenges
 The novel contributions of this work, to the best of our knowledge, are the following: 
 \begin{itemize}
     \item \textbf{Comprehensive review} of the research methods applied to multimodal environments
@@ -316,7 +315,6 @@ The novel contributions of this work, to the best of our knowledge, are the foll
 
 % Closing for the introduction
 
-
 \section{Background} \label{sec:background}
 
 % Discuss recent, past, and prominent works
@@ -326,7 +324,7 @@ Modern research in education and the learning sciences has seen a large push tow
 
 However, persistent throughout research in the field of learning analytics is the question: \textit{What forms of data need to be collected to gain insights into learner behaviors and enable meaningful analysis of learning scenarios} \cite{vatral2022using, ochoa2017multimodal}? In early learning analytics research, this question was largely answered through considerations of practicality; that is, the data which was analyzed was the data which was practical to collect in the classroom. This meant that early research on learning analytics focused highly on analyzing data from computer-based learning environments, where researchers had significant control over the design of the environments and curriculum, and log data could be easily collected and interpreted. This work analyzing log data from computer-based learning environments has a long, rich history and helped to develop meany of the theories and methods still used in learning analytics today. Log data from computer-based environments paints a very reasonable picture of learners actions and interactions in the context of the tasks they are performing in the environment that can be used to generate a wide variety of new insights into learners \cite{hoppe2017computational, ochoa2017multimodal}. 
 
-However, as the field of the learning analytics continues to advance, the limitations of these more traditional log-based analysis approaches has been the topic of significant and increased scrutiny \cite{ochoa2017multimodal}. For example, what if the learning or training environment does not facilitate easy action logging? This is certainly the case for environments which are more physical and less virutal than traditional computer-based learning and intelligent tutoring environments, such as traditional classrooms (see Section \ref{subsec:environmentSpectrum}). Beyond this, what if the logged data fails to capture the full context of learners' actions and behaviors? For example, computer logs may not tell any information about learner affect or collaborative conversations between learners. These questions, among many others, alongside the development and proliferation of affordable sensor devices, have lead learning analytics researchers to deploy additional sensor devices in the classroom to help close the gaps introduced by analysis of log data alone. These more complex sensors and data sources have the ability to capture a much richer variety of learner behavioral data. For example, physical movement, gestures, and postures captured through video data; dialogue captured through microphones; stress levels captured through biometric sensors; eye gaze and attention captured through eye tracking devices; etc \cite{vatral2022using}. 
+However, as the field of the learning analytics continues to advance, the limitations of these more traditional log-based analysis approaches has been the topic of significant and increased scrutiny \cite{ochoa2017multimodal}. For example, what if the learning or training environment does not facilitate easy action logging? This is certainly the case for environments which are more physical and less virtual than traditional computer-based learning and intelligent tutoring environments, such as traditional classrooms (see Section \ref{subsec:environmentSpectrum}). Beyond this, what if the logged data fails to capture the full context of learners' actions and behaviors? For example, computer logs may not tell any information about learner affect or collaborative conversations between learners. These questions, among many others, alongside the development and proliferation of affordable sensor devices, have lead learning analytics researchers to deploy additional sensor devices in the classroom to help close the gaps introduced by analysis of log data alone. These more complex sensors and data sources have the ability to capture a much richer variety of learner behavioral data. For example, physical movement, gestures, and postures captured through video data; dialogue captured through microphones; stress levels captured through biometric sensors; eye gaze and attention captured through eye tracking devices; etc \cite{vatral2022using}. 
 
 By combining together all of these additional sensor devices, researchers can capture a much richer picture of learners' affective, cognitive, psychomotor, and metacognitive states and lead to more comprehensive analysis of learner behaviors \cite{blikstein2016multimodal}. This combination of multiple sensor modalities for analysis of learner behavior has come to be known as the field of multimodal learning analytics (MMLA) \cite{blikstein2013multimodal, blikstein2016multimodal, worsley_multimodal_2018}. Today, MMLA has been the subject of over a decade of concentrated research including multiple journal special issues \cite{BJETSpecialIssue}\footnote{\href{https://www.mdpi.com/journal/sensors/special_issues/multimodal_learning_analytics_sensor}{https://www.mdpi.com/journal/sensors/special\_issues/multimodal\_learning\_analytics\_sensor}}\footnote{\href{https://learning-analytics.info/index.php/JLA/announcement/view/102}{https://learning-analytics.info/index.php/JLA/announcement/view/102}}, a special interest group in the Society for Learning Analytics Research\footnote{\href{https://www.solaresearch.org/community/sigs/crossmmla-sig/}{https://www.solaresearch.org/community/sigs/crossmmla-sig/}}, an edited book \cite{MMLAHandbook}, and several systematic literature reviews \cite{Chango2022, Alwahaby2022, Shankar2018, Crescenzi2020, Mu2020, DiMitri2018, worsley_multimodal_2018}. Owing to this significant body of prior work, in this review we narrow our focus to the study of only applied research methods studies.
 
@@ -365,46 +363,7 @@ By combining the valuable insights from these two significant surveys, a more co
 
 % Analysis RQs!
 
-% Possible RQs:
-
-%     1.Literature Gap In applied MMLA Methods - Answered by modalities + analysis methods bar charts
-%     2.The need for mid fusion - most people are using it but no one has every classified it this way
-%     3.What do communities tell us about current landscape of MMLTE?
-%       -ENV GOAL/TYPE ANALYSIS VIA COMMUNITIES: 
-%       -Only reread 53 not 73
-%       -Dives deeper into communities as requested
-%       -Helps explain away the methodology question of why we didn't collect this initially, but we use this as a way to better inform the communities
-%       -Condisder individual community analysis across publication
-%       -Most researchers only use a few 2-5 modalities, rather than many          -motivates technical challenges and ChimeraPy within each community. Differences, reasons.
-%       -Literature gap in communities: is there anything specifically that there is not a community for and would be worth having a separate community for
-        % -Nature of applications methods have been applied to, what has been done, i.e., analysis 
-        % -Scope: publication venues of all 73 papers, and of each individual community 
-
-% New proposed coding scheme:
-% Hierarchical: Environment Type => Environment Setting => Environment Subject => Environment Features
-    % Environment Type: Learning/Training
-    % Environment Setting: Physical/Virtual/Blended
-    % Environment Subject: Core Science (biology, physics, etc.), Applied science (clinical settings, engineering, etc.) Math, Language Arts, Psychomotor Skills 
-    % Environment Features: Gamification, multi-student, didactic, computer-based, open-ended, embodied, simulation-based, mixed reality
-
-% Email about model-based vs. model free:
-
-% To make sure we're all on the same page, we will consider both formal CPS models (i.e., derived from principles from physics/physiological knowledge or formal automata-based representation of CPS cyber components) and AI/ML models (i.e., regression, classification, DL, etc.) to be "model-based." So, if either one of those boxes is checked, we will consider the method "model-based."
-
-% "Model-free" methods are those that are not model-based by our definition, and largely perform statistical measurements such as correlation. I think exploratory analyses not grounded to a formal model and that don't use AI/ML models also would likely fall into this "model-free" category. 
-    
-
-% Since the term MMLA was formally coined in 2013 (Blikstein, c/o Ochoa), it has been used to inform learning and training environments.
-% Research has shown multimodal data is very often more informative than any single modality.
-% Several reviews have been done on MMLA, but through various lenses: data fusion (Chango, 2022); learning objectives such as behavior, engagement, and outcome (Sharma, 2020); and MMLA trends (Qushem, 2020)
-% We identified the need for a review of MMLA methods applied to multimodal data in learning and training environments. I.e., how are researchers and practitioners using MMLA to inform their environments based on the data they have?
-% This review is focused on applied multimodal methods used to inform learning and training environments.
-% Fully virtual environments are not included due to scalability issues in classrooms and a lack of video context relative to the environment. 
-% We discover, characterize, and contrast sub-communities within MMLA with the goal of understanding trends in analysis.
-% This review will provide researchers with insight into how others are applying MMLA to their learning and training environments given specific combinations of data collection mediums, modalities, analysis methods, and data fusion types.
-
 % Definitions
-%% Discuss participant tasks, participant goals, and researcher goals
 For the purposes of this paper, we define a \textit{modality} as a unique attribute defined by data from one of more datastreams, where each modality conveys different information, even if derived from the same data collection medium \cite{Ochoa?}. We define \textit{multimodal} as a combination of either multiple modalities or multiple datastreams (i.e., multiple data collection mediums). For instance, the same video datastream could be used for the affect and pose modalities (one-to-many), and the affect modality could be derived from separate audio and video datastreams (many-to-one). Both examples would be considered multimodal by our definition. Additionally, we use the terms ``papers" and ``works" interchangeably in this review, as we expand our definition of ``paper" to include other publications outside of conference and journal submissions (books, for example).
  
 We define a \textit{learning environment} as any environment whose explicit purpose is to foster knowledge gain and retention. This can include school classrooms, tutoring centers, online learning environments like Khan Academy, etc. Learning environments are focused on helping users gain knowledge and retain information, and they are often (though not always) open-ended. We define a \textit{training environment} as any environment whose explicit purpose is to help users achieve an end goal, such as task-proficiency or a positive outcome other than learning. This is often done through practice and repetition, and can include military training, nursing training, physical training, workplace training, etc. Training environments are task-oriented and are often (though not always), constrained. 
@@ -416,7 +375,7 @@ Consider a paper whose sole focus is multimodal composing environments that happ
 
 \subsection{Environment Spectrum}\label{subsec:environmentSpectrum} % Physical <--- Mixed ----> Virtual
 
-% No AR/VR training environments that require learner to wear glasses in this study
+% Reminder that no AR/VR training environments that require learner to wear glasses in this study
 
 One important aspect when considering the literature surrounding multimodal learning analytics (MMLA) is identifying the contexts in which these techniques are used, which mostly fall under the category continuum of learning and training (see Figure \ref{fig:ltcontinuum}). The main goals of learning environments are education and knowledge gain. These venues range from conventional classrooms to online courses and self-paced learning environments. When we categorize these environments on our continuum shown in Figure \ref{fig:ltcontinuum}, we add a second dimension, between fully physical and fully virtual, to represent this wide range of learning environments. MMLA methods applied in learning environments focus on extracting insights from various modalities such as text, audio, video, and interactions to assess students' comprehension, engagement, and progress. Educators may modify instructional tactics, spot problematic students, and improve learning materials by analyzing these multimodal signals since they provide significant insights into both individual and group learning patterns.
 
@@ -432,7 +391,7 @@ On the other hand, training environments are designed to improve performance and
 However, it is important to note that this division isn't always clear-cut. Some environments of study, like those populated by PhD students, blur the line between education and training. These students are learning new things in a vein similar to learning environments, but they are also increasing their research abilities and expertise, in a vein similar to a training program. Similarly, certain contexts, like game-playing platforms, defy easy classification into the learning or training categories. In these instances, MMLA methodologies must be flexibly applied, appreciating the multifaceted nature of the objectives at hand. In our categorization of all of the environments from our corpus of papers, we recognize this ambiguity in discrete categorization, but also recognize the utility of such a categorization when analyzing the research subcommunities that makeup the larger field of MMLA. As such, we perform a fuzzy qualitative discrete categorization based on discussions among the authors of where we believe each paper’s environment best fits on our continuum shown in Figure \ref{fig:ltcontinuum}.
 
 \subsection{Data Collection Mediums} 
-% Definitions
+% Definitions reminders
 % Researcher artifacts includes field notes and also labeling of the data (i.e., manual coding). 
 % Participant artifacts includes pre/post tests and the like. To qualify, all artifacts must be collected and analyzed in the pipeline and cannot be collected post hoc afterward.
 % Depth camera versus regular: discuss that both are video, but depth usually used for motion modality with skeletal features
@@ -477,7 +436,14 @@ For example, consider the same Kinect sensor discussed earlier. In this case, th
 
 This classification is still somewhat qualitative and up to a researcher's interpretation. As described by Di Mitri et al., "The distinction between observable/unobservable is conceptual and can vary in practice." \cite{DiMitri2018}; however, we believe that this additional data fusion category helps to resolve some of the ambiguity related to the original categorization scheme and is useful for identifying the sub-communities of MMLA based on which methods researchers have applied. For a concrete definition of the modalities that we consider oberservable for the categorization in this paper, see section \ref{sec:Modalities}. In addition to the early, mid, late, and hybrid data fusion categories, in this paper, following the methodology of Chango et al. \cite{Chango2022}, we add an \textit{other} category to catch studies that do not fit into one of those four groups or in which the fusion point was not specified.
 
-\subsection{Environment Goals}
+% NEED CATEGORIES FOR LATEST ROUND OF FEATURE EXTRACTION:
+% Confirm exact set from S18 corpus to be sure!
+    % Environment Setting. Physical, virtual, blended, unspecified.
+    % Environment Subject. STEM, humanities, psychomotor skills, other, unspecified
+    % Participant Structure. Individual, multi-person, unspecified
+    % Didactic Nature. Instructional, training, informal, specified 
+    % Level of Instruction or Training. K-12, university, professional development
+
 
 \section{Methods} \label{sec:methods} % How our literature view was done
 
@@ -738,98 +704,19 @@ Each item in each of the circumscribing feature sets is described in Tables \ref
 
 During discretized feature extraction, additional papers were newly identified for possible exclusion pursuant to our aforementioned criteria. After discussing each paper selected for possible exclusion, 2 papers were removed from the corpus due to all five reviewers agreeing that each paper violated at least one exclusion criterion. After the two removals, 73 papers remained in the corpus, all of whose features were extracted into discrete sets pursuant to Table \ref{tab:feature_extraction} by the first full paper read round reviewer. At this point, a second and final quality control round was performed for full paper reads (Table \ref{tab:procedure}, Step ID 9.3), where each of the 73 papers remaining in the corpus was assigned to a reviewer who had not yet read that particular paper. For this round, reviewers were instructed to perform two tasks: identify any papers remaining in the corpus that violated any of the exclusion criteria (to discuss later for possible exclusion), and perform a round of feature extraction (to determine inter-rater reliability (IRR) with respect to the initial feature extraction via Cohen's $k$ \cite{cohen1960coefficient}). For this round, no additional papers were identified for exclusion, resulting in a final corpus of 73 works. Each paper's discrete feature sets were ultimately determined via consensus coding \cite{} by the two reviewers who read that particular paper (i.e., both reviewers needed to agree on the presence or absence of each feature in each paper). For reference, Cohen's $k$ before consensus was $k=0.873$.  
 
-% BEGIN 2ND ROUND FEATURE EXTRACTION
-
-% Final Feature Extraction for Last Round
-%     Environment Setting. Physical, virtual, blended, unspecified.
-%     Environment Subject. STEM, humanities, psychomotor skills, other, unspecified
-%     Participant Structure. Individual, multi-person, both, unspecified
-%     Didactic Nature. Instructional, training, informal
-%     Level of Instruction or Training. K-12, undergraduate, graduate, professional development
-%     Analysis Approach. Model-based or model-free
-%     Analysis Results. (not discretized)
-
 Once our corpus was finalized, we performed one additional round of feature extraction to extract additional circumscribing features to be used in our analysis. These features are: Environment Setting, Environment Subject, Participant Structure, Didactic Nature, Level of Instruction, Analysis Approach, and Analysis Results. All of these features are explained in Table \ref{} alongside their discrete values. The one exception is Analysis Results, which was not discretized due to the wide degree of variability across each paper's findings. Instead, we noted each paper's findings, and used them in our qualitative analysis via a thematic analysis \cite{}. The additional features were selected for extraction to allow for greater insight into the corpus via a more in depth analysis.
 
 Similar to our initial round of feature extraction, we began with inductive coding, where four of this paper's authors first extracted the new circumscribing features for the same papers he or she performed inductive coding on during the previous round of feature extraction. We then discussed each paper's extracted features and formulated discrete sets for the new circumscribing features (with the exception of Analysis Results). During the first round of IRR, reviewers revisited the same papers they read during inductive coding and extracted the new circumscribing features pursuant to the agreed-upon feature sets devised during inductive coding. During the second round of IRR, reviewers reread (and extracted the additional features from) the same set of papers they were the 2$^{nd}$ reviewer for during the initial round of feature extraction. At this point, for each paper, the two reviewers who extracted that paper's additional features performed consensus coding to define that paper's final set of features. For reference, Cohen's $k=0.71$ for the additional round of feature extraction.
 
 \subsection{Analysis}
-% Explain our analysis methods, i.e., which descriptive statistics we used, communities for quantitative analysis, and other qualitative analysis.
+% Explain our analysis methods, i.e., which descriptive statistics we used, clusters for quantitative analysis, and subdomains for qualitative analysis.
+% How successful were the methods/approaches? What was lacking? Overall, across all 73 works.
+
 After collecting the final set of papers, we employed various analytical methods to uncover trends, statistics, and clusters in applied MMLA. We started by examining basic descriptive statistics of paper characteristics. Using the citation information from the collected papers, we constructed a citation graph, which served as a basis for further graph-based analysis. We identified graph communities using the Louvain community-finding algorithm from the open-source \href{https://github.com/taynaud/python-louvain}{python-louvain} package. These communities were then described using the circumscribing features, helping us understand specific research subgroups within the field of MMLA.    
-
-% Performed both qualitative and quantitative analysis
-
-% From 10/12 meeting before final feature extraction:
-
-% Final Analysis
-%     Descriptive statistics
-%     Communities (likely need to be redone with new features)
-%     Subdomains
-%     Venn diagram with Analysis Goals and other features (focus on modality)
-%     Gaps
-%     Challenges
-%     SOTA
-%     Results
-
-% 10/13 - 10/14 emails from PIs
-
-% Hi All,
-
-% I have some follow-up thoughts after our discussion:
-
-% For the model-based papers, we may also want to consider/discuss a few things:
-
-% Do these models output actions/suggestions? vs. just monitoring results? 
-
-% Do these models interact with the environment/users? For example, actively sending surveys, ask for clarification/additional information when trying to make a decision? 
-
-% How do researchers and the domain experts evaluate these models other than accuracy? 
-
-% For the model-free ones, 
-
-% What are the analytic approaches being used? 
-
-% Another challenge in MMLA I would imagine is annotation, especially with multiple users in a complex environment. What are the existing approaches for annotation? 
-
-% Best regards, 
-% Meiyi 
-
-% HI Meiyi, others! I agree these are really good questions to frame our description of the methods, i.e., how active are the models in interacting with the users when learning/training takes place vs are they just passive estimators of analytics measures?  The question about accuracy and validity of the models is also a good one, especially because these models are often empirical.
-
-% The analytics approaches for model-free methods is also a nice way of describing and comparing model-free methods.
-
-% Looking forward to you all presenting the next steps.
-
-% Gautam
-
-
-
-% Thanks, professors! I think after this final round of feature extraction we will be able to address all of these points/questions (as well as others!). Once we are able to separate papers via model-based vs. model-free in particular, these answers will be self-evident in our analysis.
-
-% [GB >] I believe this correct, especially the last sentence, except I am not sure the proposed analyses will be self-evident, unless you make explicit connections between the features and the analyses methods. I hope I am not misunderstanding all of you, but this may need some clarification.
-
-% To clarify, we are talking about the framing of our paper's methods/analysis, correct? I.e., my interpretation is that we can begin extracting features pursuant to what we agreed on during our last meeting Thursday, but that we should frame our analysis around these points/questions once this final set of features is extracted. Is my understanding correct, or are there additional features you'd like extracted before we begin the final round of IRR/feature extraction? Thanks!
-
-% [GB >] I think the feature extraction you all proposed before we met Thursday is ok, and a  good way to describe environments. The model-based versus model-free is an additional classification and I do not see a direct mapping between the features and this classification. If one emerges that will be a finding from our analyses.
-
-% Let me try and interpret. Dividing the systems into model-driven and model-free is a method we are using to support our analyses. Meiyi’s points, which I like very much, represent a way for doing the analyses. And of course, underlying all of this is our study of how multiple modalities of data and their analyses enable the analyses we are presenting in this paper, and what might we lose in these analyses if we used only a single data modality. I am just thinking aloud. Hope this makes sense.
-
-% But, good questions.
-
-% Gautam
-
-% Thanks Dr. Biswas, this makes sense. We will extract the features as discussed and will see if there is a mapping between the "model-based vs. model-free" classification and the features. Our focus will remain on how multiple modalities and their analyses enable the analyses we're presenting in the paper and discuss what would be lost if these analyses included only unimodal approaches.
-
-% Actually, a better way to put it is — what do you gain by using multiple modalities of data as opposed to using just a single modality. 
-% Gautam
-
-% Get Outlook for iOS
 
 
 \subsubsection{Descriptive Statistics}
 % Qualitative analysis via descriptive statistics:
-%   Unweighted (i.e. each paper counts as 1) 
-%   Papers over time
 %   Learning versus training
 %   Fusion types
 %   Analysis types
@@ -841,60 +728,58 @@ After collecting the final set of papers, we employed various analytical methods
 %       Most prevalent publication journals/conferences
 %       Most prevalent publications in our corpus as intersection of union of most cited in corpus and most cited overall
 
-\subsubsection{Network Analysis}
+\subsubsection{Cluster Analysis}
+% Quantitative analysis via clustering
 
-% Quantitative analysis via communities
-% Citation Graph of Corpus
-%   Citations w/in corpus
-%   Total citations 
-%   Matching top publications within final and initial corpus
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth, trim=1cm 1cm 1cm 2cm, clip]{img/community_analysis/mmlte_total_corpus_graph.png}
-    \caption{Complete final corpus citation graph: }
-    \label{fig:final_corpus_citation_graph}
-\end{figure}
+% Commented out communities work on 11/14/23 once we pivoted to clustering:
 
-For our network approach, we started by using the citation information within our final paper corpus to create a citation graph, shown in Fig. \ref{fig:final_corpus_citation_graph}. Each node is a paper with their weight being their total citation count, rather then their citations within the corpus. This was done to verify that landmark papers were staples both within and outside our corpus.  
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.5\textwidth, trim=1cm 1cm 1cm 2cm, clip]{img/community_analysis/mmlte_total_corpus_graph.png}
+%     \caption{Complete final corpus citation graph: }
+%     \label{fig:final_corpus_citation_graph}
+% \end{figure}
 
-% Identifying Community via Louvain Algorithm
-%   Louvain community discovery algorithm to generate citation communities
-%   Characterized each community via their papers' extracted features
-%   Computed normalized frequency for each category across the communities
+% For our network approach, we started by using the citation information within our final paper corpus to create a citation graph, shown in Fig. \ref{fig:final_corpus_citation_graph}. Each node is a paper with their weight being their total citation count, rather then their citations within the corpus. This was done to verify that landmark papers were staples both within and outside our corpus.  
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth, trim=3cm 2cm 3cm 2cm, clip]{img/community_analysis/community_network.png}
-    \caption{Identified citation communities: }
-    \label{fig:citation_communities}
-\end{figure}
+% % Identifying Community via Louvain Algorithm
+% %   Louvain community discovery algorithm to generate citation communities
+% %   Characterized each community via their papers' extracted features
+% %   Computed normalized frequency for each category across the communities
 
-Once with the corpus citation graph constructed, a pre-processing step was performed before using the Louvain algorithm -- Zero degree nodes within the corpus were eliminated to avoid inflating the number of identified communities. By applying the Louvain community algorithm, we obtained eight candidate communities; however, three were discarded for being two-node communities, resulting in five prominent communities. These communities are shown in Fig. \ref{fig:citation_communities}. Understanding how these communities was approached using the discrete circumscribing features through a frequency-based strategy. Across each feature category (e.g. fusion, analysis, modalities), the normalized frequency for each discrete label was computed across each community. To achieve this, each paper's discrete tags were binarized using \href{https://scikit-learn.org/stable/index.html}{Scikit-Learn's} MultiLabelBinarizer. Frequency counts of binary labels were then computed and normalized across community and category. Employing these normalized frequencies, we applied a qualitative approach supported by cosine similarity to hierarchical split communities in an inverted tree fashion, as shown in Fig. \ref{fig:qualitative_breakdown}. Beginning with all communities grouped together, a cosine similarity metric was used to split a group into subgroups by computing the similarity between intra- and inter-groups elements. The splitting processed persisted until a group contained a single community. These groups were then characterized by qualitative observing the normalized frequency differences during each split.
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\textwidth, trim=3cm 2cm 3cm 2cm, clip]{img/community_analysis/community_network.png}
+%     \caption{Identified citation communities: }
+%     \label{fig:citation_communities}
+% \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\textwidth]{img/community_analysis/Community Breakdown-Latest.drawio(1).png}
-    \caption{Qualitative breakdown of citation communities using features: }
-    \label{fig:qualitative_breakdown}
-\end{figure}
+% Once with the corpus citation graph constructed, a pre-processing step was performed before using the Louvain algorithm -- Zero degree nodes within the corpus were eliminated to avoid inflating the number of identified communities. By applying the Louvain community algorithm, we obtained eight candidate communities; however, three were discarded for being two-node communities, resulting in five prominent communities. These communities are shown in Fig. \ref{fig:citation_communities}. Understanding how these communities was approached using the discrete circumscribing features through a frequency-based strategy. Across each feature category (e.g. fusion, analysis, modalities), the normalized frequency for each discrete label was computed across each community. To achieve this, each paper's discrete tags were binarized using \href{https://scikit-learn.org/stable/index.html}{Scikit-Learn's} MultiLabelBinarizer. Frequency counts of binary labels were then computed and normalized across community and category. Employing these normalized frequencies, we applied a qualitative approach supported by cosine similarity to hierarchical split communities in an inverted tree fashion, as shown in Fig. \ref{fig:qualitative_breakdown}. Beginning with all communities grouped together, a cosine similarity metric was used to split a group into subgroups by computing the similarity between intra- and inter-groups elements. The splitting processed persisted until a group contained a single community. These groups were then characterized by qualitative observing the normalized frequency differences during each split.
 
-\begin{figure}
-    \begin{tabular}{|c|c|}
-        \hline
-        Comm. ID & Papers \\
-        \hline
-        0 & A \\
-        1 & B \\
-        2 & B \\
-        3 & B \\
-        4 & B \\
-        None & \\
-        \hline
-    \end{tabular}
-    \caption{Main caption for the figure}
-    \label{fig:corpus_table}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{img/community_analysis/Community Breakdown-Latest.drawio(1).png}
+%     \caption{Qualitative breakdown of citation communities using features: }
+%     \label{fig:qualitative_breakdown}
+% \end{figure}
+
+% \begin{figure}
+%     \begin{tabular}{|c|c|}
+%         \hline
+%         Comm. ID & Papers \\
+%         \hline
+%         0 & A \\
+%         1 & B \\
+%         2 & B \\
+%         3 & B \\
+%         4 & B \\
+%         None & \\
+%         \hline
+%     \end{tabular}
+%     \caption{Main caption for the figure}
+%     \label{fig:corpus_table}
+% \end{figure}
 
 \section{Findings} \label{sec:findings} 
 % Primary uses of multimodal analysis in MMLTE
@@ -902,15 +787,30 @@ Once with the corpus citation graph constructed, a pre-processing step was perfo
 
 \subsection{Corpus Statistics}
 
+% Learning v. training envs
+% Fusion type/bar chart
+% Analysis type/bar chart
+% Modalities bar charts
+% Number of papers per number of modalities
+% Mediums bar charts
+% Publications bar chart
+
 \begin{figure}[h!]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[width=\textwidth]{img/statistical_imgs/year.png}
-        \caption{Image 1}
-    \end{subfigure}
-    \hfill
+
+    % Commented out because no longer using
+    
+    % \begin{subfigure}[b]{0.45\textwidth}
+    %     \includegraphics[width=\textwidth]{img/statistical_imgs/year.png}
+    %     \caption{Image 1}
+    % \end{subfigure}
+    % \hfill
+    
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{img/statistical_imgs/modalities.png}
+        
+        % Add footnote about the 1 paper with only 1 modality having multiple data collection mediums, so we consider it multimodal by our definition.
+        
         \caption{Image 2}
     \end{subfigure}
     \hfill
@@ -923,12 +823,11 @@ Once with the corpus citation graph constructed, a pre-processing step was perfo
         \includegraphics[width=\textwidth]{img/statistical_imgs/learning_vs_training_envs.png}
         \caption{Image 4}
     \end{subfigure}
-    \\
     \begin{subfigure}[b]{0.33\textwidth}
         \includegraphics[width=\textwidth]{img/statistical_imgs/fusion_type with OTH.png}
         \caption{Image 5}
     \end{subfigure}
-    \hfill
+    \\
     \begin{subfigure}[b]{0.33\textwidth}
         \includegraphics[width=\textwidth]{img/statistical_imgs/number of modalities per count of papers.png}
         \caption{Image 6}
@@ -946,66 +845,27 @@ Once with the corpus citation graph constructed, a pre-processing step was perfo
     \caption{Composite figure with 7 small images and 1 large image}
 \end{figure}
 
-% Papers over time, David
-% Learning v. training envs, David
-% Fusion type/bar chart, David
-% Analysis type/bar chart, David
-% Modalities bar charts, David
-% Mediums bar charts, David
-% Publications bar chart, David
-% Number of papers per number of modalities, David
+% Changed subsection from communities to clusters
+\subsection{Clusters} % Eduardo
 
-\subsection{Citation Community} % Eduardo
-%########################################################################################
-% Eduardo's Email Regarding communities, for reference
-
-% Hello MMLTE Team,
-
-% Apologies for the delay on the community analysis, surprisingly difficult to do anything with KB internet.
-
-% I was able to perform the community analysis and it provided an interesting perspective on the MMLTE body of literature. I have attach some preliminary figures that I have created to help understand the results. I also provide a zip file with more information. 
-
-% Let me first breakdown the approach and please let me know if you find any faults, concerns, or invalid practices.
-
-% # Preprocessing
-% For the community detection, I remove all 0 degree Nodes (as these wouldn't be part of any community and combine these into a community didn't seem appropriate due to their lack of relationship). This removal reduced the corpus from 73 to 58. After detecting the communities, I also removed all communities smaller than 3 nodes, as I noticed that communities of 2 were highly homogeneous in their categorical attributes (modalities, fusion, and analysis). There were like a continuation of prior work but didn't resemble a trend or an actual community of research in MMLTE. This removal step reduced the corpus from 58 to 52.
-
-% # Analysis
-% After the preprocessing step, the communities were detected by the louvian community detection algorithm from this package, resulting in 5 communities of size greater than 3 from the 52 paper corpus. The following sizes of the each of the communities are the following:
-
-% 0: N=9
-% 1: N=15
-% 2: N=11
-% 3: N=13
-% 4: N=4
-
-% It was difficult to understand how these communities were different or similar at first, but I thought that I could use the discretize attributes (modalities, fusion, and analysis) to explore patterns and differences between the communities. For each community, I computed the normalized (sum/total) frequency counts of each category. Then I created a (dense) heatmap visualization across the modalities, fusion types, analysis methods and environment types for all the communities. I can create a separate figure with each column for clarity if needed, but the collective figure is more helpful for recognizing the differences and similarities between the communities.
-
-% With the comprehensive normalized frequency figure, I was able to create a tree that separates and characterized the communities. I noticed that communities are split by their methodology (QUAN vs QUAL). The QUAN branch is further split by the fusion and modality types. For the QUAL branch, the split is from the types of modalities used observatory (e.g. VIDEO, AUDIO, and LOGS) vs sensory (e.g. SENSOR, EYE, and LOGS). A figure displaying this tree is also attach to this email to further clarify.
-
-% Any thoughts or feedback would be greatly appreciated!
-
-% Best,
-% Eduardo Davalos
-% ########################################################################################
-
-% Qualitative description of the community based on their relative frequency along with cosine similarity
-%   Inverted Tree breakdown
-
-% Summary of Network Analysis
-%   QUAL vs QUANT
-%   QUANT has major splits between traditional MID and experimental modalities & fusion types
-%   QUAL split between observatory and sensory modalities
 
 \section{Discussion} \label{sec:discussion}
 % Recap what we have done and findings
 
 % Comprehensive review of research methods applied to multimodal learning and training environments
-% Qualitative analysis of current body of literature based on environments, authors, year, modality, medium, fusion, analysis type, publication
-% Need for mid fusion
 % A novel citation graph method for corpus reduction
-% Categorization and description of MMLA literature via citation communities
+% Qualitative analysis of current body of literature (subdomains + aggregate)
+% Categorization and description of MMLA literature via clustering (quantitative)
 % Also discuss implications, limitations, and future research directions with MMLA
+% Address Need for mid fusion
+% All analysis should address:
+%   SOTA
+%   Challenges
+%   Results trends
+%   Unimodal vs. multimodal advantages
+% Tie qualitative findings to quantitative findings in some way
+
+
 
 \subsection{Implications}
 % Findings:
@@ -1016,11 +876,9 @@ Once with the corpus citation graph constructed, a pre-processing step was perfo
 % Most multimodal work considers 2-5 modalities per paper
 % Classification, stats, qual most popular analysis methods
 % Mid fusion and hybrid fusion most popular
-% 5 Communities
 
 % Not necessary to do tons of modalitites, but focus on a few that are the most informative
 % Should consider data fusion to inform environment, particularly mid fusion by fusing observable, derived features
-% Use communities analyis to inform your own multimodal research 
 
 \subsection{Limitations}
 The major limitations of this work involve the use of Google Scholar to conduct the literature search and the use of a citation graph for programmatic corpus reduction. Both are discussed in the following paragraphs.
@@ -1042,12 +900,12 @@ Additionally, we reached out to SerpAPI directly and asked, ``Does SerpAPI attac
 As discussed in Section \ref{subsec:study_selection}, we initially pruned our corpus using quantitative means via the use of a citation graph. In doing this, it is possible we excluded relevant works from our corpus based on them only having cited or been cited by a minimal number of other works in our corpus. This literature review is a survey of the prominent methods, practices, and approaches researchers are applying to multimodal learning and training environments. As such, the authors agreed that if a work did not utilize a large degree of previous research (i.e. cite several other works in the corpus) or serve as a base from which a large degree of other researchers have built upon (i.e. be cited by several other works in the corpus), then that work was likely outside the scope of our review. Considering our corpus was still largely comprised (over 50\%) of works later deemed to be outside the scope of this review after graph-based pruning, the authors are confident that few papers directly pertaining to multimodal learning and training environments were discarded as a result of graph-based pruning.
 
 \subsection{Other Limitations}.
-% Limitation for papers not peer reviewed, but this is okay because all papers accepted somewhere and therefore refereed to some degree. 
+% Limitation for one paper not peer reviewed, but this is okay because all papers accepted somewhere and therefore refereed to some degree. 
 
 % Search term limitation add
 %   we only searched "multimodal," so MMLA research done without using this word may not be included in our initial search
 
-% ChatGPT not included
+% ChatGPT not included (came out right after our literature search.)
 
 \subsubsection{Future Research Directions} 
 % Additional modalities
