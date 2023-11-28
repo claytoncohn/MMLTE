@@ -1220,3 +1220,91 @@
 % Dr. Biswas: Procedure for selection papers was good -- but could be some discussion of how these could be better automated.
 
 % Clayton: Regarding corpus reduction procedure automation, will include question in email.
+
+% Removed section on clustering:
+
+% \subsubsection{Cluster Analysis}
+% Quantitative analysis via clustering
+
+
+% Commented out communities work on 11/14/23 once we pivoted to clustering:
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.5\textwidth, trim=1cm 1cm 1cm 2cm, clip]{img/community_analysis/mmlte_total_corpus_graph.png}
+%     \caption{Complete final corpus citation graph: }
+%     \label{fig:final_corpus_citation_graph}
+% \end{figure}
+
+% For our network approach, we started by using the citation information within our final paper corpus to create a citation graph, shown in Fig. \ref{fig:final_corpus_citation_graph}. Each node is a paper with their weight being their total citation count, rather then their citations within the corpus. This was done to verify that landmark papers were staples both within and outside our corpus.  
+
+% % Identifying Community via Louvain Algorithm
+% %   Louvain community discovery algorithm to generate citation communities
+% %   Characterized each community via their papers' extracted features
+% %   Computed normalized frequency for each category across the communities
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\textwidth, trim=3cm 2cm 3cm 2cm, clip]{img/community_analysis/community_network.png}
+%     \caption{Identified citation communities: }
+%     \label{fig:citation_communities}
+% \end{figure}
+
+% Once with the corpus citation graph constructed, a pre-processing step was performed before using the Louvain algorithm -- Zero degree nodes within the corpus were eliminated to avoid inflating the number of identified communities. By applying the Louvain community algorithm, we obtained eight candidate communities; however, three were discarded for being two-node communities, resulting in five prominent communities. These communities are shown in Fig. \ref{fig:citation_communities}. Understanding how these communities was approached using the discrete circumscribing features through a frequency-based strategy. Across each feature category (e.g. fusion, analysis, modalities), the normalized frequency for each discrete label was computed across each community. To achieve this, each paper's discrete tags were binarized using \href{https://scikit-learn.org/stable/index.html}{Scikit-Learn's} MultiLabelBinarizer. Frequency counts of binary labels were then computed and normalized across community and category. Employing these normalized frequencies, we applied a qualitative approach supported by cosine similarity to hierarchical split communities in an inverted tree fashion, as shown in Fig. \ref{fig:qualitative_breakdown}. Beginning with all communities grouped together, a cosine similarity metric was used to split a group into subgroups by computing the similarity between intra- and inter-groups elements. The splitting processed persisted until a group contained a single community. These groups were then characterized by qualitative observing the normalized frequency differences during each split.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{img/community_analysis/Community Breakdown-Latest.drawio(1).png}
+%     \caption{Qualitative breakdown of citation communities using features: }
+%     \label{fig:qualitative_breakdown}
+% \end{figure}
+
+% \begin{figure}
+%     \begin{tabular}{|c|c|}
+%         \hline
+%         Comm. ID & Papers \\
+%         \hline
+%         0 & A \\
+%         1 & B \\
+%         2 & B \\
+%         3 & B \\
+%         4 & B \\
+%         None & \\
+%         \hline
+%     \end{tabular}
+%     \caption{Main caption for the figure}
+%     \label{fig:corpus_table}
+% \end{figure}
+
+% Beginning of Analysis section describing the communities
+
+% After collecting the final set of papers, we employed various analytical methods to uncover trends, statistics, and clusters in applied MMLA. We started by examining basic descriptive statistics of paper characteristics. Using the citation information from the collected papers, we constructed a citation graph, which served as a basis for further graph-based analysis. We identified graph communities using the Louvain community-finding algorithm from the open-source \href{https://github.com/taynaud/python-louvain}{python-louvain} package. These communities were then described using the circumscribing features, helping us understand specific research subgroups within the field of MMLA.    
+
+% Analysis sections. Will get folded into new framework.
+
+% \subsubsection{Descriptive Statistics}
+% % Qualitative analysis via descriptive statistics:
+% %   Learning versus training
+% %   Fusion types
+% %   Analysis types
+% %   Modalities
+% %       Modalities distribution
+% %       # Modalities per paper
+% %   Mediums
+% %   Publications
+% %       Most prevalent publication journals/conferences
+% %       Most prevalent publications in our corpus as intersection of union of most cited in corpus and most cited overall
+
+% \section{Findings} \label{sec:findings} 
+% % Primary uses of multimodal analysis in MMLTE
+% % Discuss the need for mid-fusion versus early fusion
+
+% \subsection{Corpus Statistics}
+
+% % Learning v. training envs
+% % Fusion type/bar chart
+% % Analysis type/bar chart
+% % Modalities bar charts
+% % Number of papers per number of modalities
+% % Mediums bar charts
+% % Publications bar chart

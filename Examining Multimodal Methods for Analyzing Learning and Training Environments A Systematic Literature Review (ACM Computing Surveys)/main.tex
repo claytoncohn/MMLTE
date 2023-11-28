@@ -263,8 +263,6 @@
 
 \section{Introduction} \label{sec:intro}
 
-% Architecture diagram and explanation
-
 % Introduction to LA and MMLA and its impact on everyday lives (why should we care)
 %   LA: Empowering educators and assisting students in real-world situations
 %       Discuss how LA mostly focused on collecting logs and video data
@@ -359,11 +357,21 @@ Another influential survey is \citet{chango_review_nodate}, where data fusion me
 By combining the valuable insights from these two significant surveys, a more complete and current understanding of data fusion emerges. This improved definition seamlessly integrates the idea of observability, capturing the process of bringing together different sources of information to create a unified data representation. This definition also takes into account the distinction between measurable sensory evidence and human-inferred annotations, guided by the observability line. In the upcoming section, we further elaborate in these data fusion scheme along with refined taxonomy.
 
 \section{Framework} 
+
 % Lens through which we are conducting this research
+% Framework diagram and explanation
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/MMLTE_Framework.png}
+    \caption{MMLTE Survey Framework}
+    \label{fig:framework}
+\end{figure}
 
 % Analysis RQs!
 
-% Definitions
+% Definitions:
+%   Tables: feature name, description, mapped acronym
 For the purposes of this paper, we define a \textit{modality} as a unique attribute defined by data from one of more datastreams, where each modality conveys different information, even if derived from the same data collection medium \cite{Ochoa?}. We define \textit{multimodal} as a combination of either multiple modalities or multiple datastreams (i.e., multiple data collection mediums). For instance, the same video datastream could be used for the affect and pose modalities (one-to-many), and the affect modality could be derived from separate audio and video datastreams (many-to-one). Both examples would be considered multimodal by our definition. Additionally, we use the terms ``papers" and ``works" interchangeably in this review, as we expand our definition of ``paper" to include other publications outside of conference and journal submissions (books, for example).
  
 We define a \textit{learning environment} as any environment whose explicit purpose is to foster knowledge gain and retention. This can include school classrooms, tutoring centers, online learning environments like Khan Academy, etc. Learning environments are focused on helping users gain knowledge and retain information, and they are often (though not always) open-ended. We define a \textit{training environment} as any environment whose explicit purpose is to help users achieve an end goal, such as task-proficiency or a positive outcome other than learning. This is often done through practice and repetition, and can include military training, nursing training, physical training, workplace training, etc. Training environments are task-oriented and are often (though not always), constrained. 
@@ -436,14 +444,25 @@ For example, consider the same Kinect sensor discussed earlier. In this case, th
 
 This classification is still somewhat qualitative and up to a researcher's interpretation. As described by Di Mitri et al., "The distinction between observable/unobservable is conceptual and can vary in practice." \cite{DiMitri2018}; however, we believe that this additional data fusion category helps to resolve some of the ambiguity related to the original categorization scheme and is useful for identifying the sub-communities of MMLA based on which methods researchers have applied. For a concrete definition of the modalities that we consider oberservable for the categorization in this paper, see section \ref{sec:Modalities}. In addition to the early, mid, late, and hybrid data fusion categories, in this paper, following the methodology of Chango et al. \cite{Chango2022}, we add an \textit{other} category to catch studies that do not fit into one of those four groups or in which the fusion point was not specified.
 
-% NEED CATEGORIES FOR LATEST ROUND OF FEATURE EXTRACTION:
+\subsection{Environment Setting}
 % Confirm exact set from S18 corpus to be sure!
-    % Environment Setting. Physical, virtual, blended, unspecified.
-    % Environment Subject. STEM, humanities, psychomotor skills, other, unspecified
-    % Participant Structure. Individual, multi-person, unspecified
-    % Didactic Nature. Instructional, training, informal, specified 
-    % Level of Instruction or Training. K-12, university, professional development
+% Environment Setting. Physical, virtual, blended, unspecified.
 
+\subsection{Environment Subject}
+% Confirm exact set from S18 corpus to be sure!
+% Environment Subject. STEM, humanities, psychomotor skills, other, unspecified
+
+\subsection{Participant Structure}
+% Confirm exact set from S18 corpus to be sure!
+% Participant Structure. Individual, multi-person, unspecified
+
+
+\subsection{Didactic Nature}
+% Didactic Nature. Instructional, training, informal, specified 
+
+\subsection{Level of Instruction or Training}
+% Confirm exact set from S18 corpus to be sure!
+% Level of Instruction or Training. K-12, university, professional development
 
 \section{Methods} \label{sec:methods} % How our literature view was done
 
@@ -708,92 +727,141 @@ Once our corpus was finalized, we performed one additional round of feature extr
 
 Similar to our initial round of feature extraction, we began with inductive coding, where four of this paper's authors first extracted the new circumscribing features for the same papers he or she performed inductive coding on during the previous round of feature extraction. We then discussed each paper's extracted features and formulated discrete sets for the new circumscribing features (with the exception of Analysis Results). During the first round of IRR, reviewers revisited the same papers they read during inductive coding and extracted the new circumscribing features pursuant to the agreed-upon feature sets devised during inductive coding. During the second round of IRR, reviewers reread (and extracted the additional features from) the same set of papers they were the 2$^{nd}$ reviewer for during the initial round of feature extraction. At this point, for each paper, the two reviewers who extracted that paper's additional features performed consensus coding to define that paper's final set of features. For reference, Cohen's $k=0.71$ for the additional round of feature extraction.
 
-\subsection{Analysis}
-% Explain our analysis methods, i.e., which descriptive statistics we used, clusters for quantitative analysis, and subdomains for qualitative analysis.
-% How successful were the methods/approaches? What was lacking? Overall, across all 73 works.
-
-After collecting the final set of papers, we employed various analytical methods to uncover trends, statistics, and clusters in applied MMLA. We started by examining basic descriptive statistics of paper characteristics. Using the citation information from the collected papers, we constructed a citation graph, which served as a basis for further graph-based analysis. We identified graph communities using the Louvain community-finding algorithm from the open-source \href{https://github.com/taynaud/python-louvain}{python-louvain} package. These communities were then described using the circumscribing features, helping us understand specific research subgroups within the field of MMLA.    
+\subsection{Analysis Procedure}
+% Explain analysis procedure pursuant to framework
 
 
-\subsubsection{Descriptive Statistics}
-% Qualitative analysis via descriptive statistics:
-%   Learning versus training
-%   Fusion types
-%   Analysis types
+\section{Findings}
+
+
+\subsection{Environments}
+
+
+\subsubsection{Setting}
+% SOTA
+% Research gaps
+
+% Descriptive statistics for:
+%   Environment type
+%   Environment setting
+
+
+\subsubsection{Learners}
+% SOTA
+% Research gaps
+
+% Descriptive statistics for:
+%   Participant structure
+%   Level of instruction
+%   Environment subject
+%   Didactic Nature
+
+\subsubsection{Sensors}
+% SOTA
+% Research gaps
+
+% Descriptive statistics for:
+%   Data Collection Mediums
+
+\subsection{Multimodal Data}
+% Descriptive statistics for:
 %   Modalities
-%       Modalities distribution
-%       # Modalities per paper
-%   Mediums
-%   Publications
-%       Most prevalent publication journals/conferences
-%       Most prevalent publications in our corpus as intersection of union of most cited in corpus and most cited overall
+%   
 
-\subsubsection{Cluster Analysis}
-% Quantitative analysis via clustering
+\subsubsection{Natural Language}
+% SOTA
+% Research gaps
+
+% Modalities
+% PROS, TRANS, TEXT, SPECT, AFFECT
+
+% Results achieved
+    % Advantages of multi-modal over uni-modal
+\subsubsection{Vision}
+% SOTA
+% Research gaps
+
+% Modalities
+% POSE, AFFECT, GEST, ACT, FATIG, PIXEL, GAZE
+
+% Results achieved
+    % Advantages of multi-modal over uni-modal
+\subsubsection{Sensors}
+% SOTA
+% Research gaps
+
+% Modalities
+% AFFECT, POSE, EDA, PULSE, ACT, BP, TEMP, EEG, EMG, FATIG, GAZE
+
+% Results achieved
+    % Advantages of multi-modal over uni-modal
+\subsubsection{Human-Centered}
+% SOTA
+% Research gaps
+
+% Modalities
+% QUAL, INTER, SURVEY, RPA, PPA
+
+% Results achieved
+    % Advantages of multi-modal over uni-modal
+\subsubsection{Logs}
+% SOTA
+% Research gaps
+
+% Modalities
+% LOGS
+
+% Results achieved
+    % Advantages of multi-modal over uni-modal
+\subsection{Data Fusion}
 
 
-% Commented out communities work on 11/14/23 once we pivoted to clustering:
+\subsubsection{Early Fusion}
+% SOTA
+% Research gaps
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.5\textwidth, trim=1cm 1cm 1cm 2cm, clip]{img/community_analysis/mmlte_total_corpus_graph.png}
-%     \caption{Complete final corpus citation graph: }
-%     \label{fig:final_corpus_citation_graph}
-% \end{figure}
+\subsubsection{Mid Fusion}
+% SOTA
+% Research gaps
+    % Discuss the need for mid-fusion relative to early fusion
 
-% For our network approach, we started by using the citation information within our final paper corpus to create a citation graph, shown in Fig. \ref{fig:final_corpus_citation_graph}. Each node is a paper with their weight being their total citation count, rather then their citations within the corpus. This was done to verify that landmark papers were staples both within and outside our corpus.  
+% Descriptive statistics for:
+%   Fusion Types
 
-% % Identifying Community via Louvain Algorithm
-% %   Louvain community discovery algorithm to generate citation communities
-% %   Characterized each community via their papers' extracted features
-% %   Computed normalized frequency for each category across the communities
+\subsubsection{Late Fusion}
+% SOTA
+% Research gaps
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=\textwidth, trim=3cm 2cm 3cm 2cm, clip]{img/community_analysis/community_network.png}
-%     \caption{Identified citation communities: }
-%     \label{fig:citation_communities}
-% \end{figure}
 
-% Once with the corpus citation graph constructed, a pre-processing step was performed before using the Louvain algorithm -- Zero degree nodes within the corpus were eliminated to avoid inflating the number of identified communities. By applying the Louvain community algorithm, we obtained eight candidate communities; however, three were discarded for being two-node communities, resulting in five prominent communities. These communities are shown in Fig. \ref{fig:citation_communities}. Understanding how these communities was approached using the discrete circumscribing features through a frequency-based strategy. Across each feature category (e.g. fusion, analysis, modalities), the normalized frequency for each discrete label was computed across each community. To achieve this, each paper's discrete tags were binarized using \href{https://scikit-learn.org/stable/index.html}{Scikit-Learn's} MultiLabelBinarizer. Frequency counts of binary labels were then computed and normalized across community and category. Employing these normalized frequencies, we applied a qualitative approach supported by cosine similarity to hierarchical split communities in an inverted tree fashion, as shown in Fig. \ref{fig:qualitative_breakdown}. Beginning with all communities grouped together, a cosine similarity metric was used to split a group into subgroups by computing the similarity between intra- and inter-groups elements. The splitting processed persisted until a group contained a single community. These groups were then characterized by qualitative observing the normalized frequency differences during each split.
+\subsection{Analysis}
+% SOTA
+% Research gaps
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{img/community_analysis/Community Breakdown-Latest.drawio(1).png}
-%     \caption{Qualitative breakdown of citation communities using features: }
-%     \label{fig:qualitative_breakdown}
-% \end{figure}
+% Descriptive statistics for:
+%   Analysis Methods
+%   Analysis Approaches (MB v. MF)
 
-% \begin{figure}
-%     \begin{tabular}{|c|c|}
-%         \hline
-%         Comm. ID & Papers \\
-%         \hline
-%         0 & A \\
-%         1 & B \\
-%         2 & B \\
-%         3 & B \\
-%         4 & B \\
-%         None & \\
-%         \hline
-%     \end{tabular}
-%     \caption{Main caption for the figure}
-%     \label{fig:corpus_table}
-% \end{figure}
+\subsubsection{Model-Based}
 
-\section{Findings} \label{sec:findings} 
-% Primary uses of multimodal analysis in MMLTE
-% Discuss the need for mid-fusion versus early fusion
+\subsubsection{Model-Free}
 
-\subsection{Corpus Statistics}
 
-% Learning v. training envs
-% Fusion type/bar chart
-% Analysis type/bar chart
-% Modalities bar charts
-% Number of papers per number of modalities
-% Mediums bar charts
-% Publications bar chart
+\subsection{Feedback}
+
+\subsubsection{Direct Feedback}
+% SOTA
+% Research gaps
+
+% Learner/trainee feedback
+% Online versus offline
+
+\subsubsection{Indirect Feedback}
+% SOTA
+% Research gaps
+
+% System design
+% Improved research conclusions
+% Online versus offline
 
 \begin{figure}[h!]
     \centering
@@ -845,9 +913,6 @@ After collecting the final set of papers, we employed various analytical methods
     \caption{Composite figure with 7 small images and 1 large image}
 \end{figure}
 
-% Changed subsection from communities to clusters
-\subsection{Clusters} % Eduardo
-
 
 \section{Discussion} \label{sec:discussion}
 % Recap what we have done and findings
@@ -855,28 +920,28 @@ After collecting the final set of papers, we employed various analytical methods
 % Comprehensive review of research methods applied to multimodal learning and training environments
 % A novel citation graph method for corpus reduction
 % Qualitative analysis of current body of literature (subdomains + aggregate)
-% Categorization and description of MMLA literature via clustering (quantitative)
 % Also discuss implications, limitations, and future research directions with MMLA
 % Address Need for mid fusion
-% All analysis should address:
-%   SOTA
-%   Challenges
-%   Results trends
-%   Unimodal vs. multimodal advantages
-% Tie qualitative findings to quantitative findings in some way
 
-
-
+% Discuss (overall, in the aggregate):
+    % SOTA
+    % Research gaps
+    % Sensors
+    % Multimodal data
+    % Fusion
+    % Analysis methods/approaches
+    % Results achieved
+    % Advantages of multi-modal over uni-modal
+    
 \subsection{Implications}
-% Findings:
-% BJET and LAK most popular journal/conference for applied MMLA and quantitative analysis
+
+% Publications: BJET and LAK most popular journal/conference for applied MMLA and quantitative analysis
 % Learning more popular than training currently
 % Video, audio, logs, ppa most popular mediums
 % Pose, logs, affect, gaze, and prosodic speech appear to be the most popular modalities.
-% Most multimodal work considers 2-5 modalities per paper
+% Most multimodal work considers 2-5 modalities per paper (cite figure if necessary, but shouldn't be needed. Can just use raw counts)
 % Classification, stats, qual most popular analysis methods
 % Mid fusion and hybrid fusion most popular
-
 % Not necessary to do tons of modalitites, but focus on a few that are the most informative
 % Should consider data fusion to inform environment, particularly mid fusion by fusing observable, derived features
 
