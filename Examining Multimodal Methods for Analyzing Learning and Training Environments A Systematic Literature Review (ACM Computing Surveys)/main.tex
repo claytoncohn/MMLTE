@@ -761,7 +761,7 @@ Similar to our initial round of feature extraction, we began with inductive codi
 %   Environment subject
 %   Didactic Nature
 
-\subsubsection{Sensors}
+\subsubsection{Data}
 % SOTA
 % Challenges
 % Research gaps
@@ -773,17 +773,98 @@ Similar to our initial round of feature extraction, we began with inductive codi
 % Descriptive statistics for:
 %   Modalities
 
+% One modality paper with 2 data collection mediums, vid and aud: 
+\cite{3809293172}
+
+\begin{figure}
+        \includegraphics[width=\textwidth]{img/statistical_imgs/modalities.png}
+        \caption{Modalities}
+        \label{fig:modalities}
+\end{figure}
+
+\begin{figure}
+        \includegraphics[width=\textwidth]{img/statistical_imgs/number of modalities per count of papers.png}
+        
+        % Add footnote about the 1 paper with only 1 modality having multiple data collection mediums, so we consider it multimodal by our definition.
+        
+        \caption{Modalities quantities}
+        \label{fig:modalities_nums}
+\end{figure}
+
+% Introduce subdomains
+
 \subsubsection{Natural Language}
 % List # of papers falling into this subdomain
-% List Modalities
-% PROS, TRANS, TEXT, SPECT, AFFECT
+-35 papers use some form of natural language\\
 
-% SOTA
-% Challenges
-% Research gaps
+% List Modalities (didn't find any audio affect)
+% PROS, TRANS, TEXT, SPECT
+-PROS: 24\\
+-TRANS: 16\\
+-TEXT: 1\\
+-SPECT: 1\\
+
+Vast majority used prosodic audio and transcribed speech. Only 1 for raw text and 1 for audio spectogram.
+
+Only 8 papers combine PROS and TRANS, and 24 use only one or the other. 
+
+Most analysis is done via qualitative analysis and statistical methods. Some is done classification, but not much with reg/patt/net. Contrast to full corpus, where classification was the most prevalent.
+%NLP: {'REG': 6, 'CLS': 14, 'STATS': 21, 'CLUST': 3, 'QUAL': 19, 'PATT': 4, 'NET': 4}
+
+% ALL: {'CLUST': 9,'QUAL': 29,'CLS': 39,'REG': 12,'STATS': 34,'PATT': 9,'NET': 4}
+
+Fusion defined in 21/35 papers (60\%) with MID being the favorite. This is less prevalent than the fusion breakdown in the corpus, where ~75\% of papers define fusion (54/73). 
+% NLP: {'MID': 12, 'EARLY': 1, 'OTH': 15, 'HYBRID': 5, 'LATE': 3}
+% OTH fusion only fusion type in 14/35 papers
+
+% ALL: {'HYBRID': 19, 'LATE': 8, 'MID': 27, 'EARLY': 3, 'OTH': 20}
+% Full corpus OTH fusion only fusion type in 19/73 papers
+
+No trend among environment settings really except virtual environments less frequent than blended/physical relative to full corpus. Suggests focus on collab in at least some physical space and not 1-on-1 agent interaction, for exanple.
+% NLP: {'PHYS': 13, 'VIRT': 13, 'BLND': 8, 'UNSP': 1}
+% ALL: {'BLND': 20, 'PHYS': 21, 'VIRT': 31, 'UNSP': 2}
+
+Even with 4:3 ratio of ind to multi in corpus overall, ratio of ind to multi drops to 3:5 with NLP only due to focus on multiperson environments, including conversation. Not surprising given discourse component, but would also be interested in agent-based conversations (which were lacking).
+% NLP: {'MULTI': 23, 'IND': 14}
+% ALL: {'IND': 45, 'MULTI': 31}
+
+No trend among didactic nature. relative to overall corpus.
+% NLP: {'INSTR': 21, 'TRAIN': 8, 'INF': 6}
+% ALL: {'INSTR': 45, 'INF': 12, 'UNSP': 1, 'TRAIN': 15}
+
+Both university and K12, although slight edge to K12 relative to corpus as a whole.
+% NLP: {'UNI': 14, 'K12': 17, 'PROF': 3, 'UNSP': 4}
+% ALL: {'K12': 30, 'UNI': 36, 'UNSP': 7, 'PROF': 5}
+
+NLP has higher level of model free relative to corpus (17/41, 41\% relative to 27/57, 32\%)
+% NLP: {'MB': 24, 'MF': 17}
+% ALL: {'MB': 57, 'MF': 27}
 
 % Results achieved
     % Advantages of multi-modal over uni-modal
+
+% Challenges
+-ASR
+-Temporality
+-Complexity
+-Hardware, software, NLP methods
+
+
+% Research gaps
+-Lack of textual input. Discuss
+-Only 8 papers use both transcribed audio and prosodic information, which means there is a lack of combining the two
+    -Textless NLP lack with combined audio semantics/prosodic audio
+-Focus on statistical analysis and qualitative, but lacking in AI/ML
+-Lack of conversational agent-based work. The stuff that's in there doesn't deal with actual conversations between students and agents, as the agent often acts as an evaluator and provides performance metrics or canned responses (i.e., 1-way recommendations) that are not robust to fluid environments  --- and does not act as a mentor, peer, or collaborator.
+
+% SOTA
+-Discuss RNNs, Transformers, other ML methods (SVM and RF) with limitation on explainability.
+
+% For 12/6:
+%   Challenges/collab for remaining papers
+%   Results analysis
+%   SOTA
+
 \subsubsection{Vision}
 % List # of papers falling into this subdomain
 % List Modalities
@@ -1015,7 +1096,7 @@ As discussed in Section \ref{subsec:study_selection}, we initially pruned our co
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{references, zotero_references, corpus_papers}
+\bibliography{references, zotero_references, corpus_papers, uuid_references}
 
 %%
 %% If your work has an appendix, this is the place to put it.
