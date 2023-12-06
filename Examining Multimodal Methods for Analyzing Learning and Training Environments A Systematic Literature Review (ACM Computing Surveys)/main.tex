@@ -776,6 +776,8 @@ Similar to our initial round of feature extraction, we began with inductive codi
 % One modality paper with 2 data collection mediums, vid and aud: 
 \cite{3809293172}
 
+% Thematic analysis cite: https://psycnet.apa.org/record/2011-23864-004
+
 \begin{figure}
         \includegraphics[width=\textwidth]{img/statistical_imgs/modalities.png}
         \caption{Modalities}
@@ -808,10 +810,15 @@ Vast majority used prosodic audio and transcribed speech. Only 1 for raw text an
 
 Only 8 papers combine PROS and TRANS, and 24 use only one or the other. 
 
-Most analysis is done via qualitative analysis and statistical methods. Some is done classification, but not much with reg/patt/net. Contrast to full corpus, where classification was the most prevalent.
+Most analysis is done via qualitative analysis and statistical methods. Some is done via classification, but not much with reg/patt/net. Contrast to full corpus, where classification was the most prevalent.
 %NLP: {'REG': 6, 'CLS': 14, 'STATS': 21, 'CLUST': 3, 'QUAL': 19, 'PATT': 4, 'NET': 4}
 
 % ALL: {'CLUST': 9,'QUAL': 29,'CLS': 39,'REG': 12,'STATS': 34,'PATT': 9,'NET': 4}
+
+Only 9 papers in the entire corpus \textit{only} perform qualitative analysis. 7 of those papers use natural language in some form.
+% Qual only: 
+% NLP: 7/35
+% ALL: 9/73
 
 Fusion defined in 21/35 papers (60\%) with MID being the favorite. This is less prevalent than the fusion breakdown in the corpus, where ~75\% of papers define fusion (54/73). 
 % NLP: {'MID': 12, 'EARLY': 1, 'OTH': 15, 'HYBRID': 5, 'LATE': 3}
@@ -854,14 +861,12 @@ NLP has higher level of model free relative to corpus (17/41, 41\% relative to 2
 -Lack of textual input. Discuss
 -Only 8 papers use both transcribed audio and prosodic information, which means there is a lack of combining the two
     -Textless NLP lack with combined audio semantics/prosodic audio
--Focus on statistical analysis and qualitative, but lacking in AI/ML
+-Focus on statistical analysis and qualitative, but lacking in AI/ML?
 -Lack of conversational agent-based work. The stuff that's in there doesn't deal with actual conversations between students and agents, as the agent often acts as an evaluator and provides performance metrics or canned responses (i.e., 1-way recommendations) that are not robust to fluid environments  --- and does not act as a mentor, peer, or collaborator.
 
-% SOTA
--Discuss RNNs, Transformers, other ML methods (SVM and RF) with limitation on explainability.
+% SOTA 
 
-% For 12/6:
-%   Analysis methods for previous 12 papers (put in notes)
+% For 12/6. 12/7:
 %   Challenges/collab/analysis for remaining papers
 %   Results analysis
 %   SOTA
@@ -1029,6 +1034,7 @@ NLP has higher level of model free relative to corpus (17/41, 41\% relative to 2
     % SOTA
     % Challenges
     % Research gaps
+    %   Domain specificity and lack of generalizable approaches
     % Sensors
     % Multimodal data
     % Fusion
