@@ -14,6 +14,7 @@
 \usepackage{tabularx}
 \usepackage{ragged2e}
 
+
 \pdfstringdefDisableCommands{%
   \def\unskip#1{<#1>}%
 }
@@ -849,37 +850,87 @@ NLP has higher level of model free relative to corpus (17/41, 41\% relative to 2
 % ALL: {'MB': 57, 'MF': 27}
 
 % Results achieved
-    % Advantages of multi-modal over uni-modal
+    -key feature ID relative to outcome (i.e., learning/training gains, skills, confidence, behaviors, strategies, collaboration quality, etc.) (e.g., pauses, n-grams, volume, pitch variation, etc.)
+    -multimodal > unimodal
 
 % SOTA 
 
-% Challenges
--ASR
--Temporality
--Complexity
--Hardware, software, NLP methods
+-Data visualization
 
+-ML models are the most common quantitative approach: SVM, RF, Logistic regression, linear regression, NB, etc.
+    -Usually used to regress/classify outcome (i.e., performance gains for learning/training)
+    -Other methods used, but sparingly: clustering, behavior patterns, social network analysis, markov chains, etc.
+    -AI methods lacking. DNN methods such as, RNN, LSTM, BERT...but rarer
+    -Traditional NLP methods TF-IDF/Word2Vec used as baselines but not as part of the actual method
+
+-Qualitative mostly involved descriptive statistics, case studies/individual observations, thematic analysis/constant comparative method of field notes/surveys, qualitative coding
+
+-Stats: mostly correlation between features and specific features/feature combinations to outcome, and significance testing
+
+-Lots of collaboration work, evaluating it both on its own and relative to outcome
+
+% Challenges
+-Hardware/software/multimodal and NLP method limitations for complex tasks (such as characterizing persuasive speech and understanding natural, oral arguments in debate)
+    -Noisy, chaotic environments
+    -ASR mentioned several times
+        -Esp. with adolescents and in noisy environments (cite LID, LAK)
+        -English only
+        -"state-of-the-art diarization system does not perform well on real child-speech interactions"
+    -ASR issues
+    -Speaker diarization
+-Data
+    -Small datasets 
+    -Jargon with domains/children (cite thesis)
+-Complexity
+    -Feature space: "From the audio data, 6405 features were extracted"
+-Opaqueness
+-Time   
+    -Extensive preprocessing and feature engineering required
+    -"a researcher may need to watch screen video data, listen to the audio dialogue several times, and enter behavioural codes into a separate document. Having to do this for every problem and concept students experience over the course of even one class period of learning technology use would be vastly taxing on human time and effort."
+    -"we decided to split the audio manually, which was time consuming and, therefore, led to a lower number of students considered in the applied example."
+-Temporality
+    -Difficult to inform as it unfolds over time
+    -segmentation
+        -"difficulties segmenting the audio files in order to obtain the students-only utterances"
+        
 % Research gaps
 -Lack of textual input. Discuss
 -Only 8 papers use both transcribed audio and prosodic information, which means there is a lack of combining the two
     -Textless NLP lack with combined audio semantics/prosodic audio
--Focus on statistical analysis and qualitative, but lacking in AI/ML?
+-Focus on statistical analysis, qualitative, older ML, but lacking in SOTA AI (esp. RL, Transformers, although BERT/Audeering mentioned)
 -Lack of conversational agent-based work. The stuff that's in there doesn't deal with actual conversations between students and agents, as the agent often acts as an evaluator and provides performance metrics or canned responses (i.e., 1-way recommendations) that are not robust to fluid environments  --- and does not act as a mentor, peer, or collaborator.
 
-% For 12/6. 12/7:
-%   Results 
-%   SOTA (methods)
-%   Challenges
-%   Research gaps
-
 \subsubsection{Vision}
-% List # of papers falling into this subdomain
+% List # of papers falling into this 
+- 59 papers use some form of vision (Camera or Eye Tracking data collection medium with a mapped modalitiy in [POSE, AFFECT, GEST, ACT, FATIG, PIXEL, GAZE])
+
 % List Modalities
 % POSE, AFFECT, GEST, ACT, FATIG, PIXEL, GAZE
+- 'GAZE': 27,
+- 'FATIG': 2,
+- 'ACT': 11,
+- 'AFFECT': 25,
+- 'POSE': 33,
+- 'GEST': 16,
+- 'PIXEL': 1
+
+Vast majority of papers use some combination of GAZE, AFFECT, and POSE when analyzing video. A few use GEST and ACT. Only 2 and 1 papers use FATIG and PIXEL respectively. Lack of papers using PIXEL directly indicates 2 things: (1) Need for mid-fusion, as most people are not looking at raw image features; (2) Lack of alignment between core-vision SOTA and MMLA SOTA
+
+Methods dist: \{'PATT': 8, 'NET': 2, 'QUAL': 24, 'CLUST': 7, 'CLS': 33, 'REG': 8, 'STATS': 26\}
+
+No significant differences in the distributions of analysis methods between the complete dataset and the vision subset.
+
+Approximately 10 papers did only QUAL or QUAL+STATS --- suggests that vision MMLA research is very computationally focused rather than only Qual focused. Further re-inforces by slightly higher percentage of model-based methods in vision compared to the overall dataset ($69.5\% vs 63.0$)
+
+Vast majority of the total papers that apply QUAL methods (29) apply it using vision (24). Not surpising given the importance of analyzing video in qualitative research.
+
+Almost no papers do early fusion using video data --- further support for the need of MID fusion
 
 % SOTA
-% Challenges
-% Research gaps
+% Challenges & Research Gaps
+Almost no papers are doing EARLY fusion using vision data -- suggests that everyone is relying on pre-trained unimodal vision models to perform multimodal inference. This is sensible, since training vision models is difficult and requires a lot of data, but also means there is potential performance improvements in these models by exploring fusing data early. Some examples of this are starting to come out in the CoreML field (e.g., CLIP variants), so it is a promising direction to explore.
+
+Only 14 out of the 59 papers using Vision did a significant combination of qualitative and quantitative analysis --- most commonly a combination of classification and qualitative analysis of those classes. Suggests that much of the vision work is method papers, rather than aimed at understanding students more holistically. More researchers should explore mixed-methods approaches. 
 
 % Results achieved
     % Advantages of multi-modal over uni-modal
@@ -896,22 +947,100 @@ NLP has higher level of model free relative to corpus (17/41, 41\% relative to 2
     % Advantages of multi-modal over uni-modal
 \subsubsection{Human-Centered}
 % List # of papers falling into this subdomain
+
+-TOTAL PAPERS\textbf{ 45} of 73 (QUAL or INTER or SURVEY or RPA or PPA)
+
 % List Modalities
-% QUAL, INTER, SURVEY, RPA, PPA
+% QUAL 14, INTER 10, SURVEY 10, RPA 12, PPA 19
+
+- QUAL 14, INTER 10, SURVEY 10, RPA 12, \textbf{PPA 19}
+
+-Out of 45 papers, \textbf{0 have all 5} modalities, \textbf{1 has 4} modalities, \textbf{3 have 3} modalities, \textbf{11 have 2} modalities, \textbf{30 have 1} modality (QUAL 6, INTER 3, SURVEY 6, RPA 6, PPA 9)
+
+-Combinations (number of papers >3) QUAL + PPA: 6, INTER + PPA: 4, SURVEY + PPA: 4, RPA + PPA: 4
+
+-Only 1 of 45 papers doesn't have non-human-centered modalities (it is a paper that does clustering and regression using only RPA)
+
+- Looking at analysis methods for the 45 papers: STATS 25, CLS 21, \textbf{QUAL 12}, CLUST 5, PATT 5, REG 4, NET 2
+
+\noindent\rule{2cm}{0.4pt}
+
+Out of the 73 papers in your corpus, 45 (approximately 61.6\%) incorporate at least one of the human-centered modalities (QUAL, INTER, SURVEY, RPA, or PPA). This indicates a significant proportion of papers in your corpus that involve human-centered data collection methods. This concentration implies a strong interest in capturing and analyzing data that directly involves human experiences, perspectives, and artifacts, from the perspective of the human who produces the data based on its own interpretations of the tasks taking place during the activity.
+
+Among the human-centered modalities, Participant Artifacts (PPA) has the highest representation with 19 papers, followed by Qualitative Researcher Observations (QUAL) with 14 papers and Researcher Artifacts (RPA) with 12. Interview Notes (INTER) and Survey responses (SURVEY) both have similar representation with 10 papers. 
+
+The prevalence of Participant Artifacts (PPA) suggests a notable emphasis on utilizing materials produced directly by the study participants. This includes a diverse range of materials, depending on the nature of the study. The high count of Qualitative Researcher Observations (QUAL) indicates a focus on qualitative insights drawn directly from the researcher's observations of participant behavior and the environment.
+
 
 % SOTA
-% Challenges
-% Research gaps
+-SOTA:
 
+% Challenges
+- Challenges: While a human-centered approach in multimodal learning analytics brings valuable insights, it also poses several challenges related to subjectivity, scalability, resource intensiveness, and potential limitations in generalizability. Due to the inherent subjectivity of human-centered modalities, the analysis of this data may be susceptible to the influence of the researcher's perspective, possibly introducing bias into the interpretation. Furthermore, these approaches often are resource-intensive, requiring trained researchers for data collection and analysis. Manual collection and human analysis can be time-consuming and may not scale well, especially in large-scale educational settings. Nevertheless, human-centered approaches may offer more transparent and interpretable insights than automated methods.
+
+% Research gaps
+-GAPS
 % Results achieved
     % Advantages of multi-modal over uni-modal
+- Advantages of multi-modal: By integrating multiple modalities, researchers can gain a more comprehensive understanding of the learning environment. This human-centered approach offers insights into the participants' experiences, perceptions, and behaviors, often pinpointing subtle nuances that might be missed in a unimodal analysis.
+    
+    QUAL provides rich contextual observations, PPA and RPA offer tangible artifacts, INTER captures in-depth discussions, and SURVEY provides multiple participant perspectives, collectively enriching the analysis. The use of multiple modalities allows for triangulation and cross-verification, where findings from different sources are compared to enhance the validity of the results.
+    
 \subsubsection{Logs}
 % List # of papers falling into this subdomain
+30 papers that use LOGS for their modalities analysis (40\% of the entire corpus). Log modality/medium was expected to be the largest group based on traditional LA and its role in contexualizing complimentary data.
+
 % List Modalities
-% LOGS
+Since LOGS is its own modality and medium, I list below the counts of complimentary modalities:
+-GAZE: 30 (13\%)\\
+-AFFECT: 15 (12\%)\\
+-POSE: 14 (11.4\%)
+-EDA: 8 (7.3\%)
+-PPA: 8 (7.3\%)
+-RPA: 7 (6.5\%)
+-ACT: 6 (4.8\%)
+-PULSE: 5 (4\%)
+-TEMP 5 (4\%)
+-TRANS: 5 (4\%)
+-QUAL: 5 (4\%)
+-SURVEY: 4 (3.2\%)
+-INTER: 4 (3.2\%)
+-GEST: 4 (3.2\%)
+-BP: 3 (2.4\%)
+-EEG: 2 (1.6\%)
+-FATIG: 2 (1.6\%)
+-TEXT: 1 (0.8\%)
+
+% QUAL vs QUANT
+-QUANT: 12
+-QUAL: 7
+-Mixed Methods: 11
+
+% Fusion
+No early, largely because AI methods aren't trained to raw logs.
+-EARLY: 0
+-MID: 11 (34\%)
+-LATE: 4 (13\%)
+-HYBRID: 10 (31\%)
+-OTH: 7 (22\%)
+
+% Environment Setting
+
+% Participant Structure
+
+% Didactic Nature
+
+% Grade Level
+
+% MB vs MF
 
 % SOTA
+
 % Challenges
+Time alignment (difficult to manually align to video/audio)
+Learning environment dependent analysis
+Generalizability constraints
+
 % Research gaps
 
 % Results achieved
@@ -1032,16 +1161,35 @@ NLP has higher level of model free relative to corpus (17/41, 41\% relative to 2
 % Address Need for mid fusion
 
 % Discuss (overall, in the aggregate):
+    % Results
     % SOTA
     % Challenges
+        % -"One of the biggest challenges in multimodal learning analytics is that the large volume of rich, multimodal data collected requires significant human time and effort to make sense of."
+        % -"Making sense of all the richness that exists in multimodal data can be highly time-consuming."
+        % -"Data from different sources are often difficult to integrate."
+        % -"In practice, however, the increased complexity resulting from the additional collection of multimodal data presents unique challenges"
+        % Codesign, explainability, trust (challenge/gap as a whole for the field).
+        % Overall challenge: class size/data. Majority of methods used to analyze case studies or classroom-sized study participants. This is not a lot of data and may help explain why DL methods are not as common as you would expect.
+            % limited amount of data available to properly train
+                % -"data is limited, which represents one of the major challenges for building robust and reliable multimodal models"
+                % -"training a model on a reduced dataset introduces a bias to the model, affecting the validity of the model’s predictions when the data inputs come from a different distribution than the training set. "
+            % small set of students (overall challenge)
+            % Small, imbalanced datasets (cite CSEDU, AIED, AIED2)
+            % lack of representative data in open datasets (i.e., few focusing on children/education) (overall challenge)
+            % Generalizability:
+                % Finally, the design and sample size of the focus group do not allow us to generalize the results. 
+                % The limited number of pair work EEs does not allow us to make any strong claims in terms of the framework’s reliability. 
+        % Explainability: making sense of the data (overall challenge)
+        % Subjectivity: the uncertainty arising from the [subjective] annotations may influence the resulting model structures, parameters and interpretation. I.e., tough to generalize (overall challenge)
+        %   Cite: C&E, IUI, EAAI
+        % Diversity:
+        %  "...the subject pool is not overly diverse, limiting our ability to explore culture or ethics-related factors in the model reliably"
+        % "Obtaining and labelling data is indeed a costly process especially in the context of education"
+
     % Research gaps
     %   Domain specificity and lack of generalizable approaches
-    % Sensors
-    % Multimodal data
-    % Fusion
-    % Analysis methods/approaches
-    % Results achieved
-    % Advantages of multi-modal over uni-modal
+    %   Small/imbalanced/unrepresentative data (need large open sets)
+    %   Multimodal, conversational agents
     
 \subsection{Implications}
 
