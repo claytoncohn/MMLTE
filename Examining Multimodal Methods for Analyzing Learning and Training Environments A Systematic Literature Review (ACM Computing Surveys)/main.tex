@@ -357,7 +357,7 @@ Another influential survey is \citet{chango_review_nodate}, where data fusion me
 
 By combining the valuable insights from these two significant surveys, a more complete and current understanding of data fusion emerges. This improved definition seamlessly integrates the idea of observability, capturing the process of bringing together different sources of information to create a unified data representation. This definition also takes into account the distinction between measurable sensory evidence and human-inferred annotations, guided by the observability line. In the upcoming section, we further elaborate in these data fusion scheme along with refined taxonomy.
 
-\section{Framework} 
+\section{Framework} \label{sec:framework}
 
 % Lens through which we are conducting this research
 % Framework diagram and explanation
@@ -513,13 +513,15 @@ This classification is still somewhat qualitative and up to a researcher's inter
 \subsection{Analysis Approach}
 % MB vs MF.
 
-\section{Methods} \label{sec:methods} % How our literature view was done
+\section{Methods} \label{sec:methods}
 
 % Overview of methods section to include lit search, study selection, feature extraction, and analysis methods
 
+In this section, we discuss our study selection and feature extraction procedures, and introduce the analysis we perform for this literature review. Section \ref{subsec:literature_search} presents our literature search procedure. Section \ref{subsec:study_selection} discusses our corpus reduction procedure, which includes both quantitative and qualitative methods. Sections \ref{subsec:feature_extraction} and Section \ref{subsec:analysis_procedure} describe our feature extraction and analysis procedures, respectively.
+
 \subsection{Literature Search} \label{subsec:literature_search}
 
-This literature review examines contemporary multimodal analytics methods applied to learning and training environments. Our aim is to collect all pertinent papers published between 1/1/2017 and 10/22/2022. The proceeding paragraphs detail the methods used to construct our literature corpus and the efforts taken to consider all relevant papers, which we then distill via both quantitative (network analysis) and qualitative (quality control) methods to a manageable amount of works we believe to be representative of the current state of the field. In doing so, we introduce a novel graph-based study selection approach that uses a directed citation graph to exclude irrelevant works based on a paper's incoming and outgoing citations. To the authors' knowledge, this approach has not been previously used for distilling a literature review corpus. Our procedure for performing the quality control portion of this literature review is adapted from Barbara Kitchenham's ``Procedures for Performing Systematic Reviews" \cite{kitchenham2004procedures}.
+This literature review examines contemporary multimodal analytics methods applied to learning and training environments. Our aim is to collect all pertinent papers published between 1/1/2017 and 10/22/2022. The proceeding paragraphs detail the methods used to construct our literature corpus and the efforts taken to consider all relevant papers, which we then distill via both quantitative (network analysis) and qualitative (quality control) methods to a manageable amount of works we believe to be representative of the current state of the field. In doing so, we introduce a novel graph-based corpus distillation procedure that uses a directed citation graph to exclude irrelevant works based on a paper's incoming and outgoing citations. We call our approach \textit{Citation Graph Pruning} (CGP). To the authors' knowledge, this approach has not been previously used for distilling a literature review corpus. Our procedure for performing the quality control portion of this literature review is adapted from Barbara Kitchenham's ``Procedures for Performing Systematic Reviews" \cite{kitchenham2004procedures}.
 
 Our literature search consisted of 42 queries agreed upon and defined by the authors as being representative of the body of works this literature review would be conducted on. Instead of performing our queries manually, our approach leverages programmatic querying via API-based web scraping for Google Scholar. There are multiple tools for scraping Google Scholar information, such as \href{https://pypi.org/project/scholarly/}{scholarly} and \href{https://github.com/venthur/gscholar}{gscholar}. Ultimately, we employed \href{https://serpapi.com/google-scholar-api}{SerpAPI}, a proprietary third-party Google Scholar web scraping API, for its most essential feature: organic web results. Other API tools' results are not organic, i.e., a query made via the API and one manually queried in a browser-based environment will produce two different sets of results.
 
@@ -566,7 +568,7 @@ Our initial search yielded a total of 4,200 papers. The distillation procedure w
 \begin{table}[htbp]
     \renewcommand{\arraystretch}{1.3}%
     \centering
-    \caption{Corpus reduction procedure. Step ID 0 is the literature search. Steps IDs 1-7 were performed quantitatively via pruning the initial search corpus's citation graph. Subsequent steps were performed qualitatively via our quality control procedures. At each step of the corpus reduction procedure, the number of papers pruned and number of papers remaining are listed.}
+    \caption{Corpus reduction procedure. Step ID 0 is the literature search. Steps IDs 1-6 were performed quantitatively via pruning the initial search corpus's citation graph. Subsequent steps were performed qualitatively via our quality control procedures. At each step of the corpus reduction procedure, the number of papers pruned and number of papers remaining are listed.}
     \begin{tabularx}{\linewidth}{l@{\hskip .25in} l@{\hskip .25in} l@{\hskip .25in} l@{\hskip .25in}}
         Step ID & Procedure & Removed & Remaining \\
         \midrule
@@ -604,7 +606,7 @@ Our initial search yielded a total of 4,200 papers. The distillation procedure w
         \quad 9.1 & \quad First full paper round & 52 & 75\\
         \quad 9.2 & \quad Feature discretization and extraction & 2 & 73\\
         \quad 9.3 & \quad Second full paper round & 0 & 73\\
-        
+        \quad 9.4 & \quad Second feature extraction round & 0 & 73\\
         \bottomrule
     \end{tabularx}
     \label{tab:procedure}
@@ -653,7 +655,7 @@ Once we had our connected graph, we removed 1-degree nodes to further prune it. 
 
 A cursory look at the remaining 1,063 titles informed us that a large part of our corpus was still outside the scope of our review. We first noticed many papers related to training multimodal neural networks, whereby neural networks are trained on multimodal datasets to perform multimodal tasks. An example of this is \textit{image captioning}, where a neural network is trained to write a caption for a given image \cite{yu2019multimodal}. This requires multimodal training, as the network must have knowledge of both vision and language. We also noticed many works applying multimodal methods to the medical field, usually in terms of imaging. Medical images take many forms, and multiple forms can be combined to train a deep learning model in a multimodal fashion. For example, Cheng at al. used both computed tomography (CT) and magnetic resonance (MR) images to train a neural network for deep similarity learning, where a binary classifier is trained to learn the correspondence between two image patches \cite{cheng2018deep}. To remove papers pertaining to multimodal neural network training and multimodal medical applications, we programmatically identified 217 titles via regex keyword search (Table \ref{tab:procedure}, Step ID 6) that contained at least one of six of the following words: neural, deep, machine, medical, medicine, and healthcare. We then evaluated the selected titles by hand. Of the 217, 13 were kept in the corpus due to their potential relevance to our review. Papers employing deep learning methods in multimodal learning analytics (MMLA) and applying multimodal methods to medical learning or training environments were within the scope of our review, for example. For reference, we removed one paper titled, ``deep learning for object detection and scene perception in self-driving cars: survey, challenges, and open issues" \cite{gupta2021deep}; and we kept one titled, ``supervised machine learning in multimodal learning analytics for estimating success in project‐based learning" \cite{spikol2018supervised}. The remaining 204 papers were removed from the corpus, reducing it to 859 potentially relevant works.
 
-It was at this point we concluded our quantitative pruning procedures and began qualitatively reducing the corpus, which we discuss in the next subsection.
+It was at this point we concluded our CGP procedure and began qualitatively reducing the corpus, which we discuss in the next subsection.
 
 \subsubsection{Quality Control (Qualitative Pruning).} \label{subsubsec:quality_control}
 
@@ -707,7 +709,7 @@ Certain papers deal with learning or training environments but are outside the s
 
 During the first round of full paper reads (Table \ref{tab:procedure}, Step ID 9.1), all papers received one initial read. Reviewers marked each paper as ``immediate exclude," ''immediate accept," ``borderline exclude," or ``borderline accept." Papers marked as ``immediate exclude" were discussed by all 5 reviewers and excluded only if all agreed. These were papers with easily identifiable reasons for exclusion based on our criteria (for instance, a proposed theoretical framework with no analysis or a doctoral consortium presenting ideas for future research). No papers were ever excluded from our corpus during full paper reads without unanimous agreement from all five reviewers. Papers marked as ``immediate accept" were kept in the corpus for the second full paper read round. Papers marked as ``borderline exclude" or ``borderline accept" were assigned to a separate reader for further review and were subsequently discussed. Similar to papers marked for immediate exclusion, borderline papers were excluded prior to the second full paper read round only if all authors agreed. Altogether, 52 papers were excluded during the first round of full paper reads, which left 75 works remaining in the corpus. 
 
-\subsection{Feature Extraction}
+\subsection{Feature Extraction} \label{subsec:feature_extraction}
 
 During the first full paper read round, several features were extracted from each paper (Table \ref{tab:procedure}, Step ID 9.2). Features included identifying information (e.g., title, first author, publication year), and information related to the paper's methods (e.g., data collection mediums, modalities, and analysis methods). The extracted features and their descriptions are found in Table \ref{tab:feature_extraction}.\footnote{For the ``Year" category, we used the date the manuscript was first publicly available (if listed, otherwise we used the publication date) in order to most accurately represent when the methods were performed. In some instances, the first date of online availability preceded the official publication date by over a year. Additionally, only data that was ultimately used in the paper's analysis was considered for the ``Data Collection Mediums" category (i.e., if it was collected but never analyzed, we did not include it).}
 
@@ -745,12 +747,12 @@ During the first full paper read round, several features were extracted from eac
     \label{tab:feature_extraction}
 \end{table}
 
-After the first read, the reviewers discussed their extracted features. To ensure alignment and understanding between all authors with respect to the features, feature categories were discretized via inductive coding \cite{}, where four of this paper's authors each extracted initial feature sets from 25\% of the corpus's papers. For example, the initially extracted data collection medium feature included instances of video camera, web camera, and Kinect camera, all of which were mapped to the ``VIDEO" data collection medium. Once the authors agreed on the discrete sets of features, papers were reread by their original reviewers, and their features were extracted into the discrete sets. The discrete feature-spaces are listed below in Table \ref{tab:circumscribing_features}. We call these features \textit{circumscribing features} to delineate them versus the identifying features (e.g., UUID, paper title, author, etc.) that were extracted for identification purposes but not used during analysis. 
+After the first read, the reviewers discussed their extracted features. To ensure alignment and understanding between all authors with respect to the features, feature categories were discretized via inductive coding \cite{thomas2003general}, where four of this paper's authors each extracted initial feature sets from 25\% of the corpus's papers. For example, the initially extracted data collection medium feature included instances of video camera, web camera, and Kinect camera, all of which were mapped to the ``VIDEO" data collection medium. Once the authors agreed on the discrete sets of features, papers were reread by their original reviewers, and their features were extracted into the discrete sets. The discrete feature-spaces are listed below in Table \ref{tab:circumscribing_features_1}. We call these features \textit{circumscribing features} to delineate them versus the identifying features (e.g., UUID, paper title, author, etc.) that were extracted for identification purposes but not used during analysis. 
 
 \begin{table}[htbp]
     \renewcommand{\arraystretch}{1.3}%
     \centering
-    \caption{Circumscribing features and their corresponding feature sets. For \textit{Environment Type}, items in the feature set are mutually exclusive (i.e., an environment can either be a learning \textit{or} training environment by our definition, but it cannot be both. All other circumscribing features can consist of multiple items in the feature set (e.g., each paper in our corpus will contain multiple mediums or modalities).}
+    \caption{The first round of circumscribing features and their corresponding feature sets. For \textit{Environment Type}, items in the feature set are mutually exclusive (i.e., an environment can either be a learning \textit{or} training environment by our definition, but it cannot be both. All other circumscribing features can consist of multiple items in the feature set (e.g., each paper in our corpus will contain multiple mediums or modalities).}
     \begin{tabular}{p{0.22\linewidth}@{\hskip .1in} | @{\hskip .1in}p{0.45\linewidth}@{\hskip .1in}}
         \toprule
         Circumscribing Feature & Feature Set\\
@@ -764,7 +766,7 @@ After the first read, the reviewers discussed their extracted features. To ensur
 
         \bottomrule
     \end{tabular}
-    \label{tab:circumscribing_features}
+    \label{tab:circumscribing_features_1}
 \end{table}
 
 % Needs to be filled in with tables.
@@ -772,19 +774,39 @@ Each item in each of the circumscribing feature sets is described in Tables \ref
 
 During discretized feature extraction, additional papers were newly identified for possible exclusion pursuant to our aforementioned criteria. After discussing each paper selected for possible exclusion, 2 papers were removed from the corpus due to all five reviewers agreeing that each paper violated at least one exclusion criterion. After the two removals, 73 papers remained in the corpus, all of whose features were extracted into discrete sets pursuant to Table \ref{tab:feature_extraction} by the first full paper read round reviewer. At this point, a second and final quality control round was performed for full paper reads (Table \ref{tab:procedure}, Step ID 9.3), where each of the 73 papers remaining in the corpus was assigned to a reviewer who had not yet read that particular paper. For this round, reviewers were instructed to perform two tasks: identify any papers remaining in the corpus that violated any of the exclusion criteria (to discuss later for possible exclusion), and perform a round of feature extraction (to determine inter-rater reliability (IRR) with respect to the initial feature extraction via Cohen's $k$ \cite{cohen1960coefficient}). For this round, no additional papers were identified for exclusion, resulting in a final corpus of 73 works. Each paper's discrete feature sets were ultimately determined via consensus coding \cite{} by the two reviewers who read that particular paper (i.e., both reviewers needed to agree on the presence or absence of each feature in each paper). For reference, Cohen's $k$ before consensus was $k=0.873$.  
 
-Once our corpus was finalized, we performed one additional round of feature extraction to extract additional circumscribing features to be used in our analysis. These features are: Environment Setting, Environment Subject, Participant Structure, Didactic Nature, Level of Instruction, Analysis Approach, and Analysis Results. All of these features are explained in Table \ref{} alongside their discrete values. The one exception is Analysis Results, which was not discretized due to the wide degree of variability across each paper's findings. Instead, we noted each paper's findings, and used them in our qualitative analysis via a thematic analysis \cite{}. The additional features were selected for extraction to allow for greater insight into the corpus via a more in depth analysis.
+Once our corpus was finalized, we performed one additional round of feature extraction to extract additional circumscribing features to be used in our analysis. These features are: Environment Setting, Environment Subject, Participant Structure, Didactic Nature, Level of Instruction, Analysis Approach, and Analysis Results. All of these features are explained in Table \ref{circumscribing_features_2} alongside their discrete values. The one exception is Analysis Results, which was not discretized due to the wide degree of variability across each paper's findings. Instead, we noted each paper's findings, and used them in our qualitative analysis during a thematic analysis \cite{braun2012thematic}, which we describe in Section \ref{subsec:analysis_procedure}. The additional features were selected for extraction to allow for greater insight into the corpus via a more in depth analysis.
+
+\begin{table}[htbp]
+    \renewcommand{\arraystretch}{1.3}%
+    \centering
+    \caption{The second round of circumscribing features and their corresponding feature sets. .}
+    \begin{tabular}{p{0.27\linewidth}@{\hskip .1in} | @{\hskip .1in}p{0.48\linewidth}@{\hskip .1in}}
+        \toprule
+        Circumscribing Feature & Feature Set\\
+        \toprule
+        Environment Setting & physical, virtual, blended, unspecified\\
+        Environment Subject & STEM, humanities, psychomotor skills, other, unspecified\\
+        Participant Structure & individual, multi-person, unspecified\\
+        Didactic Nature & instructional, training, informal, unspecified\\
+        Level of Instruction or Training & K-12, university, professional development, unspecified\\
+        Analysis Approach & model-free, model-based\\
+        \bottomrule
+    \end{tabular}
+    \label{tab:circumscribing_features_2}
+\end{table}
 
 Similar to our initial round of feature extraction, we began with inductive coding, where four of this paper's authors first extracted the new circumscribing features for the same papers he or she performed inductive coding on during the previous round of feature extraction. We then discussed each paper's extracted features and formulated discrete sets for the new circumscribing features (with the exception of Analysis Results). During the first round of IRR, reviewers revisited the same papers they read during inductive coding and extracted the new circumscribing features pursuant to the agreed-upon feature sets devised during inductive coding. During the second round of IRR, reviewers reread (and extracted the additional features from) the same set of papers they were the 2$^{nd}$ reviewer for during the initial round of feature extraction. At this point, for each paper, the two reviewers who extracted that paper's additional features performed consensus coding to define that paper's final set of features. For reference, Cohen's $k=0.71$ for the additional round of feature extraction.
 
-\subsection{Analysis Procedure}
+\subsection{Analysis Procedure} \label{subsec:analysis_procedure}
 % Explain analysis procedure pursuant to framework
 
+For each component of our framework depicted in Figure \ref{fig:framework}, we perform qualitative analysis via a thematic analysis of the features we extracted from our corpus, where we present descriptive statistics for each component and discuss the prevalent trends in the literature. Diving deeper into the multimodal data, we decompose our list of modalities into five subdomains that, together, characterize multimodal data as a whole: natural language, vision, sensors, human-centered, and logs. For each subdomain, we discuss the current state-of-the-art, challenges, research gaps, and the results achieved by researchers. We present our findings for each component of our framework in Section \ref{sec:findings}. In Section \ref{sec:discussion}, we discuss our overall findings with respect to the corpus and field as a whole.
 
 \section{Findings}
-
+We present our findings with respect to the individual components in the Figure \ref{fig:framework} framework: Environment, Multimodal Data, Data Fusion, Analysis, and Feedback. Each component in the figure corresponds to a subsection. 
 
 \subsection{Environments}
-
+We investigate learning and training environments with respect to three components, pursuant to our framework: setting, learners/trainers, and data. Setting refers to the environment itself, learners/trainers refers to the participants, and data refers to the data collection within the environment.
 
 \subsubsection{Setting}
 % SOTA
@@ -795,8 +817,33 @@ Similar to our initial round of feature extraction, we began with inductive codi
 %   Environment type
 %   Environment setting
 
+The Environment Setting analysis, delineated in Figure \ref{}, categorizes the environments into four distinct types: Virtual (VRT), Physical (PHYS), Blended (BLND), and Unspecified (UNSP), as there is a total of 31, 21, 20, and 2 papers, respectively. Our review reveals a predominance of virtual environments, as evidenced by the substantial count of VRT settings. This trend could be attributed to the increasing reliance on online platforms for educational engagement, a phenomenon that the COVID-19 pandemic post-2020 may have accelerated.
 
-\subsubsection{Learners}
+The nearly equivalent prominence of PHYS and BLND settings suggests a nuanced approach in the multimodal learning or training domains, potentially indicating a balanced integration of traditional and innovative methods. The BLND category, in particular, underscores a transitional dynamic in educational delivery, blending the tangible aspects of in-person experiences with the flexibility of virtual accessibility.
+The minimal presence of UNSP environments within our study implies a clear definition of the setting in most cases, which provides a more reliable foundation for analyzing the impact of environment types on learning and training outcomes.
+
+Our analysis further extends to the distribution of learning versus training environments, as depicted in Fig. \ref{}. The substantial leaning towards learning environments underscores the focus of educational literature on knowledge acquisition. In contrast, the less frequent occurrence of training settings may reflect a narrower scope centered on skill enhancement and professional development. This distribution is insightful, as it indicates the primary objectives pursued in the examined environments.
+
+While catalyzed by technological and societal evolution, the shift towards virtual settings also resonates with the convenience of collecting and processing multimodal data for analytical purposes. The interplay between physical and blended environments might indicate a diversification in the pedagogical delivery, especially in fields where hands-on, psychomotor activities are crucial, such as nursing.
+
+The core of learning is bridging knowledge gaps facilitated by multimodal approaches that enhance the acquisition and assimilation of information. Training, conversely, addresses practice gaps, where multimodality serves as a tool for rapid adaptation and responsive learning.
+
+Nonetheless, the optimal combination of modality, environment, and content that maximizes learning and training efficiency still needs to be discovered. Our literature survey indicates a concerted effort to comprehend the varying impacts of modalities across different settings. The interpretability of data, a pivotal aspect of learner feedback, varies significantly, prompting diverse analytical methodologies.
+
+A notable research gap exists in environments where physical demand is intense, such as rehabilitative therapy or athletic training. Here, the challenge lies in leveraging multimodality to provide meaningful feedback to individuals who are not only physically active but may be navigating pain and physical limitations. Determining how cognitive and physical loads affect the uptake of information in such settings is crucial for enhancing the learning or training experience.
+
+
+\subsubsection{Learners/Trainers}
+Within the scope of our study, the learner's domain encompasses several key elements: the environment subject, participant structure, didactic nature, and the level of instruction or training. Each facet contributes to a comprehensive understanding of the learner's experience and the educational context.
+
+The environment subjects are predominantly within the STEM fields, with a significant count of 55, indicating a strong focus on Science, Technology, Engineering, and Mathematics in the environments under consideration. humanities (HUM) follow with a count of 11, while psychomotor (PSY) is represented with five occurrences. There are a few unspecified (UNSP) subjects, and other (OTH) subjects are the least represented with a count of 2. This distribution suggests a heavy emphasis on STEM education in the current literature, potentially reflecting the global trend towards these disciplines due to their growing importance in the job market and societal advancement.
+
+When it comes to participant structure, individual (IND) learning environments are more prevalent, with 45 counts, compared to multi-participant (MULTI) structures, which have 31. This indicates a significant proportion of studies focusing on individual learning experiences, which may imply a tailored approach to learning, allowing for personalization and self-paced progress. However, the substantial presence of multi-participant settings also highlights the importance of collaborative and social learning environments in educational research.
+
+The instructional methods, as denoted by the didactic nature of the environments, are majorly instructional (INSTR) with 45 counts. This is followed by training (TRAIN) with 15 and informal (INF) with 12. Only one instance remains unspecified. This suggests that formal instruction is the predominant mode of teaching in the environments surveyed, with a smaller yet notable focus on training and informal learning settings, which may include more interactive, practical, or workplace-based learning scenarios.
+
+As for the level of instruction or training, the university (UNI) level dominates with 36 counts, closely followed by K-12 with 30. Unspecified levels account for 7, while professional (PROF) settings are the least represented with 5. The prominence of university-level subjects could reflect the research intensity and academic focus of higher education, while the strong representation of K-12 indicates a continued interest in foundational education practices. The professional setting, though lesser in count, is critical for understanding lifelong learning and continuing education.
+The data on learner characteristics in our corpus of literature illustrate a landscape where STEM education is paramount, individual learning experiences are valued, formal instruction is the standard teaching method, and there is a strong emphasis on university and K-12 education levels. However, the presence of other educational levels and informal learning contexts indicates a diverse range of learning experiences and instructional approaches. This diversity presents both challenges and opportunities for educators and researchers alike, as it underscores the need to tailor educational strategies to suit various learning environments and to address the unique requirements of different learner demographics.
 % SOTA
 % Challenges
 % Research gaps
@@ -808,6 +855,12 @@ Similar to our initial round of feature extraction, we began with inductive codi
 %   Didactic Nature
 
 \subsubsection{Data}
+
+As depicted in Fig. \ref{}, the current state of the art in data collection mediums reflects a diverse array of technologies and methodologies, with video (VIDEO) leading at 61 counts, followed by audio (AUDIO) recordings at 37. These two mediums indicate a preference for rich multimedia data that can capture the complexity of learning and interaction in environments. Log files (LOGS) and participant-produced artifacts (PPA) are also significant, with counts of 33 and 30, respectively, suggesting a strong inclination toward capturing learner behaviors and outputs directly from the learning process.
+
+Despite advancements, the field faces challenges in integrating data from disparate sources and ensuring data quality and privacy. For instance, sensor data (SENSOR), which has a count of 20, presents challenges in standardization and interpretation. Although less prevalent, eye-tracking (EYE) and motion capture (MOTION) data raise concerns about intrusiveness and the need for sophisticated analysis techniques.
+
+There are notable gaps in text-based data (TEXT), with only one count, indicating a potential underutilization of linguistic analysis in educational research. Additionally, integrating multimodal data streams to provide holistic insights remains an area ripe for exploration. The relatively lower usage of surveys (SURVEY) and interviews (INTER) suggests a research gap in understanding subjective experiences and qualitative dimensions of learning.
 % SOTA
 % Challenges
 % Research gaps
@@ -816,30 +869,28 @@ Similar to our initial round of feature extraction, we began with inductive codi
 %   Data Collection Mediums
 
 \subsection{Multimodal Data}
-% Descriptive statistics for:
-%   Modalities
+We present the breakdown of the different modalities used in our corpus in Figure \ref{fig:modalities}.
 
-% One modality paper with 2 data collection mediums, vid and aud: 
-\cite{3809293172}
-
-% Thematic analysis cite: https://psycnet.apa.org/record/2011-23864-004
-
-\begin{figure}
+\begin{figure}[htbp]
+    \centering    
+    \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{img/statistical_imgs/modalities.png}
-        \caption{Modalities}
-        \label{fig:modalities}
-\end{figure}
-
-\begin{figure}
+        \caption{Frequency counts for the number of papers in our corpus containing each modality in its multimodal analysis pipeline.}
+        \label{fig:modalities_freq}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{img/statistical_imgs/number of modalities per count of papers.png}
-        
-        % Add footnote about the 1 paper with only 1 modality having multiple data collection mediums, so we consider it multimodal by our definition.
-        
-        \caption{Modalities quantities}
+        \caption{The number of modalities used per paper (i.e., how many papers (y-axis) used $n$ modalities (x-axis)).}
         \label{fig:modalities_nums}
+    \end{subfigure}
+    \caption{A breakdown of the individual modalities used in our corpus both in terms of frequency count (left) and the number of modalities used per paper (right).}
+    \label{fig:modalities}
 \end{figure}
 
-% Introduce subdomains
+``Pose" is the most prevalent modality, appearing in some form in the multimodal pipelines of roughly 45\% of the papers in our corpus. Pose refers to both physical body pose and geospacial location. The logs, affect, gaze, and prosodic speech modalities are also common, at least one of which appears in all but 8 papers in our corpus. The remaining modalities appear less frequently, with raw text, raw pixel value, and audio spectogram only appearing in one paper each. The vast majority of papers (60/73) use 2-5 modalities in their multimodal analysis. One paper used only 1 modality\footnote{By our definition of ``multimodal" in Section \ref{sec:framework}, we consider a paper to be multimodal if multiple modalities are used during analysis \textit{or} multiple data collection mediums are used. One paper \cite{3809293172} collected both video and audio data, from which the authors derived a single modality: researcher produced artifacts (RPA). For this reason, there is one paper in our corpus using only one modality in its analysis pipeline, which we still consider to be multimodal by our definition.}, and one paper used 10 modalities. We hypothesize that researchers typically choose to 2-5 modalities for their multimodal analysis due to that range offering a compromise between overhead and performance, as several papers alluded to diminishing returns as more modalities and features were added to the pipeline. In these instances, researchers often first collected the data across several modalities but then reduced their feature space via dimensionality reduction techniques like principal component analysis (PCA). 
+
+Diving deeper into the multimodal data, we identified five subdomains based on the modalities that best characterize the types of data that currently drive the multimodal methods being applied to learning and training environments: natural language, vision, sensors, human-centered, and logs. The following subsections present our findings with respect to each subdomain. For each subdomain, we identify the individual modalities it comprises and discuss our findings with respect to its prevalence in the corpus, current state-of-the-art, challenges faced, research gaps, and results achieved.
 
 \subsubsection{Natural Language}
 % List # of papers falling into this subdomain
@@ -982,72 +1033,43 @@ Only 14 out of the 59 papers using Vision did a significant combination of quali
 % List # of papers falling into this subdomain
 % List Modalities
 % AFFECT, POSE, EDA, PULSE, ACT, BP, TEMP, EEG, EMG, FATIG, GAZE
-\textbf{Utilization of Wearable Sensory Data in the Matched Studies}
-
-1. Monitoring Emotional and Physiological States: Many studies use wearable sensors to track physiological responses (heart rate variability, skin temperature, EDA) and correlate them with emotional states (e.g., stress, arousal) during learning activities like coding workshops and classroom environments.
-
-2. Behavior and Performance Prediction: Wearable sensors, in combination with other modalities like eye-tracking and Kinect cameras, are used to predict behaviors like effort in assessments, performance in CPR training, and engagement in game-based learning.
-
-3. Real-time Feedback and Adaptation: In studies like CPR training, wearable data is used to provide real-time feedback. Also, in classroom environments, data from wearables is used to adaptively recommend learning activities.
-
-4. Multimodal Data Integration: Several studies integrate data from wearables with other sources, like Kinect-based posture data and facial cameras, for a comprehensive analysis of the learning process.
-
-\textbf{Challenges Identified in These Studies}
-
-1. Data Integration and Interpretation: Combining and interpreting data from various sensors and modalities to provide meaningful insights is a recurring challenge.
-
-2. Balancing Accuracy and Practicality: Ensuring that the data collected is both accurate and practically useful for real-time applications, such as in CPR training feedback.
-
-3. Contextual Relevance: Ensuring that the sensor data is relevant and accurately reflects the learning context, especially in dynamic and interactive environments like game-based learning or collaborative tasks.
-
-4. Technical Limitations and Complexity: Dealing with the technical complexities of processing and analyzing multimodal data streams, especially when employing advanced machine learning techniques.
-
-\textbf{State-of-the-Art Techniques in These Studies}
-
-1. Advanced Predictive Modeling: Using machine learning and AI techniques, like support vector machines, deep neural networks, and reinforcement learning for predictive analysis.
-
-2. Real-Time Feedback Systems: Developing systems that can process sensor data in real-time to provide immediate feedback, as seen in CPR training.
-
-3. Effective Multimodal Data Fusion: Employing sophisticated data fusion techniques, such as feature-level concatenation, for enhanced predictive accuracy.
-
-\textbf{Potential Gaps and Future Directions}
-
-1. Long-Term Impact Analysis: Most studies focus on immediate or short-term effects; long-term studies to assess the sustained impact of these technologies are needed.
-
-2. Broader Demographic and Contextual Application: Expanding research to include diverse learning contexts and demographic groups to understand the broader applicability of these technologies.
-
-3. Scalability and Generalizability: Research often happens in controlled environments; scaling these technologies for widespread use and ensuring their generalizability remains a challenge.
-
-4. User Experience and Acceptance: More research is needed on how learners perceive and interact with these technologies, especially in terms of comfort, usability, and perceived effectiveness.
-Notes: \textbf{Storytelling With Learner Data: Guiding Student Reflection on Multimodal Team Data: To me this is the most interesting one, because of its realistic application in real world; the data seems limited and does not have IMU data and the data was logged by observer can be treated as ground truth. A more sophisticated model should be implemented.}
-
-\textbf{More in-depth:}
-
-\textbf{Missing Data-Driven Methods to Utilize Wearable Sensory Data}
-
-\begin{enumerate}
-    \item \textbf{Granular Data Analysis}: There's a need for more sophisticated data-driven methods that can delve into the finer details of wearable sensor data, such as identifying subtle patterns or correlations that might not be apparent with traditional analysis techniques.
-    \item \textbf{Contextual and Behavioral Analytics}: Advanced analytics that can contextualize sensor data in real-time learning scenarios, linking physiological responses to specific learning activities or cognitive processes.
-\end{enumerate}
-\textbf{Lack of Visualization of Sensory Data}
-
-\begin{enumerate}
-    \item \textbf{Interactive Data Visualization}: Current studies often lack robust visual representations of the data collected from wearables. Interactive and intuitive visualizations can aid in understanding complex datasets, revealing patterns and trends in physiological responses and their triggers.
-    \item \textbf{Visual Correlation with Learning Events}: Visualizing how sensor data aligns with specific learning events or actions can provide deeper insights into the learning process, such as identifying triggers for stress, engagement, or confusion.
-\end{enumerate}
-\textbf{Lack of Usage in Explainable AI (XAI) Methods}
-
-\begin{enumerate}
-    \item \textbf{Attribution-Based Methods}: The application of XAI, particularly attribution-based methods, is not extensively explored in these studies. Such methods could offer clarity on how different input features (sensor data) contribute to the model's predictions, enhancing the interpretability of AI-driven analyses in educational research.
-    \item \textbf{Transparency in AI Models}: Incorporating XAI could also help in demystifying the decision-making process of AI models, especially when these models are used for predictive analytics or adaptive learning systems.
-\end{enumerate}
-
 % SOTA
 % Challenges
 % Research gaps
 
 % Results achieved
     % Advantages of multi-modal over uni-modal
+
+Our systematic review identified 20 papers within the realm of sensor-based educational research, covering a spectrum of modalities designed to capture and analyze a wide range of physiological and behavioral data:
+
+\begin{itemize}
+    \item AFFECT: 29 papers
+    \item POSE: 33 papers
+    \item EDA: 16 papers
+    \item PULSE: 13 papers
+    \item ACT: 13 papers
+    \item BP: 4 papers
+    \item TEMP: 8 papers
+    \item EEG: 3 papers
+    \item EMG: 2 papers
+    \item FATIG: 2 papers
+    \item GAZE: 27 papers
+\end{itemize}
+
+Wearable sensors have been pivotal in monitoring learners' emotional and physiological states, predicting behavior and performance, providing real-time feedback, and enabling the integration of multimodal data. Their use extends from classroom environments to specialized training scenarios such as CPR instruction, where they serve not only as tools for assessment but also as mechanisms for adapting educational interventions in real-time.
+
+The integration and interpretation of data from various sensors present substantial challenges, particularly when coupled with the necessity for accuracy and practicality in real-time applications. Ensuring the relevance of sensor data to the learning context and managing the technical complexities of processing multimodal data streams remain significant hurdles.
+
+The advent of advanced predictive modeling, real-time feedback systems, and effective multimodal data fusion represents the state of the art in leveraging wearable sensor data. Yet, there is a pressing need for more granular data analysis to identify subtle patterns and correlations, particularly those not apparent through traditional analysis methods. Contextual and behavioral analytics are required to link physiological responses to specific learning activities in real time.
+
+The field also lacks robust, interactive data visualizations that can intuitively convey complex data sets. Visual correlations with learning events would enable deeper insights, revealing patterns in physiological responses and their triggers. Furthermore, the use of Explainable AI (XAI) methods, particularly attribution-based methods, is scant. These methods could clarify how different sensor data contribute to predictive models, enhancing interpretability in educational research.
+
+Research in sensor-based educational technologies often focuses on immediate or short-term effects; thus, longitudinal studies are needed to assess sustained impacts. Expanding the research to encompass diverse learning contexts and demographic groups will help understand the broader application of these technologies. Moreover, while research often occurs in controlled environments (for example, Manikins), scaling these technologies for widespread use and ensuring their generalizability across diverse educational settings remains a challenge.
+
+Investigations into the user experience and acceptance of wearable technologies in education are also needed, particularly concerning comfort, usability, perceived effectiveness, and most importantly, privacy. These factors are crucial for the successful integration of such technologies into everyday educational practices.
+
+The study conducted by Echeverria et al. \cite{1296637108} stands out in the corpus of literature for its application of accelerometer data to real-world educational settings, marking it as one of the relatively few studies to incorporate such data. Nonetheless, the research is characterized by a narrowed data scope, concentrating solely on accelerometer metrics. Additionally, its reliance on observer-logged data points to the need for a more intricate modeling approach. To achieve a fuller understanding of the learning process through movement and orientation in the setting of CPR simulation, the integration of additional sensory inputs such as gyroscope and magnetometer data might be practical. Such expansion would allow for a multidimensional analysis of physical interactions, potentially unveiling deeper insights into the kinesthetic aspects of learning.
+
 \subsubsection{Human-Centered}
 % List # of papers falling into this subdomain
 
@@ -1236,7 +1258,7 @@ More model-based methods compared to model-free with respect to the general corp
 % Improved research conclusions
 % Online versus offline
 
-\begin{figure}[h!]
+\begin{figure}[htbp]
     \centering
 
     % Commented out because no longer using
@@ -1360,15 +1382,15 @@ Additionally, we reached out to SerpAPI directly and asked, ``Does SerpAPI attac
 
 As discussed in Section \ref{subsec:study_selection}, we initially pruned our corpus using quantitative means via the use of a citation graph. In doing this, it is possible we excluded relevant works from our corpus based on them only having cited or been cited by a minimal number of other works in our corpus. This literature review is a survey of the prominent methods, practices, and approaches researchers are applying to multimodal learning and training environments. As such, the authors agreed that if a work did not utilize a large degree of previous research (i.e. cite several other works in the corpus) or serve as a base from which a large degree of other researchers have built upon (i.e. be cited by several other works in the corpus), then that work was likely outside the scope of our review. Considering our corpus was still largely comprised (over 50\%) of works later deemed to be outside the scope of this review after graph-based pruning, the authors are confident that few papers directly pertaining to multimodal learning and training environments were discarded as a result of graph-based pruning.
 
-\subsection{Other Limitations}.
-% Limitation for one paper not peer reviewed, but this is okay because all papers accepted somewhere and therefore refereed to some degree. 
+\subsubsection{Other Limitations}.
+% Paper that was not peer reviewed (possibly) \cite{483140962}
+Other, more minor limitations are also worth mentioning. Due to the prevalence of papers being published to open, non-peer-reviewed platforms like arXiv in recent years (particularly in computer science), we did not screen for non-peer-reviewed works during study selection (i.e., we did not adopt a paper's not being peer-reviewed as an exclusion criterion). There is one paper in the corpus that was submitted to a workshop that none of the authors are familiar with. We are, therefore, unsure of whether or not the paper underwent a formal peer-review. However, the workshop includes submission, notification, and camera ready dates, so we are confident that the workshop is at least refereed to some degree. The rest of the papers in our corpus, to the best of our knowledge, all underwent formal peer-review.
 
-% Search term limitation add
-%   we only searched "multimodal," so MMLA research done without using this word may not be included in our initial search
+Another limitation is that each of our 42 literature search queries included the word ``multimodal" (in some form). It is possible that works performing multimodal analysis on learning and training environments were unintentionally excluded from our search due to the word ``multimodal" not being explicitly present in their manuscripts. Due to the opacity of Google Scholar's algorithm, we cannot be sure how reliant it is on individual keywords. 
 
-% ChatGPT not included (came out right after our literature search.)
+Finally, we conducted our literature search in October 2022---one month before the release of ChatGPT. The increasing degree to which ChatGPT (and other LLMs) are beginning to shape research methodologies is difficult to overstate. Recently (summer of 2023), publications applying LLMs to education- and training-based tasks and environments began to emerge. However, due to the timing of our literature search relative to ChatGPT's release, works in our corpus do not include LLMs in their multimodal pipelines. We anticipate that, as the prevalence of LLMs continues to grow, these powerful models will serve as a foundational piece of many multimodal analysis pipelines used to inform learning and training environments.
 
-\subsubsection{Future Research Directions} 
+\subsection{Future Research Directions} 
 % Additional modalities
 % Text with LLMs (search ended a month prior to ChatGPT release)
 % Textless NLP 
@@ -1376,6 +1398,8 @@ As discussed in Section \ref{subsec:study_selection}, we initially pruned our co
 % Infrastructure
 % ChimeraPy
 % Further automating corpus reduction process
+
+\section{Conclusion}
 
 \section*{Conflict of Interest Statement}
 
