@@ -893,66 +893,27 @@ We present the breakdown of the different modalities used in our corpus in Figur
 Diving deeper into the multimodal data, we identified five subdomains based on the modalities that best characterize the types of data that currently drive the multimodal methods being applied to learning and training environments: natural language, vision, sensors, human-centered, and logs. The following subsections present our findings with respect to each subdomain. For each subdomain, we identify the individual modalities it comprises and discuss our findings with respect to its prevalence in the corpus, current state-of-the-art, challenges faced, research gaps, and results achieved.
 
 \subsubsection{Natural Language}
-% List # of papers falling into this subdomain
--35 papers use some form of natural language\\
 
-% List Modalities
-% PROS, TRANS, TEXT, SPECT, AFFECT
--PROS: 24\\
--TRANS: 16\\
--TEXT: 1\\
--SPECT: 1\\
--AFFECT: 2
+% Descriptive statistics
+% Modalities in natural language subdomain
+Of the 73 papers in the corpus, 35 of them collected and analyzed some form of natural language data. The natural language subdomain comprises the following modalities: prosodic speech, transcribed speech, raw text, audio spectogram, and affect (when derived from text or audio). Prosodic speech (present in 24 papers) and transcribed speech (present in 16 papers) were the most prevalent natural language modalities, at least one of which appeared in all but 3 of the 35 natural language papers. 8 papers used a combination of prosodic speech and transcribed speech, while 24 papers used one or the other. Only one paper used raw text, and only one used an audio spectogram. 2 papers used audio-based affect.
 
-Vast majority used prosodic audio and transcribed speech. Only 1 for raw text and 1 for audio spectogram.
+The majority of natural language papers performed analysis qualitatively or via statistical methods (e.g., correlating features to each other and individual features to outcomes such as learning gains). The focus on statistical analysis methods also caused papers using natural language to favor a higher percentage of model-free analysis approaches ($\approx$41\%) compared to the corpus as a whole ($\approx$32\%). Qualitative analysis was particularly prevalent in papers using natural language relative to the corpus as a whole. Of the 73 papers in the full corpus, 9 of them perform qualitative analysis as their lone analysis method, and 7 of those 9 incorporate some form of natural language. 40\% (14/35) of papers using natural language performed classification. This is in contrast to the $\approx$53\% (39/73) of papers that performed classification across the entire corpus, where classification was the most prevalent modality overall (discussed in Section \ref{subsec:findings_analysis}). Other analysis methods such as regression, clustering, pattern extraction, and network analysis were used in a handful of instances.
 
-Only 8 papers combine PROS and TRANS, and 24 use only one or the other. 
+60\% (21/35) of papers using natural language incorporated some form of data fusion, relative to the $\approx$74\% (54/73) of papers in the entire corpus that employed data fusion. Only 19 papers in the corpus did not use (or disclose using) any form of data fusion in their multimodal pipeline, 14 of which were papers using natural language. Among the papers using natural language with data fusion, mid fusion was the most prevalent, appearing in 12/21 papers. Early, late, and hybrid fusion were also used, but only occasionally. In addition to data fusion, another major difference between the full corpus and the papers using natural language is the participant structure. Overall, the ratio of multi-person environments to individual environments in the full corpus is $\approx$2:3 (31:45); however, with the papers that use natural language, that ratio increases to $\approx$5:3 (23:14)\footnote{Some papers analyzed data from both individual and multi-person environments, as well as both virtual and physical environments}. This is largely due to many natural language papers focusing on collaborative learning and training (e.g., collaborative discourse), which necessitates multi-person environments. This is further evidenced by virtual-only environments making up a smaller percentage of natural language papers ($\approx$37\%, 13/35) relative to $\approx$42\% (31/74) in the full corpus, which suggests the majority of collaborative multimodal learning and training research is conducted with a physical component. There were no significant differences between the natural language subdomain and the full corpus in terms of didactic nature and level of instruction.
 
-Most analysis is done via qualitative analysis and statistical methods. Some is done via classification, but not much with reg/patt/net. Contrast to full corpus, where classification was the most prevalent.
-%NLP: {'REG': 6, 'CLS': 14, 'STATS': 21, 'CLUST': 3, 'QUAL': 19, 'PATT': 4, 'NET': 4}
+% INCLUDE ENVIRONMENT SUBJECT
 
-% ALL: {'CLUST': 9,'QUAL': 29,'CLS': 39,'REG': 12,'STATS': 34,'PATT': 9,'NET': 4}
 
-Only 9 papers in the entire corpus \textit{only} perform qualitative analysis. 7 of those papers use natural language in some form.
-% Qual only: 
-% NLP: 7/35
-% ALL: 9/73
 
-Fusion defined in 21/35 papers (60\%) with MID being the favorite. This is less prevalent than the fusion breakdown in the corpus, where ~75\% of papers define fusion (54/73). 
-% NLP: {'MID': 12, 'EARLY': 1, 'OTH': 15, 'HYBRID': 5, 'LATE': 3}
-% OTH fusion only fusion type in 14/35 papers
-
-% ALL: {'HYBRID': 19, 'LATE': 8, 'MID': 27, 'EARLY': 3, 'OTH': 20}
-% Full corpus OTH fusion only fusion type in 19/73 papers
-
-No trend among environment settings really except virtual environments less frequent than blended/physical relative to full corpus. Suggests focus on collab in at least some physical space and not 1-on-1 agent interaction, for exanple.
-% NLP: {'PHYS': 13, 'VIRT': 13, 'BLND': 8, 'UNSP': 1}
-% ALL: {'BLND': 20, 'PHYS': 21, 'VIRT': 31, 'UNSP': 2}
-
-Even with 4:3 ratio of ind to multi in corpus overall, ratio of ind to multi drops to 3:5 with NLP only due to focus on multiperson environments, including conversation. Not surprising given discourse component, but would also be interested in agent-based conversations (which were lacking). 
-% NLP: {'MULTI': 23, 'IND': 14}
-% ALL: {'IND': 45, 'MULTI': 31}
-
-No trend among didactic nature. relative to overall corpus.
-% NLP: {'INSTR': 21, 'TRAIN': 8, 'INF': 6}
-% ALL: {'INSTR': 45, 'INF': 12, 'UNSP': 1, 'TRAIN': 15}
-
-Both university and K12, although slight edge to K12 relative to corpus as a whole.
-% NLP: {'UNI': 14, 'K12': 17, 'PROF': 3, 'UNSP': 4}
-% ALL: {'K12': 30, 'UNI': 36, 'UNSP': 7, 'PROF': 5}
-
-NLP has higher level of model free relative to corpus (17/41, 41\% relative to 27/57, 32\%)
-% NLP: {'MB': 24, 'MF': 17}
-% ALL: {'MB': 57, 'MF': 27}
-
-% Results achieved
-    -key feature ID relative to outcome (i.e., learning/training gains, skills, confidence, behaviors, strategies, collaboration quality, etc.) (e.g., pauses, n-grams, volume, pitch variation, etc.)
+% Results
+%   Example
+-key feature ID relative to outcome (i.e., learning/training gains, skills, confidence, behaviors, strategies, collaboration quality, etc.) (e.g., pauses, n-grams, volume, pitch variation, etc.)
     -multimodal > unimodal
 
-% SOTA 
 
--Data visualization (cite ChimeraPy IEE Big Data) 
-
+% SOTA
+%   Example
 -ML models are the most common quantitative approach: SVM, RF, Logistic regression, linear regression, NB, etc.
     -Usually used to regress/classify outcome (i.e., performance gains for learning/training)
     -Other methods used, but sparingly: clustering, behavior patterns, social network analysis, markov chains, etc.
@@ -966,6 +927,7 @@ NLP has higher level of model free relative to corpus (17/41, 41\% relative to 2
 -Lots of collaboration work, evaluating it both on its own and relative to outcome
 
 % Challenges
+%   Example
 -Hardware/software/multimodal and NLP method limitations for complex tasks (such as characterizing persuasive speech and understanding natural, oral arguments in debate)
     -Noisy, chaotic environments
     -ASR mentioned several times
@@ -987,13 +949,14 @@ NLP has higher level of model free relative to corpus (17/41, 41\% relative to 2
     -Difficult to inform as it unfolds over time
     -segmentation
         -"difficulties segmenting the audio files in order to obtain the students-only utterances"
-        
+
 % Research gaps
 -Lack of textual input. Discuss
 -Only 8 papers use both transcribed audio and prosodic information, which means there is a lack of combining the two
     -Textless NLP lack with combined audio semantics/prosodic audio
 -Focus on statistical analysis, qualitative, older ML, but lacking in SOTA AI (esp. RL, Transformers, although BERT/Audeering mentioned)
 -Lack of conversational agent-based work. The stuff that's in there doesn't deal with actual conversations between students and agents, as the agent often acts as an evaluator and provides performance metrics or canned responses (i.e., 1-way recommendations) that are not robust to fluid environments  --- and does not act as a mentor, peer, or collaborator.
+
 
 \subsubsection{Vision}
 % List # of papers falling into this 
@@ -1221,13 +1184,13 @@ More model-based methods compared to model-free with respect to the general corp
 % Research gaps
 
 
-\subsection{Analysis}
+\subsection{Analysis}\label{subsec:findings_analysis}
 % SOTA
 % Challenges
 % Research gaps
 
 % Descriptive statistics for:
-%   Analysis Methods
+%   Analysis Methods (include bar chart)
 %   Analysis Approaches (MB v. MF)
 % Add plots here
 
@@ -1321,6 +1284,7 @@ More model-based methods compared to model-free with respect to the general corp
 % Discuss (overall, in the aggregate):
     % Results
     % SOTA
+        %-Data visualization (cite ChimeraPy IEE Big Data) 
     % Challenges
         % -"One of the biggest challenges in multimodal learning analytics is that the large volume of rich, multimodal data collected requires significant human time and effort to make sense of."
         % -"Making sense of all the richness that exists in multimodal data can be highly time-consuming."
@@ -1388,7 +1352,7 @@ Other, more minor limitations are also worth mentioning. Due to the prevalence o
 
 Another limitation is that each of our 42 literature search queries included the word ``multimodal" (in some form). It is possible that works performing multimodal analysis on learning and training environments were unintentionally excluded from our search due to the word ``multimodal" not being explicitly present in their manuscripts. Due to the opacity of Google Scholar's algorithm, we cannot be sure how reliant it is on individual keywords. 
 
-Finally, we conducted our literature search in October 2022---one month before the release of ChatGPT. The increasing degree to which ChatGPT (and other LLMs) are beginning to shape research methodologies is difficult to overstate. Recently (summer of 2023), publications applying LLMs to education- and training-based tasks and environments began to emerge. However, due to the timing of our literature search relative to ChatGPT's release, works in our corpus do not include LLMs in their multimodal pipelines. We anticipate that, as the prevalence of LLMs continues to grow, these powerful models will serve as a foundational piece of many multimodal analysis pipelines used to inform learning and training environments.
+Finally, we conducted our literature search in October 2022---one month before the release of ChatGPT\footnote{\href{https://openai.com/blog/chatgpt}{https://openai.com/blog/chatgpt}}. The increasing degree to which ChatGPT (and other LLMs) are beginning to shape research methodologies is difficult to overstate. Recently (summer of 2023), publications applying LLMs to education- and training-based tasks and environments began to emerge. However, due to the timing of our literature search relative to ChatGPT's release, works in our corpus do not include LLMs in their multimodal pipelines. We anticipate that, as the prevalence of LLMs continues to grow, these powerful models will serve as a foundational piece of many multimodal analysis pipelines used to inform learning and training environments.
 
 \subsection{Future Research Directions} 
 % Additional modalities
