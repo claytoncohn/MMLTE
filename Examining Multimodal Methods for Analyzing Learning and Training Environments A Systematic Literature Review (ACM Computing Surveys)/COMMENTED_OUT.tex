@@ -1422,3 +1422,144 @@
 %     -Textless NLP lack with combined audio semantics/prosodic audio
 % -Focus on statistical analysis, qualitative, older ML, but lacking in SOTA AI (esp. RL, Transformers, although BERT/Audeering mentioned)
 % -Lack of conversational agent-based work. The stuff that's in there doesn't deal with actual conversations between students and agents, as the agent often acts as an evaluator and provides performance metrics or canned responses (i.e., 1-way recommendations) that are not robust to fluid environments  --- and does not act as a mentor, peer, or collaborator.
+
+% --------------------------------------------------------------------------
+% DISCUSSION BULLETS
+
+% STATS
+
+% Envs:
+    % Learning more popular than training currently (7:2 learning to training ratio)
+    % VRT environments most prevalent (31/73), with 52/73 (VRT+BLND) using at least some virtual component.
+    % STEM focus (55/73)
+    
+% Participants
+    % Most students are UNI (36) or K12 (30)
+    % 45:31 IND : MULT
+    
+% Data and modalities:
+%   Video, audio, logs, ppa most popular mediums
+%   59 out of the 73 total papers using some form of vision analysis
+%   Pose, logs, affect, gaze, and prosodic speech appear to be the most popular modalities.
+%   Most multimodal work considers 2-5 modalities per paper (cite figure if necessary, but shouldn't be needed. Can just use raw counts)
+%   Not necessary to do tons of modalitites, but focus on a few that are the most informative
+%   45 (approximately 61.6\%) incorporate at least one of the human-centered modalities (QUAL, INTER, SURVEY, RPA, or PPA).
+%       Among these papers, an overwhelming majority—44 out of 45—incorporate more than one human-centered modality in their analyses
+
+% Analysis methods/approaches
+%   Classification, stats, qual most popular analysis methods (and what used for)
+%   Out of our paper set, 46 papers (63\%) use model-based methods, 16 papers (22\%) employ model-free methods, and 11 papers (15\%) use a combination of both. 
+%   This distribution, with 78\% of papers favoring model-based analysis, indicates a strong preference in the MMLA community for developing models to explain the learning process.
+
+% Data fusion
+%   Mid fusion and hybrid fusion most popular
+%   Should consider data fusion to inform environment, particularly mid fusion by fusing observable, derived features
+%   Of the 73 papers, 54 perform early, mid, late, or hybrid fusion. 
+%   mid fusion is the most prevalent, employed in 27 papers (36.99\%)
+
+% Publications: BJET and LAK most popular journal/conference for applied MMLA and quantitative analysis
+
+% RESULTS
+
+%   multi over uni:
+%       "In this research study, we presented that where the students   are looking, the distance between them, the motion of their hands our key features for a learning analytics system to be effectively used to identify collaboration in small groups of Engineering students."
+%        "The take-away is that there are several strategies for doing multimodal learning analytics, and that many of these approaches can provide a meaningful glimpse into a complex data set, glimpses that may be difficult to identify using traditional approaches."
+%       "We observed that linguistic features (i.e.n-gram of various size and types in combination with syntactic information), multimodal in-domain corpora and classification procedures resulted in the best performance on an argument structure mining task."
+
+%   identify specific features:
+%       "We found that the semantics and speaker information in the linguistic modality, the pitch variation in the audio modality, and the facial muscle movements in the video modality are the most significant unimodal indicators of impasse."
+
+%   understand learning gains differences:
+%       "Our results demonstrate how NLP and ML techniques allow us to use different modalities of the same data, voice and transcript, and different modalities of different data sources, voice data from interviews, answers to a goal orientation questionnaire, and answers to open ended questions about energy, in order to better understand individual differences in students’ performances."
+%         "...even when they do not improve predictive power, multimodal patterns help contextualize and reveal nuances in the unimodal primitives. This supports the overall idea of multimodal learning analytics in which the additional modalities (speech and body movement in our case) help to understand unclear patterns such as idling."
+    
+% Human-centered:
+%     researchers gained a more comprehensive understanding of the learning environment and the learning activities. 
+%     This human-centered approach offers insights into the participants' experiences, perceptions, and behaviors, often pinpointing subtle nuances that might be missed in a unimodal analysis. 
+%     QUAL provides rich contextual observations, PPA and RPA offer tangible artifacts, INTER captures in-depth discussions, and SURVEY provides multiple participant perspectives, collectively enriching the analysis. 
+%     The use of multiple modalities allows for triangulation and cross-verification, where findings from different sources are compared to enhance the validity of the results.
+        
+% SOTA
+%   SOTA lacking with regard to field as a whole
+
+% CHALLENGES
+
+% Time-cost
+%   -"One of the biggest challenges in multimodal learning analytics is that the large volume of rich, multimodal data collected requires significant human time and effort to make sense of."
+%   -"Making sense of all the richness that exists in multimodal data can be highly time-consuming."
+%   "Obtaining and labelling data is indeed a costly process especially in the context of education"
+
+% Complexity
+%   -"In practice, however, the increased complexity resulting from the additional collection of multimodal data presents unique challenges"
+
+% Alignment
+%   -"Data from different sources are often difficult to integrate."
+%   -Sampling rates
+
+% Trust
+%   Lack of codesign, explainability, trust (challenge/gap as a whole for the field). 
+%   Explainability: making sense of the data
+%   Subjectivity: the uncertainty arising from the [subjective] annotations may influence the resulting model structures, parameters and interpretation. I.e., tough to generalize
+%   Lack of codesign and 
+
+% Data
+%   Majority of methods used to analyze case studies or classroom-sized study participants. (small sets of students, often imbalanced)
+%   limited amount of data available to properly train and may help explain why DL methods are not as common as you would expect.
+%   "data is limited, which represents one of the major challenges for building robust and reliable multimodal models"
+%   "training a model on a reduced dataset introduces a bias to the model, affecting the validity of the model’s predictions when the data inputs come from a different distribution than the training set. "
+%   % lack of representative data in open datasets (i.e., few focusing on children/education)
+%   Generalizability and scalability
+%       Finally, the design and sample size of the focus group do not allow us to generalize the results. 
+        % The limited number of pair work EEs does not allow us to make any strong claims in terms of the framework’s reliability. 
+        % Diversity:
+        %  "...the subject pool is not overly diverse, limiting our ability to explore culture or ethics-related factors in the model reliably"
+        % Manual collection and human analysis can be time-consuming and may not scale well, especially in large-scale educational setting (human-centered)
+
+% RESEARCH GAPS
+
+% Generalizability and scalability
+%   Lack of approaches that work across domains and are generalizable
+
+% Lagging SOTA
+%   SOTA core methods often not applied to education
+%   small-data algorithms and methods
+%   Large open datasets
+
+% Agents
+%   Multimodal, conversational agents
+
+% Raw data:
+%   least used modality: raw pixel data
+%   Lack of text-based data (only 1 paper)
+%   Limitation of derived, observable features is their evaluation. Why do we trust them innately?
+
+% Explainability and trust
+%   Data viz (cite Nicole Hutchins dissertation tool, Caleb dissertation work)
+%   XAI
+
+% Temporal methods
+%   Longitudinal research lacking. researchers content on focusing on one study at a time.
+%   Temporality (logs): concentrate on overall learning outcomes within an assignment, but often overlooks the nuanced aspects of how student behaviors, emotions, and achievements evolve over time.
+    
+% Training environments
+%   Training envs, esp. physical ones like rehab therapy and athletic training, are not well-represented
+%   Psychomotor gap (only 5 papers in corpus)
+%   INST : TRAIN = 3:1 (45:31)
+%   20 papers use sensors
+
+
+% Participants and data
+%   Sensor data present in less than ⅓ of papers (20)
+%   Professional development also lacking (only 5)
+
+% Analysis
+%   Lack of mixed method (qual+quant) (20/73)
+
+% Standardization
+    % Several, smaller taxonomies exist
+    % standardized log format and consistent practices
+    % low adoption rate of established industry standards
+    %   This trend reflects a broader issue within the field to align with best practices and norms that have been established in the wider technology and education sectors.
+    % absence of common coding conventions (human centered)
+    %   a crucial gap lies in the reliable automation of human-coding processes (human centered)
+% --------------------------------------------------------------------------
