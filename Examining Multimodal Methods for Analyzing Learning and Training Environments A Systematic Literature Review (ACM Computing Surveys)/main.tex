@@ -281,7 +281,7 @@ By combining all of these additional sensor devices, researchers can capture a m
 
 \subsection{Contributions} \label{subsec:contributions}
 
-In this work, we perform a systematic literature review of the methods applied to multimodal learning and training environments. The scope of this review extends to any publication that both collects and analyzes data across multiple modalities or data collection mediums. This includes environments that exist fully in reality (e.g., physical therapy), mixed-reality environments (e.g., manikin-based nursing training), and online learning environments (e.g., students learning physics via computer software). Importantly, this review does not include ``virtual reality" (VR) environments due to difficulties scaling this technology in classroom settings \cite{} and video data lacking semantic meaning with respect to its environment.
+In this work, we perform a systematic literature review of the methods applied to multimodal learning and training environments. The scope of this review extends to any publication that both collects and analyzes data across multiple modalities or data collection mediums. This includes environments that exist fully in reality (e.g., physical therapy), mixed-reality environments (e.g., manikin-based nursing training), and online learning environments (e.g., students learning physics via computer software). Importantly, this review does not include ``virtual reality" (VR) environments due to difficulties scaling this technology in classroom settings \cite{cook2019challenges} and video data lacking semantic meaning with respect to its environment.
 
 The novel contributions of this work are the following: 
 \begin{itemize}
@@ -334,25 +334,23 @@ Combining the taxonomies from both reviews, an adapted classification scheme eme
     \label{fig:framework}
 \end{figure}
 
-% Analysis RQs!
+% Discuss Framework graphic as a lead in to definitions
 
-% Definitions:
-%   Tables: feature name, description, mapped acronym
-For the purposes of this paper, we define a \textit{modality} as a unique attribute defined by data from one of more datastreams, where each modality conveys different information, even if derived from the same data collection medium \cite{Ochoa?}. We define \textit{multimodal} as a combination of either multiple modalities or multiple datastreams (i.e., multiple data collection mediums). For instance, the same video datastream could be used for the affect and pose modalities (one-to-many), and the affect modality could be derived from separate audio and video datastreams (many-to-one). Both examples would be considered multimodal by our definition. Additionally, we use the terms ``papers" and ``works" interchangeably in this review, as we expand our definition of ``paper" to include other publications outside of conference and journal submissions (books, for example).
+% Feedback
+
+For the purposes of this paper, we define a \textit{modality} as a unique attribute defined by data from one of more datastreams, where each modality conveys different information, even if derived from the same data collection medium \cite{ochoa2017multimodal}. We define \textit{multimodal} as a combination of either multiple modalities \textbf{or} multiple datastreams (i.e., multiple data collection mediums). For instance, the same video datastream could be used for the affect and pose modalities (one-to-many), and the affect modality could be derived from separate audio and video datastreams (many-to-one). Both examples would be considered multimodal by our definition. Additionally, we use the terms ``papers" and ``works" interchangeably in this review, as we expand our definition of ``paper" to include other publications outside of conference and journal submissions (e.g., books and book chapters).
  
-We define a \textit{learning environment} as any environment whose explicit purpose is to foster knowledge gain and retention. This can include school classrooms, tutoring centers, online learning environments like Khan Academy, etc. Learning environments are focused on helping users gain knowledge and retain information, and they are often (though not always) open-ended. We define a \textit{training environment} as any environment whose explicit purpose is to help users achieve an end goal, such as task-proficiency or a positive outcome other than learning. This is often done through practice and repetition, and can include military training, nursing training, physical training, workplace training, etc. Training environments are task-oriented and are often (though not always), constrained. 
+We define a \textit{learning environment} as any environment whose explicit purpose is to foster knowledge gain and retention. This can include school classrooms, tutoring centers, online learning environments like Khan Academy, etc. Learning environments are focused on helping users gain knowledge and retain information, and they are often (though not always) open-ended. We define a \textit{training environment} as any environment whose explicit purpose is to help users achieve an end goal, such as task-proficiency, or a positive outcome other than learning. This is often done through practice and repetition, and can include military training, nursing training, physical training, workplace training, etc. Training environments are task-oriented and are often (though not always), constrained. 
 
-Importantly, the question of what exactly constitutes ``multimodal" environments and analysis is debated. Some researchers argue that the term multimodal is defined by the uniqueness of a datastream (or sensor), meaning multiple modalities cannot be derived from the same datastream \cite{}. However, we consider multiple datastreams to be indicative of \textit{multimedia} and not multimodality \cite{}. Similar disagreements occur when defining what constitutes early versus late fusion and learning versus training environment. Additionally, not all multimodal learning and training environments are analyzed via multimodal methods. A \textit{multimodal composing} environment \cite{}, for example, may involve students creating works using multiple modalities (e.g., a comic book sketch with both text and images), but researchers may opt to only analyze students' discourse while in the environment (which would be unimodal analysis, and therefore outside the scope of this review). 
+Importantly, our literature review includes all papers gathered during our literature search that were not excluded for any of the reasons listed in our exclusion criteria (see Section \ref{sec:methods}). This includes multimodal learning and training analysis that was done ``in passing" and not as a core focus of the paper. Consider a paper whose sole focus is multimodal composing environments that performs multimodal learning analysis as a byproduct. Should this paper be included, despite not having multimodal analysis as one of its focuses? In this review, we argue yes, as we are interested in the different methods researchers are using to conduct multimodal analysis and are not limiting ourselves to only papers where multimodal analysis is a primary focus. Clearly, these distinctions are quite nuanced, which is why the definitions we use in this work are not meant to be interpreted as ground truth. They were chosen --- after much research, analysis, and discussion --- based on how we wished to characterize the scope of our review.
 
-Consider a paper whose sole focus is multimodal composing environments that happens to perform multimodal analysis in passing. Should this paper be included in the search space, despite not having multimodal analysis as one of its foci? In this review, we argue yes, as we are interested in the different methods researchers are using to conduct multimodal analysis and are not limiting ourselves to only papers where multimodal analysis is a primary focus. Clearly, these distinctions are quite nuanced, which is why the definitions we use in this paper are not meant to be interpreted as ground truth. They were chosen, after much discussion, based on how we wanted to characterize the scope of our review.
-
+In the following subsections, we present our taxonomy of multimodal learning and training methodology pursuant to our framework in Figure \ref{fig:framework}. 
 
 \subsection{Environment Type}\label{subsec:environment_type} % Physical <--- Mixed ----> Virtual
 
-% Reminder that no AR/VR training environments that require learner to wear glasses in this study
+One important aspect when considering the literature surrounding MMLA is identifying the contexts in which these techniques are used, which mostly fall under the category continuum of learning and training (see Figure \ref{fig:ltcontinuum}). The main goals of learning environments are education and knowledge gain. These venues range from conventional classrooms to online courses and self-paced learning environments. When we categorize these environments on our continuum shown in Figure \ref{fig:ltcontinuum}, we add a second dimension, between fully physical and fully virtual, to represent this wide range of learning environments. MMLA methods applied in learning environments focus on extracting insights from various modalities such as text, audio, video, and interactions to assess students' comprehension, engagement, and progress. Educators may modify instructional tactics, spot problematic students, and improve learning materials by analyzing these multimodal signals since they provide significant insights into both individual and group learning patterns.
 
-One important aspect when considering the literature surrounding multimodal learning analytics (MMLA) is identifying the contexts in which these techniques are used, which mostly fall under the category continuum of learning and training (see Figure \ref{fig:ltcontinuum}). The main goals of learning environments are education and knowledge gain. These venues range from conventional classrooms to online courses and self-paced learning environments. When we categorize these environments on our continuum shown in Figure \ref{fig:ltcontinuum}, we add a second dimension, between fully physical and fully virtual, to represent this wide range of learning environments. MMLA methods applied in learning environments focus on extracting insights from various modalities such as text, audio, video, and interactions to assess students' comprehension, engagement, and progress. Educators may modify instructional tactics, spot problematic students, and improve learning materials by analyzing these multimodal signals since they provide significant insights into both individual and group learning patterns.
-
+% Wrapped figure to save space
 \begin{wrapfigure}{r}{0.5\textwidth}
     \begin{center}
     \includegraphics[width=0.5\textwidth]{img/LearningTrainingContinuum.jpg}
@@ -368,9 +366,9 @@ One important aspect when considering the literature surrounding multimodal lear
 %     \label{fig:ltcontinuum}
 % \end{figure}
 
-On the other hand, training environments are designed to improve performance and build skills. This category encompasses professional training programs, simulations, and vocational training platforms, across the same potential continuum of fully virtual to fully physical that we used to categorize learning environments. In training settings, MMLA approaches are used to evaluate data in order to track the mastery of new skills, the accomplishment of tasks, and overall performance. These insights help instructors and managers adjust training programs, spot competency gaps, and determine how prepared students are for issues in the real world. The objectives of MMLA differ in learning and training situations, calling for specific strategies that take into account the specifics of each situation, but in this paper we review literature across the spectrum of learning and training.
+On the other hand, training environments are designed to improve performance and build skills. This category encompasses professional training programs, simulations, and vocational training platforms, across the same potential continuum of fully virtual to fully physical that we use to categorize learning environments. In training settings, MMLA approaches are used to evaluate data in order to track the mastery of new skills, the accomplishment of tasks, and overall performance. These insights help instructors and managers adjust training programs, spot competency gaps, and determine how prepared students are for issues in the real world. The objectives of MMLA differ in learning and training situations, calling for specific strategies that take into account the specifics of each situation, but in this paper we review literature across the spectrum of learning and training.
 
-However, it is important to note that this division isn't always clear-cut. Some environments of study, like those populated by PhD students, blur the line between education and training. These students are learning new things in a vein similar to learning environments, but they are also increasing their research abilities and expertise, in a vein similar to a training program. Similarly, certain contexts, like game-playing platforms, defy easy classification into the learning or training categories. In these instances, MMLA methodologies must be flexibly applied, appreciating the multifaceted nature of the objectives at hand. In our categorization of all of the environments from our corpus of papers, we recognize this ambiguity in discrete categorization, but also recognize the utility of such a categorization when analyzing the research subcommunities that makeup the larger field of MMLA. As such, we perform a fuzzy qualitative discrete categorization based on discussions among the authors of where we believe each paper’s environment best fits on our continuum shown in Figure \ref{fig:ltcontinuum}.
+However, it is important to note that this division isn't always clear-cut. Some environments of study, like those populated by PhD students, blur the line between education and training. PhD students are learning new things in a vein similar to learning environments, but they are also increasing their research abilities and expertise in a vein similar to a training program. Similarly, certain contexts, like game-playing platforms, defy easy classification into the learning or training categories. In these instances, MMLA methodologies must be flexibly applied, appreciating the multifaceted nature of the objectives at hand. In our categorization of all of the environments from our corpus of papers, we recognize this ambiguity in discrete categorization, but also recognize the utility of such a categorization when analyzing the research subcommunities that make up the larger field of MMLA. As such, we perform a fuzzy qualitative discrete categorization based on discussions among the authors of where we believe each paper’s environment best fits on our continuum shown in Figure \ref{fig:ltcontinuum}.
 
 \subsection{Data Collection Mediums} \label{subsec:data_collection_mediums}
 % Definitions reminders
@@ -380,7 +378,7 @@ However, it is important to note that this division isn't always clear-cut. Some
 % motion capture (posyx, accelerometer, gyroscope, magnetometer)
 % Make point that things like learning gains and performance can fall into multiple categories depending on where derived from, e.g., logs, surveys, student artifacts (which can also be demo information)
 
-The intricacies of learning gains and performance metrics underscore the diversity of sources within learning analytics frameworks, ranging from logs and surveys to student artifacts.  A diverse range of data collection mediums plays a pivotal role in capturing a holistic picture of learners' progress, interactions and struggles within educational and training environments. The mediums summarized in Table \ref{tab:data_collection_mediums} were identified through an extensive analysis of the corpus of papers under consideration.
+The intricacies of learning gains and performance metrics underscore the diversity of sources within learning and training analytics frameworks, ranging from logs and surveys to student artifacts. A diverse range of data collection mediums plays a pivotal role in capturing a holistic picture of learners' progress, interactions, and struggles within educational and training environments. The mediums enumerated in Table \ref{tab:data_collection_mediums} (and all definitions in this section, for that matter) were identified through our qualitative analysis of the corpus.
 
 \begin{table}[ht]
   \centering
@@ -389,42 +387,42 @@ The intricacies of learning gains and performance metrics underscore the diversi
     \hline
     \textbf{Medium} & \textbf{Definition} \\
     \hline
-    VID & Sequence of video frames from a camera source \\
+    VID & Sequence of video frames from a camera source. \\
     \hline
-    AUD & Audio signals captured and converted by a microphone \\
+    AUD & Audio signals captured and converted by a microphone. \\
     \hline
-    SCREEN & Sequence of video frames of the contents displayed on a device screen \\
+    SCREEN & Sequence of video frames of the contents displayed on a device screen. \\
     \hline
-    EYE & Eye movement data and gaze points captured by tracking devices with sensors and cameras \\
+    EYE & Eye movement data and gaze points captured by tracking devices with sensors and cameras. \\
     \hline
-    LOGS & Environment logs containing data on participants' activities and interactions within the system \\
+    LOGS & Environment logs containing data on participants' activities and interactions within the system. \\
     \hline
-    SENSOR & Specialized sensors used to gather participants' physiological data \\
+    SENSOR & Specialized sensors used to gather participants' physiological data. \\
     \hline
-    INTER & Structured or unstructured conversations between researchers and participants \\
+    INTER & Structured or unstructured conversations between researchers and participants. \\
     \hline
-    SURVEY & Standardized sets of questions administered to participants \\
+    SURVEY & Standardized sets of questions administered to participants. \\
     \hline
-    PPA & Participant Produced Artifacts encompass materials produced by research participants using different mediums \\
+    PPA & (Participant Produced Artifacts). Materials produced by research participants using various mediums. This can include things like physical objects created for an engineering task or written responses to formative assessment questions. \\
     \hline
-    RPA & Researcher Produced Artifacts encompass materials produced by the researchers which contribute to analysis and findings \\
+    RPA & (Researcher Produced Artifacts). Materials produced by the researchers that contribute to analysis and findings. This can include things like researchers' observational notes. \\
     \hline
-    MOTION & Raw motion data collected by different devices/technologies \\
+    MOTION & Raw motion data collected by different devices/technologies. \\
     \hline
-    TEXT & Raw textual input \\
+    TEXT & Raw textual input. \\
     \hline
   \end{tabular}
   \label{tab:data_collection_mediums}
 \end{table}
 
-In the context video data, a distinction arises between depth cameras and regular cameras. While both fall under the video medium, depth cameras are typically employed in the motion modality, emphasizing skeletal features. Furthermore, within the Motion medium, the scope extends beyond general video data, encompassing technologies such as the real-time location systems (RTLS), accelerometers, gyroscopes, or magnetometers. These technologies offer diverse approaches to capturing raw motion data, providing granularity in understanding participants' physical movements.
+In the context of video data, a distinction arises between depth cameras and traditional cameras. While both fall under the video medium, depth cameras are typically employed with the motion modality to emphasize skeletal features. Furthermore, within the Motion medium, the scope extends beyond general video data, encompassing technologies such as real-time location systems (RTLS) (e.g., accelerometers, gyroscopes, or magnetometers). These technologies offer diverse approaches to capturing raw motion data, providing granularity in understanding participants' physical movements.
 
-Researcher Produced Artifacts (RPA) can range from detailed field observation notes capturing contextual nuances to labeling of data, often involving manual coding processes that enhance data interpretability, contributing to more nuanced analyses and findings. Similarly, Participant Produced Artifacts (PPA) constitute a valuable dimension in capturing participants' engagement and comprehension. These artifacts include a spectrum of materials, such as physical objects crafted by participants or the results of pre/post tests. Notably, to qualify as PPA, all artifacts must undergo collection within the designated research pipeline, excluding the collection of artifacts post hoc. 
+Researcher Produced Artifacts (RPA) can range from detailed field observation notes capturing contextual nuances to labeling of data, often involving manual coding processes that enhance data interpretability and contribute to more nuanced analyses and findings. Similarly, Participant Produced Artifacts (PPA) constitute a valuable dimension in capturing participants' engagement and comprehension. These artifacts include a spectrum of materials, such as physical objects crafted by participants or the results of pre/post tests. Notably, to qualify as PPA, all artifacts must undergo collection within the designated research pipeline, excluding the collection of artifacts post hoc. 
 
 \subsection{Modalities} \label{sec:modalities}
 % Definitions
 
-A thorough examination of the papers lead to the identification of several modalities used for analyzing and understanding learners' interactions within learning and training environments, as shown in Table \ref{tab:modalities}. 
+We identified several modalities used for analyzing and understanding participants' interactions with and within learning and training environments, as shown in Table \ref{tab:modalities}. 
 
 \begin{table}[ht]
   \centering
@@ -433,59 +431,58 @@ A thorough examination of the papers lead to the identification of several modal
     \hline
     \textbf{Modality} & \textbf{Description} \\
     \hline
-    AFFECT & The emotional state or affect exhibited by the participant \\
+    AFFECT & The emotional state or affect exhibited by the participant. \\
     \hline
-    POSE & The physical position or geolocation of the participant \\
+    POSE & The physical position, geolocation, or body posture of the participant. \\
     \hline
-    GEST & The gestures and body language displayed by the participant \\
+    GEST & The gestures and body language displayed by the participant. \\
     \hline
-    ACT & The observable actions or activities performed by the participant \\
+    ACT & The observable actions or activities performed by the participant. \\
     \hline
-    PROS & Prosodic speech information, including aspects like volume, pauses, pitch, intonation \\
+    PROS & Prosodic speech information, including volume, pauses, intonation, etc. \\
     \hline
-    TRANS & Textual speech information obtained through speech transcription, i.e., speech-to-text \\
+    TRANS & Textual speech obtained through transcription, i.e., speech-to-text. \\
     \hline
-    QUAL & Qualitative researcher observations on the participant's behavior or environment \\
+    QUAL & Qualitative researcher observations on the participant's behavior or environment. \\
     \hline
-    LOGS & Data related to the research context and participant's actions within the system \\
+    LOGS & Data related to the research context and participant's actions within the system. \\
     \hline
-    GAZE & Data on the direction and focus of the participant's eye gaze \\
+    GAZE & Data on the direction and focus of the participant's eye gaze. \\
     \hline
-
-    INTER & Notes from interviews between researchers and participants \\
+    INTER & Notes from interviews between researchers and participants. \\
     \hline
-    SURVEY & Responses to surveys/questionnaires provided by the participant \\
+    SURVEY & Responses to surveys/questionnaires provided by the participant. \\
     \hline
-    PULSE & The participant's pulse, indicating their heart rate \\
+    PULSE & The participant's pulse, indicating their heart rate. \\
     \hline
-    EDA & Participant's electrodermal activity, measuring skin conductance as an indicator of arousal \\
+    EDA & Participant's electrodermal activity, measuring skin conductance as an indicator of arousal. \\
     \hline
-    TEMP & Participant’s body temperature \\
+    TEMP & Participant’s body temperature. \\
     \hline
-    BP & Participant’s blood pressure \\
+    BP & Participant’s blood pressure. \\
     \hline
-    EEG & Participant's electroencephalography activity, recording brain electrical signals \\
+    EEG & Participant's electroencephalography activity, recording the brain's electrical signals. \\
     \hline
-    FATIG & The level of fatigue experienced by the participant during the activity \\
+    FATIG & The level of fatigue experienced by the participant during the activity. \\
     \hline
-    EMG & Participant's electromyography activity, measuring muscle electrical signals \\
+    EMG & Participant's electromyography activity, measuring muscles' electrical signals \\
     \hline
-    PPA & Participant Artifacts: Artifacts produced by the participant \\
+    PPA & (Participant Artifacts). Artifacts produced by the participant. \\
     \hline
-    RPA & Researcher Artifacts: Artifacts produced by the researcher \\
+    RPA & (Researcher Artifacts). Artifacts produced by the researcher. \\
     \hline
-    SPECT & Audio Spectrogram: Visual representation of audio frequencies in the form of a spectrogram \\
+    SPECT & (Audio Spectrogram). Visual representation of audio frequencies in the form of a spectrogram. \\
     \hline
-    TEXT & Raw text data generated by the participant in the study environment \\
+    TEXT & Raw text data generated by the participant in the study environment. \\
     \hline
-    PIXEL & Raw RGB pixel values representing visual information captured by cameras or sensors \\
+    PIXEL & Raw RGB pixel values representing visual information captured by cameras or sensors. \\
     \hline
   \end{tabular}
   \label{tab:modalities}
 \end{table}
 
-In this context of modality as a unique attribute defined by data from one or more data streams, it is important to note that multimodality can arise from a combination of either multiple modalities or multiple data streams. For example, the same video data stream could serve for both the AFFECT and POSE modalities, demonstrating how a single source can contribute to distinct attributes. Furthermore, the AFFECT modality could be derived from separate audio and video datastreams, exemplifying how information from different sources can collectively form a multimodal perspective.
-
+In the context of a modality as a unique attribute defined by data from one or more data streams, it is important to note that multimodality can arise from a combination of either multiple modalities or multiple data streams. For example, the same video data stream could be used to derive both the AFFECT and POSE modalities. %demonstrating how a single source can contribute to distinct attributes. 
+Similarly, the AFFECT modality could be derived from separate audio and video datastreams. %exemplifying how information from different sources can collectively form a multimodal perspective.
 
 \subsection{Analysis Methods} \label{subsec:analyis_methods}
 % Definitions
@@ -493,7 +490,7 @@ In this context of modality as a unique attribute defined by data from one or mo
 % Define classification for our purposes as using an algorithm to predict an output in a discrete space. Mention RL paper as using RL but falling into classification category by our definition. 
 % Add caveat that analysis methods refers to analysis only of the data and not of the actual analysis, unless analysis of the analysis provides more information about the data (show examples)
 
-The categorizations outlined in Table \ref{tab:analysis_methods} were derived through a qualitative analysis of the entire corpus of papers with the intent of discerning any tendencies or prevalent approaches within the diverse landscape of multimodal analysis for learning and training environments. The presented analysis methods, ranging from supervised tasks like Classification (CLS) to unsupervised techniques such as Clustering (CLUST), reflect the rich variety of strategies employed in the field. Evaluating these methods becomes imperative in this work's context, offering insights into the prevailing tendencies and guiding future research directions.
+The classification scheme outlined in Table \ref{tab:analysis_methods} was developed with the intent of identifying the prevalent analysis methods employed in the diverse landscape of multimodal learning and training environments. The presented analysis methods, ranging from supervised tasks like Classification (CLS) to unsupervised techniques such as Clustering (CLUST), reflect the rich variety of strategies employed in the field. Evaluating these methods is imperative within the context of this review, as they offer insights into the prevailing analysis trends in the field and help guide future research directions.
 
 \begin{table}[ht]
 \centering
@@ -502,7 +499,7 @@ The categorizations outlined in Table \ref{tab:analysis_methods} were derived th
 \hline
 \textbf{Abbreviation} & \textbf{Definition} \\
 \hline
-CLS & Classification is a supervised learning task in machine learning where the goal is to assign predefined labels or categories to input data based on its features. It involves training a model on a labeled dataset to learn the mapping between input features and corresponding output labels, enabling the model to make predictions on new, unseen data. \\
+CLS & Classification is a supervised learning task in machine learning where the goal is to assign labels or categories to input data based on its features. It involves training a model on a labeled dataset to learn the mapping between input features and their corresponding output labels, enabling the model to make predictions on new, unseen data. \\
 \hline
 REG & Regression is a supervised learning task that focuses on predicting continuous numerical values. In contrast to classification, where the output is categorical, regression involves training a model to understand the relationships between input features and continuous target values, allowing for the prediction of numerical outcomes. \\
 \hline
@@ -514,13 +511,11 @@ STATS & Statistical methods encompass a broad range of techniques used to analyz
 \hline
 NET & Network analysis involves the study of relationships and interactions among entities in a network. It includes graph-based approaches where nodes represent entities (e.g., individuals, concepts) and edges represent relationships or connections between them.  \\
 \hline
-PATT & Pattern extraction refers to the process of identifying meaningful patterns or structures within data. This can include various techniques such as sequence mining, where patterns in the temporal order of events are discovered, or other methods aimed at uncovering hidden structures that provide insights into the underlying dynamics of the data. \\
+PATT & Pattern extraction refers to the process of identifying meaningful patterns or structures within data. This can include various techniques such as Markov analysis and sequence mining, where patterns in the temporal order of events are discovered, or other methods aimed at uncovering hidden structures that provide insights into the underlying dynamics of the data. \\
 \hline
 \end{tabular}
 \label{tab:analysis_methods}
 \end{table}
-
-
 
 \subsection{Data Fusion} \label{subsec:data_fusion}
 % Graphic with different kinds of fusion
@@ -536,33 +531,32 @@ PATT & Pattern extraction refers to the process of identifying meaningful patter
 
 %   di mitri paper reference for observable/unobservable fusion definition: https://onlinelibrary.wiley.com/doi/full/10.1111/jcal.12288
 
-In the realm of multimodal learning analytics (MMLA), data fusion plays a pivotal role in harnessing the power of multiple data sources to provide a more comprehensive and insightful understanding of the learning process. The process of data fusion involves combining information from various sources to create a unified dataset, thereby facilitating enhanced interpretation and analysis, when compared to analyzing only a single modality at a time. By combining data from multiple modalities, researchers and educators can uncover hidden insights into learners' cognitive states, emotions, and behaviors. This comprehensive understanding paves the way for personalized interventions and more effective pedagogical strategies. 
+In the realm of multimodal learning learning and training, data fusion plays a pivotal role in harnessing the power of multiple data sources to provide a more comprehensive and insightful understanding of the learning process. The process of data fusion involves combining information from various sources to create a unified dataset, thereby facilitating enhanced interpretation and analysis relative to analyzing only a single modality at a time. By combining data from multiple modalities, researchers and educators can uncover hidden insights into learners' cognitive states, emotions, and behaviors. This comprehensive understanding paves the way for personalized interventions and more effective pedagogical strategies. 
 
-Within data fusion, the traditional method of categorization, as underscored by Chango et al.’s \cite{Chango2022} recent review of data fusion within MMLA, is based on three categories: early, late, and hybrid. The \textit{early fusion} approach involves combining raw data from multiple sources at the earliest stage of processing. This integration occurs before any individual modality-specific analysis, allowing for joint processing of data from different sources. By merging information early, the model can capture potential interactions and dependencies among modalities, but limited by cases where there are significant differences between data modalities and challenges surrounding the complexity and explainability of the joint modality models. The \textit{late fusion} approach involves performing separate analyses on individual modalities and then integrating their outcomes at a later stage. This method allows for specialized processing of each modality's characteristics, potentially leading to more accurate and contextually relevant insights, but limited in its ability to capture intermodal relationships that might exist. The \textit{hybrid fusion} approach aims to combine the strengths of both early and late fusion methods. In this approach, data from various sources are combined at multiple stages of processing. For instance, an initial early fusion step might be followed by separate analyses of each modality using a late fusion strategy. This allows for the exploitation of intermodal relationships while also accommodating the uniqueness of each modality's information. However, hybrid models increase the overall complexity of data analysis and require a priori decisions about which features should be combined at what points in the model pipeline. The choice of fusion method depends on several factors, including the specific problem domain, the characteristics of the available data, the desired level of interpretability, and the computational resources available.
+Within data fusion, the traditional method of categorization, as underscored by Chango et al.’s \cite{Chango2022} recent review of data fusion within MMLA, is based on three categories: early, late, and hybrid. The \textit{early fusion} approach involves combining raw data from multiple sources at the earliest stage of processing. This integration occurs before any individual modality-specific analysis, allowing for joint processing of data from different sources. By merging information early, the model can capture potential interactions and dependencies among modalities, but is limited by cases where there are significant differences between data modalities and challenges surrounding the complexity and explainability of the joint modality models. The \textit{late fusion} approach involves performing separate analyses on individual modalities and then integrating their outcomes at a later stage. This method allows for specialized processing of each modality's characteristics, potentially leading to more accurate and contextually relevant insights, but is limited in its ability to capture intermodal relationships that might exist. The \textit{hybrid fusion} approach aims to combine the strengths of both early and late fusion methods. In this approach, data from various sources are combined at multiple stages of processing. For instance, an initial early fusion step might be followed by separate analyses of each modality using a late fusion strategy. This allows for the exploitation of intermodal relationships while also accommodating the uniqueness of each modality's information. However, hybrid models increase the overall complexity of data analysis and require a priori decisions about which features should be combined at what points in the model pipeline. The choice of fusion method depends on several factors, including the specific problem domain, the characteristics of the available data, the desired level of interpretability, and the computational resources available.
 
-However, we argue that this traditional three-state categorization is actually not informed enough to fully capture the complexity of multimodal analysis. After qualitative review of our paper corpus, we had significant difficulty categorizing analysis methods into just these three categories due to the ambiguity surrounding what constitutes \textit{raw features} compared to \textit{processed features}. For example, some researchers might classify the joint position data measured by a Microsoft Kinect camera as a raw feature, and thus permissible in early fusion, since it is available from the camera without any additional processing by the researchers. However, others might classify this as a processed feature, and thus a part of hybrid or late fusion, since the Kinect camera is actually computing this data from the raw depth data, regardless of whether this computation is obfuscated to the end user. Qualitatively, we noticed this pattern and disagreement among researchers with multiple modalities within our paper corpus. Motivated by this finding, we propose an additional category of data fusion, which we call \textit{mid fusion}. 
+However, we argue that this traditional three-state categorization is actually not informed enough to fully capture the complexity of multimodal analysis. After a qualitative review of our corpus, we encountered considerable difficulty categorizing analysis methods into just these three categories due to the ambiguity surrounding what constitutes \textit{raw features} compared to \textit{processed features}. For example, some researchers might classify the joint position data measured by a Microsoft Kinect camera as a raw feature, and thus permissible in early fusion, since it is available from the camera without any additional processing by the researchers. However, others might classify this as a processed feature, and thus a part of hybrid or late fusion, since the Kinect camera is actually computing this data from the raw depth data, regardless of whether this computation is obfuscated to the end user. Qualitatively, we noticed this pattern and disagreement among researchers with multiple modalities within our paper corpus. Motivated by this finding, we propose an additional category of data fusion, which we call \textit{mid fusion}. 
 
-Mid-fusion represents a middle point between early fusion and late fusion, where data could be somewhat processed and transformed before being combined, but not transformed to the same extent as in late fusion. The difference here between mid and late fusion can be somewhat subtle depending on the modality, but is perhaps best explained using Di Mitri et al.’s \cite{DiMitri2018} conceptualization of the \textit{observability line}. In their work, modalities are categorized into \textit{input space}, which represents observable evidence and data that can be tracked with sensors, and \textit{hypothesis space}, which represents inferred learning labels. These two categories are separated by the \textit{observability line}, which they describe as "a line of separation between the observable evidence and all the possible interpretations" \cite{DiMitri2018}. In our new framework for categorizing data fusion, \textit{early fusion} represents combination without any initial processing, \textit{mid fusion} represents combination of features that have had prior processing that stays within the input space (i.e., still observable features), and \textit{late fusion} represents combination of features that have had prior processing that crosses the observability line into the hypothesis space (i.e., no longer directly observable).
+Mid-fusion represents a middle point between early fusion and late fusion, where data could be somewhat processed and transformed before being combined, but not transformed to the same extent as in late fusion. The difference here between mid and late fusion can be somewhat subtle depending on the modality, but is perhaps best explained using Di Mitri et al.’s \cite{DiMitri2018} conceptualization of the \textit{observability line}. In their work, modalities are categorized into \textit{input space}, which represents observable evidence and data that can be tracked with sensors, and \textit{hypothesis space}, which represents inferred learning labels. These two categories are separated by the \textit{observability line}, which they describe as "a line of separation between the observable evidence and all the possible interpretations" \cite{DiMitri2018}. In our new framework for categorizing data fusion, \textit{early fusion} represents combining features without any initial processing, \textit{mid fusion} represents combining features that have had prior processing but stay within the input space (i.e., they are still observable features), and \textit{late fusion} represents combining features that have had prior processing that crosses the observability line into the hypothesis space (i.e., they are no longer directly observable).
 
-For example, consider the same Kinect sensor discussed earlier. In this case, the raw pixel values from the camera image or the raw depth values from the depth sensor would be considered unprocessed observable features and candidates for early fusion. However, the joint position coordinates output by the camera SDK would be considered observable processed features, and thus candidates for mid fusion, since they are derived from other observable data, but still remain directly observable. Beyond this, if a researcher used the joint position data as input to another model which estimated a measure of motivation, for example, then this motivation construct would only be a candidate for late fusion, since we have now crossed the observability line. 
+For example, consider the same Kinect sensor discussed earlier. In this case, the raw pixel values from the camera image or the raw depth values from the depth sensor would be considered unprocessed, observable features and candidates for early fusion. However, the joint position coordinates output by the camera SDK would be considered observable, processed features, and thus candidates for mid fusion, since they are derived from other observable data but still remain directly observable. Beyond this, if a researcher used the joint position data as input to another model which estimated a measure of motivation, for example, then this motivation construct would only be a candidate for late fusion, since we have now crossed the observability line. 
 
-This classification is still somewhat qualitative and up to a researcher's interpretation. As described by Di Mitri et al., "The distinction between observable/unobservable is conceptual and can vary in practice." \cite{DiMitri2018}; however, we believe that this additional data fusion category helps to resolve some of the ambiguity related to the original categorization scheme and is useful for identifying the sub-communities of MMLA based on which methods researchers have applied. For a concrete definition of the modalities that we consider oberservable for the categorization in this paper, see section \ref{sec:modalities}. In addition to the early, mid, late, and hybrid data fusion categories, in this paper, following the methodology of Chango et al. \cite{Chango2022}, we add an \textit{other} category to catch studies that do not fit into one of those four groups or in which the fusion point was not specified.
+This classification is still somewhat qualitative and up to a researcher's interpretation. As described by Di Mitri et al., "The distinction between observable/unobservable is conceptual and can vary in practice." \cite{DiMitri2018}; however, we believe that this additional data fusion category helps to resolve some of the ambiguity related to the original categorization scheme and is useful for identifying the sub-communities of multimodal learning and training based on which methods researchers have applied. For a concrete definition of the modalities that we consider observable for the categorization in this paper, see section \ref{sec:modalities}. In addition to the early, mid, late, and hybrid data fusion categories, in this paper, following the methodology of Chango et al. \cite{Chango2022}, we add an \textit{other} category to catch studies that do not fit into one of those four groups or in which the fusion point was not specified (or fusion was not performed).
 
-% START REVIEWING HERE 1/3
 \subsection{Environment Setting} \label{subsec:environment_setting}
 % Confirm exact set from S18 corpus to be sure!
 % Environment Setting. Physical, virtual, blended, unspecified.
 
-In examining a corpus of multimodal learning analytics applied to diverse learning and training environments, we systematically analyzed the contextual settings in which these studies unfold, categorizing the learning environments as: %, as shown in Table \ref{tab:environment-settings}
+Analyzing the contextual settings in which these studies unfold, we categorize the learning and training environments as: %, as shown in Table \ref{tab:environment-settings}
 
 \begin{itemize}
     \item \textbf{Virtual (VIRT)}: Learning or training activities take place entirely within a virtual space, such as when participants engage with content and exercises within a computer-based system.  
-    \item \textbf{Physical (PHYS):} Activities unfold in a physical real-world environment. This could encompass traditional classroom settings or any other tangible space where learning or training occurs without reliance on digital technologies. 
+    \item \textbf{Physical (PHYS):} Activities unfold in a physical, real-world environment. This includes traditional classroom settings and other tangible spaces where learning or training occurs without reliance on digital technologies. 
     \item \textbf{Blended (BLND):} Learning or training activities blend elements of both the virtual and physical realms. Environments characterized by augmented reality, mixed reality, or a combination of digital and physical components fall into this category. 
-    \item \textbf{Unspecified (UNSP):} Designated when the papers analyzed do not provide sufficient information about the learning environment of the study to be conclusively categorized.    
+    \item \textbf{Unspecified (UNSP):} Designated when the papers analyzed do not provide sufficient information about a study's learning environment to be conclusively categorized.    
 \end{itemize}
 
-Our intent in undertaking this setting analysis was twofold. Firstly, we aimed to unveil the contextual relevance of multimodal learning analytics, discerning how these approaches manifest in computer-based virtual spaces, traditional physical classrooms and blended scenarios combining virtual and physical elements. Additionally, our categorization acknowledges instances where information about the environment setting is not sufficiently provided, directing attention to research gaps and unexplored areas within the current literature.
+The reasons for analyzing the environmental settings are twofold. First, we aim to unveil the contextual relevance of multimodal learning and training, discerning how these approaches manifest in computer-based (virtual) spaces, traditional classrooms (and other physical environments), and blended scenarios combining virtual and physical elements. Additionally, our categorization acknowledges instances where information about the environment setting is not sufficiently provided, directing attention to research gaps and unexplored areas within the current literature.
 
 % Joyce: is a table better?
 % \begin{table}[h]
@@ -589,17 +583,18 @@ Our intent in undertaking this setting analysis was twofold. Firstly, we aimed t
 % Confirm exact set from S18 corpus to be sure!
 % Environment Subject. STEM, humanities, psychomotor skills, other, unspecified
 
-In our qualitative analysis of the papers we recognized the significance of categorizing the domain of subjects that participants were engaged in during their educational experiences. This categorization not only provides a comprehensive framework for contextualizing the application of multimodal learning analytics but also allows for a dynamic exploration of how these methodologies intersect with a diverse array of learning and training domains. To systematize this classification, we identified five broad categories, listed below. These intentionally maintain a broad scope, as we observed that introducing more granularity would not substantially contribute to understanding the current trends in the field of multimodal learning analytics applied to learning and training environments.
+While conducting our analysis, we recognized the importance of identifying the subject matter domains that study participants were engaged in during their educational and training experiences. This categorization not only further helps contextualize the application of multimodal learning and training analytics, but also allows for dynamically exploring how these methods intersect with a diverse array of domains. To systematize this classification, we identified five subject matter categories, which are listed below. These categories are intentionally broad, as we observed that introducing additional granularity %would not substantially contribute to a better understanding the current trends in the field of multimodal learning analytics applied to learning and training environments.
 % , defined in Table \ref{tab:environment-subjects}: STEM, Humanities, Psychomotor Skills, Other, and Unspecified.  
+hindered our ability to analyze and understand the current trends in the field due to the corpus's widely varied subject matter.
 \begin{itemize}
-    \item \textbf{STEM:} Participants engaged in learning or training related to Science, Technology, Engineering, and Mathematics (STEM) disciplines.
-    \item \textbf{Humanities (HUM):} Participant activities focused on disciplines such as literature and other humanities-related fields.
+    \item \textbf{STEM:} Participants engaged in learning or training related to Science, Technology, Engineering, and Mathematics (STEM) disciplines. In our case, this also includes applied scientific disciplines such as healthcare and medicine.
+    \item \textbf{Humanities (HUM):} Participant activities focused on disciplines such as literature, debate, oral presentation, and other humanities-related fields.
     \item \textbf{Psychomotor Skills (PSY):}  Learning or training activities emphasizing the development of motor skills and coordination.
     \item \textbf{Other (OTH):} Subjects that do not fall into the above categories. This could encompass a wide range of topics beyond STEM, humanities, or psychomotor skills.
-    \item \textbf{Unspecified (UNSP):} Designated when the papers analyzed did not provide sufficient information about the subjects to be conclusively categorized.
+    \item \textbf{Unspecified (UNSP):} Designated when the papers analyzed did not provide sufficient information about the subject matter to be conclusively categorized.
 \end{itemize}
 
-It's noteworthy that papers which reported results from multiple studies were categorized with labels corresponding to the environment subject of each study \cite{3796643912,2055153191}. 
+Importantly, papers reporting results from multiple studies are categorized with labels corresponding to the environment subject of each study \cite{3796643912,2055153191}. 
 
 
 %Joyce: would a table be better?
@@ -628,59 +623,60 @@ It's noteworthy that papers which reported results from multiple studies were ca
 
 
 \subsection{Participant Structure} \label{subsec:participant_structure}
-% Confirm exact set from S18 corpus to be sure! Joyce: there are no unspecified paper in the corpus
-% Participant Structure. Individual, multi-person, unspecified
+% Confirm exact set from S18 corpus to be sure! 
+% Participant Structure. Individual, multi-person
 
+% Joyce: there are no unspecified paper in the corpus
+% Clayton: awesome thanks for pointing this out!
 
-While analyzing the corpus of papers, we systematically categorized the participant structure based on whether the analysis of the studies focused primarily on individual or multiple learning experiences. The classification comprises two primary categories: 
+We categorized papers' participant structures based on whether the analysis of the studies focused primarily on individual or multi-person learning and training experiences. The classification comprises two primary categories: 
 \begin{itemize}
-    \item \textbf{Individual (IND)}: The analysis of learning or training activities were predominantly centered around individuals.
-    \item \textbf{Multi-Person (MULTI)}: The analysis of learning or training activities involved multiple participants, often emphasizing collaborative or group dynamics. 
+    \item \textbf{Individual (IND)}: Environments where learning or training activities center around individual participants.
+    \item \textbf{Multi-Person (MULTI)}: Environments where learning or training activities involve multiple participants, often emphasizing collaborative or group dynamics. 
 \end{itemize}
 
- It's noteworthy that some papers encompassed both categories, reflecting diverse studies within a single publication\cite{1326191931, 3637456466}. This categorization illuminates the varying scopes of analysis focus, shedding light on instances where multimodal analytics are tailored to individual learners and others where collaborative learning experiences take precedence.
-
+It's noteworthy that some papers analyzed both types of environments, reflecting the diversity in studies even within individual publications \cite{1326191931, 3637456466}. This categorization illuminates the varying scopes of analysis focus, shedding light on instances where multimodal analytics are tailored to individual learners and others where collaborative (and other multi-person) learning and training experiences take precedence.
 
 \subsection{Didactic Nature} \label{subsec:didactic_nature}
 % Didactic Nature. Instructional, training, informal, unspecified 
 % Joyce: confirmed on S18
 
-In our endeavor to comprehensively analyze different dimensions of the state-of-the-art (SOTA) of MMLA in diverse educational settings, we have introduced a categorization based on the didactic nature of the studies. The classification encompasses four distinct categories: 
+Didactic nature refers to the ``type" of learning or training that transpires in each study's environment, which we use as yet another lens through which to understand, analyze, and differentiate learning and training environments. Our categorization scheme comprises 4 distinct categories:
 
 \begin{itemize}
     \item \textbf{Instructional (INSTR)}: Studies where the primary focus is on formal instruction, including traditional classroom settings, online courses, or any structured learning environment with clear instructional objectives.
 
-    \item \textbf{Training (TRAIN)}: Studies categorized under training emphasize skill development, practical training, or professional development. This involves scenarios where participants are acquiring specific skills or competencies relevant to their profession or field.
+    \item \textbf{Training (TRAIN)}: Studies categorized under TRAIN emphasize skill development, practical training, or professional development. This involves scenarios where participants are acquiring specific skills or competencies relevant to their profession or field.
     
-    \item \textbf{Informal (INF)}: Informal nature involves learning that occurs in a more unstructured manner, outside formal instructional or training environments. For instance, Worsley et al's work \cite{666050348} aimed to bridge multimodal interaction to a game called Minecraft, aiming to support diverse learners in non-traditional learning environments. 
+    \item \textbf{Informal (INF)}: Informal environments involve learning or training that occurs in a more unstructured manner, outside formal instructional or training environments. For instance, \citet{666050348} aimed to bridge multimodal interaction to the game Minecraft\footnote{https://www.minecraft.net/en-us} to support diverse learners in non-traditional learning environments. 
     
-    \item \textbf{Unspecified (UNSP)}: This category is likely applied when the papers do not provide sufficient information about the didactic nature of the study. It acknowledges instances where the educational context is not clearly defined or detailed in the literature.
+    \item \textbf{Unspecified (UNSP)}: This category is applied when the papers do not provide sufficient information about the didactic nature of the study. It acknowledges instances where the training or educational context is not clearly defined or detailed in the literature.
 \end{itemize}
 
 \subsection{Level of Instruction or Training} \label{subsec:level_of_instruction}
 % Confirm exact set from S18 corpus to be sure! Joyce: confirmed
 % Level of Instruction or Training. K-12, university, professional development
-We sought to delineate the level of instruction or training for participants, providing valuable insights into the educational contexts targeted by these analyses. The following categories capture the diverse educational levels represented in our surveyed papers:
+We sought to delineate the level of instruction or training for participants, providing valuable insights into the educational contexts targeted by these analyses. The following categories capture the diverse training and educational levels represented in our survey:
 
 \begin{itemize}
-    \item \textbf{K-12}: Participants at the primary or secondary education levels, encompassing kindergarten to 12th grade.
+    \item \textbf{K-12}: Participants at the primary or secondary education levels, encompassing kindergarten through 12th grade.
     \item \textbf{University (UNI)}: Participants engaged in university-level education, including both undergraduate and graduate students.
-    \item \textbf{Professional Development (PROF)}: Participants involved in training or learning experiences specifically designed for professional development.
-    \item \textbf{Unspecified (UNSP)}: Designated when the papers analyzed did not provide sufficient information about the level of instruction or training for the participants.
+    \item \textbf{Professional Development (PROF)}: Participants involved in training or learning experiences specifically designed for professional development and not tied to a K-12 or university curriculum.
+    \item \textbf{Unspecified (UNSP)}: Designated when papers did not provide sufficient information about the participants' level of instruction or training.
 \end{itemize}
 
-It is important to note that studies featuring multiple groups of participants or those reporting results across various studies may have been assigned multiple labels, reflecting the diversity inherent in the investigated papers.
+It is important to note that studies featuring multiple groups of participants, or those reporting results across various studies, may have been assigned multiple labels, reflecting the diversity inherent to the set of papers in our corpus.
 
 \subsection{Analysis Approach} \label{subsec:analysis_approach}
 % MB vs MF.
 
-While the types of analysis methods exhibited significant variability, we systematically categorized the overarching analysis approach into two main categories: \textbf{model-based} and \textbf{model-free}.
+While the analysis methods exhibited significant variability, we systematically categorized the overarching analysis approaches into two main categories: \textbf{model-based} and \textbf{model-free}.
 
 Model-based analysis involves constructing a formal representation, or model, to elucidate the underlying structure of the data. These models are built based on predefined assumptions about the relationships within the data. For example, in machine learning applications, a model-based approach may entail creating mathematical functions that capture the relationships between input features and output labels. In the broader context of cyber-physical systems, model-based analysis may involve developing computational models that represent the dynamics of the system and its interactions.
 
-On the other hand, model-free analysis in MMLA encompasses approaches that do not explicitly construct a model of the underlying data distribution. Instead, these methods directly learn patterns and relationships from the data without assuming a specific form for the underlying model. 
+On the other hand, model-free analysis refers to approaches that do not explicitly construct a model of the underlying data distribution or predict outcomes. Instead, these methods directly learn patterns and relationships from the data without assuming a specific form defined by an underlying model. 
 
-It is noteworthy that the categorization into model-based or model-free analysis approaches is not mutually exclusive. This category is multi-label, signifying that a single paper may receive both labels if it reports the utilization of different analysis approaches within the same study. 
+It is noteworthy that the categorization of papers into model-based or model-free analysis approaches is not mutually exclusive. It is multi-label, signifying that a single paper may receive both labels if it reports the utilization of different analysis approaches within the same paper. 
 
 \section{Methods} \label{sec:methods}
 
