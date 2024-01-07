@@ -14,6 +14,10 @@
 \usepackage{tabularx}
 \usepackage{ragged2e}
 
+% Pseudocode
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
 % Citation table
 \usepackage{longtable} % for 'longtable' environment
 \usepackage{pdflscape} % for 'landscape' environment
@@ -200,7 +204,7 @@
 
 
 \begin{abstract}
-As learning and training technologies continue to improve, so do our abilities to collect data from these environments and develop methods to better inform participants' learning and training processes. This allows for capturing, combining, and analyzing datastreams across several different modalities (e.g., speech, video, eye gaze, etc.) and leveraging large amounts of rich, multimodal data to help explain how individuals learn and train. In recent years, the field of multimodal learning analytics (MMLA) has grown considerably, as researchers are discovering that combining multiple modalities 1) often harnesses more predictive power, and 2) is more informative with respect to the learning and training processes, than analyzing any single modality alone. While there have been several surveys and literature reviews focusing on multimodal learning and training, they are often specific to individual pieces of the multimodal pipeline (e.g., presenting a conceptual model \cite{di_mitri_signals_2018} and data fusion \cite{chango_improving_2021}). To the best of our knowledge, no literature review has yet been conducted on the \textit{methods} used to inform multimodal learning and training environments.
+As learning and training technologies continue to improve, so does our ability to collect data from these environments and develop methods to better inform participants' learning and training processes. This allows for capturing, combining, and analyzing datastreams across several different modalities (e.g., speech, video, eye gaze, etc.) and leveraging large amounts of rich, multimodal data to help explain how individuals learn and train. In recent years, the field of multimodal learning analytics (MMLA) has grown considerably, as researchers are discovering that combining multiple modalities 1) often harnesses more predictive power, and 2) is more informative with respect to the learning and training processes, than analyzing any single modality alone. While there have been several surveys and literature reviews focusing on multimodal learning and training, they are often specific to individual pieces of the multimodal pipeline (e.g., presenting a conceptual model \cite{DiMitri2018} and data fusion \cite{Chango2022}). To the best of our knowledge, no literature review has yet been conducted on the \textit{methods} used to inform multimodal learning and training environments.
 
 In this literature review, we conduct a comprehensive analysis of the research methods currently being applied to multimodal learning and training environments. We present a taxonomy and framework that represent recent advancements in multimodal learning and training methodology, where we categorize multimodal data into five distinct subdomains: Natural Language, Vision, Sensors, Human-Centered, and Logs. We present descriptive statistics and perform an in depth qualitative, thematic analysis, and discuss our findings with respect to the current state-of-the-art, results, challenges, and research gaps for both the individual subdomains and the field as a whole. In doing so, we identify the need for an additional data fusion classification --- \textit{mid fusion} --- and introduce a novel, graph-based approach to literature review corpus distillation, which we refer to as \textit{citation graph pruning}.
 
@@ -275,16 +279,15 @@ In this literature review, we conduct a comprehensive analysis of the research m
 % Discuss recent, past, and prominent works
 \subsection{A Brief History}
 
-Modern research in education, training, and the learning sciences has seen a large push toward personalizing curriculum and the educational process to individual learner and trainee needs. Throughout this transformation, many methods of student personalization and adaptation have been developed; however, among these, data-driven methods have emerged as an extremely promising approach. This research on data-driven student personalization has come to be known as the field of learning analytics\footnote{\href{https://www.solaresearch.org/about/what-is-learning-analytics/}{https://www.solaresearch.org/about/what-is-learning-analytics/}}. Learning analytics research focuses on the collection and analysis of learner or trainee data in order to generate insights about student behaviors \cite{maseleno2018demystifying, Zilvinskis2017}. These insights can then drive a variety of classroom tools and interventions such as computer-based learning and intelligent tutoring environments (e.g., \cite{heffernan2014assistments, leelawong2008designing}), adaptive scaffolding (e.g., \cite{Emerson2020, basu2017learner}), teacher-feedback tools (e.g., \cite{rodriguez2018teacher, Hutchins2023}), and many other developments. 
+Modern research in education, training, and the learning sciences has seen a large push toward personalizing curriculum and the educational process to individual learner and trainee needs. Throughout this transformation, many methods of student personalization and adaptation have been developed; however, among these, data-driven methods have emerged as an extremely promising approach. This research on data-driven student personalization has come to be known as the field of learning analytics\footnote{\href{https://www.solaresearch.org/about/what-is-learning-analytics/}{https://www.solaresearch.org/about/what-is-learning-analytics/}}. Learning analytics research focuses on the collection and analysis of learner or trainee data in order to generate insights about student behaviors \cite{maseleno2018demystifying, Zilvinskis2017}. These insights can then drive a variety of classroom tools and interventions such as computer-based learning and intelligent tutoring environments (e.g., \cite{heffernan2014assistments, leelawong2008designing}), adaptive scaffolding (e.g., \cite{1598166515, basu2017learner}), teacher-feedback tools (e.g., \cite{rodriguez2018teacher, Hutchins2023}), and many other developments. 
 
 However, persistent throughout research in the field of learning analytics is the question: \textit{What forms of data need to be collected to gain insights into learner behaviors and enable meaningful analysis of learning and training scenarios} \cite{vatral2022using, ochoa2017multimodal}? In early learning analytics research, this question was largely answered through considerations of practicality; that is, the data which was analyzed was the data which was practical to collect in the classroom or training environment. This meant that early research on learning analytics focused highly on analyzing data from computer-based learning and training environments, where researchers had significant control over the design of the environments and curriculum, and log data could be easily collected and interpreted. This work analyzing log data from computer-based learning and training environments has a long, rich history and helped to develop meany of the theories and methods still used in learning analytics today. Log data from computer-based environments paints a very reasonable picture of student actions and interactions in the context of the tasks they are performing in the environment that can be used to generate a wide variety of new insights into learners \cite{hoppe2017computational, ochoa2017multimodal}. 
 
-However, as the field of learning analytics continues to advance, the limitations of these more traditional log-based analysis approaches has been the topic of significant and increased scrutiny \cite{ochoa2017multimodal}. For example, what if the learning or training environment does not facilitate easy action logging? This is certainly the case for environments which are more physical and less virtual than traditional computer-based learning and intelligent tutoring environments, such as traditional classrooms (see Section \ref{subsec:environment_type}). Beyond this, what if the logged data fails to capture the full context of learners' actions and behaviors? For example, computer logs may not tell any information about student affect or collaborative conversations between learners. These questions, among many others, alongside the development and proliferation of affordable sensor devices, have lead learning analytics researchers to deploy additional sensor and other data collection devices in the classroom to help close the gaps introduced by the analysis of log data alone. These more complex sensors and data sources have the ability to capture a much richer variety of learner behavioral data. For example, physical movement, gestures, and postures captured through video data; dialogue captured through microphones; stress levels captured through biometric sensors; eye gaze and attention captured through eye tracking devices; etc \cite{vatral2022using}. 
+However, as the field of learning analytics continues to advance, the limitations of these more traditional log-based analysis approaches has been the topic of significant and increased scrutiny \cite{ochoa2017multimodal}. For example, what if the learning or training environment does not facilitate easy action logging? This is certainly the case for environments which are more physical and less virtual than traditional computer-based learning and intelligent tutoring environments, such as traditional classrooms (see Section \ref{subsec:environment_type}). Beyond this, what if the logged data fails to capture the full context of learners' actions and behaviors? For example, computer logs may not tell any information about student affect or collaborative conversations between learners. These questions, among many others, alongside the development and proliferation of affordable sensor devices, have lead learning analytics researchers to deploy additional sensor and other data collection devices in the classroom to help close the gaps introduced by the analysis of log data alone. These more complex sensors and data sources have the ability to capture a much richer variety f learner behavioral data. For example, physical movement, gestures, and postures captured through video data; dialogue captured through microphones; stress levels captured through biometric sensors; eye gaze and attention captured through eye tracking devices; etc \cite{vatral2022using}. 
 
-By combining all of these additional sensor devices, researchers can capture a much richer picture of students' affective, cognitive, psychomotor, and metacognitive states, leading to a more comprehensive analysis of students' behaviors \cite{blikstein2016multimodal}. This combination of multiple sensor modalities for analysis of learner and trainee behavior has come to be known as the field of multimodal learning analytics (MMLA) \cite{blikstein2013multimodal, blikstein2016multimodal, worsley_multimodal_2018}. Today, MMLA has been the subject of over a decade of concentrated research including multiple journal special issues \cite{BJETSpecialIssue}\footnote{\href{https://www.mdpi.com/journal/sensors/special_issues/multimodal_learning_analytics_sensor}{https://www.mdpi.com/journal/sensors/special\_issues/multimodal\_learning\_analytics\_sensor}}\footnote{\href{https://learning-analytics.info/index.php/JLA/announcement/view/102}{https://learning-analytics.info/index.php/JLA/announcement/view/102}}, a special interest group in the Society for Learning Analytics Research\footnote{\href{https://www.solaresearch.org/community/sigs/crossmmla-sig/}{https://www.solaresearch.org/community/sigs/crossmmla-sig/}}, an edited book \cite{MMLAHandbook}, and several systematic literature reviews \cite{Chango2022, Alwahaby2022, Shankar2018, Crescenzi2020, Mu2020, DiMitri2018, worsley_multimodal_2018}. Owing to this significant body of prior work, in this review, we narrow our focus to the study of only applied research methods studies.
+By combining all of these additional sensor devices, researchers can capture a much richer picture of students' affective, cognitive, psychomotor, and metacognitive states, leading to a more comprehensive analysis of students' behaviors \cite{blikstein2016multimodal}. This combination of multiple sensor modalities for analysis of learner and trainee behavior has come to be known as the field of multimodal learning analytics (MMLA) \cite{blikstein2013multimodal, blikstein2016multimodal, 3095923626}. Today, MMLA has been the subject of over a decade of concentrated research including multiple journal special issues \cite{BJETSpecialIssue}\footnote{\href{https://www.mdpi.com/journal/sensors/special_issues/multimodal_learning_analytics_sensor}{https://www.mdpi.com/journal/sensors/special\_issues/multimodal\_learning\_analytics\_sensor}}\footnote{\href{https://learning-analytics.info/index.php/JLA/announcement/view/102}{https://learning-analytics.info/index.php/JLA/announcement/view/102}}, a special interest group in the Society for Learning Analytics Research\footnote{\href{https://www.solaresearch.org/community/sigs/crossmmla-sig/}{https://www.solaresearch.org/community/sigs/crossmmla-sig/}}, an edited book \cite{MMLAHandbook}, and several systematic literature reviews \cite{Chango2022, Alwahaby2022, Shankar2018, Crescenzi2020, Mu2020, DiMitri2018, 3095923626}. Owing to this significant body of prior work, in this review, we narrow our focus to the study of only applied research methods studies.
 
 \subsection{Contributions} \label{subsec:contributions}
-
 In this work, we perform a systematic literature review of the methods applied to multimodal learning and training environments. The scope of this review extends to any publication that both collects and analyzes data across multiple modalities or data collection mediums. This includes environments that exist fully in reality (e.g., physical therapy), mixed-reality environments (e.g., manikin-based nursing training), and online learning environments (e.g., students learning physics via computer software). Importantly, this review does not include ``virtual reality" (VR) environments due to difficulties scaling this technology in classroom settings \cite{cook2019challenges} and video data lacking semantic meaning with respect to its environment.
 
 The novel contributions of this work are the following: 
@@ -304,11 +307,11 @@ The novel contributions of this work are the following:
 %   A review on data fusion in multimodal learning analytics and educational data mining
 %   Multimodal data capabilities for learning: What can multimodal data tell us about learning?
 %   Trends of Multimodal Learning Analytics: A Systematic Literature Review
-Following this recent wave of MMLA research, surveys, and literature reviews have portrayed the MMLA landscape through various windows. Concisely, some of these include: multimodal data fusion \cite{chango_review_2022}, conceptual model and taxonomy \cite{di_mitri_signals_2018}, statistical and qualitative assessment of literature \cite{sharma_multimodal_2020, qushem_trends_2020}, virtual reality \cite{philippe_multimodal_2020}, technology and data engineering focused for automating MMLA \cite{chua_technologies_2019}, and impact and ethical considerations \cite{alwahaby_evidence_2021}. Our literature review augments these by focusing on the applied methods currently being used to inform multimodal learning and training environments. While prior works have touched on this, no recent works (to our knowledge) have explicitly centered on multimodal learning and training methodology. In the following paragraphs, we detail two foundational reviews from which we derived our own review's framing. Our intention is to extend and modify these existing taxonomies to reflect recent MMLA advancements. 
+Following this recent wave of MMLA research, surveys, and literature reviews have portrayed the MMLA landscape through various windows. Concisely, some of these include: multimodal data fusion \cite{Chango2022}, conceptual model and taxonomy \cite{DiMitri2018}, statistical and qualitative assessment of literature \cite{sharma_multimodal_2020, qushem_trends_2020}, virtual reality \cite{philippe_multimodal_2020}, technology and data engineering focused for automating MMLA \cite{chua_technologies_2019}, and impact and ethical considerations \cite{Alwahaby2022}. Our literature review augments these by focusing on the applied methods currently being used to inform multimodal learning and training environments. While prior works have touched on this, no recent works (to our knowledge) have explicitly centered on multimodal learning and training methodology. In the following paragraphs, we detail two foundational reviews from which we derived our own review's framing. Our intention is to extend and modify these existing taxonomies to reflect recent MMLA advancements. 
 
 % DI MITRI (Observability)
 %   From signals to knowledge: A conceptual model for multimodal learning analytics
-In a \citet{di_mitri_signals_2018} review, the authors proposed the Multimodal Learning Analytics Model (MLeAM), a conceptual model that describes the cyclical relationship between behavior, data, machine learning, and feedback in MMLA. Along with a comprehensive taxonomy, a key contribution was the idea of data observability and its splitting of space into input and hypothesis. Specifically, \citet{di_mitri_signals_2018} states that there is an observability line acting as the boundary between these two spaces, where input space is for measurable and sensory evidence (e.g., behaviors) and the hypothesis space is reserved for human-inferred annotation (e.g., emotions, motivation, cognition, and belief). This idea of observability, which refers to the process of using AI to turn input evidence into hypotheses, has guided our understanding as we define and describe applied MMLA research through this lens.
+In a \citet{DiMitri2018} review, the authors proposed the Multimodal Learning Analytics Model (MLeAM), a conceptual model that describes the cyclical relationship between behavior, data, machine learning, and feedback in MMLA. Along with a comprehensive taxonomy, a key contribution was the idea of data observability and its splitting of space into input and hypothesis. Specifically, \citet{DiMitri2018} states that there is an observability line acting as the boundary between these two spaces, where input space is for measurable and sensory evidence (e.g., behaviors) and the hypothesis space is reserved for human-inferred annotation (e.g., emotions, motivation, cognition, and belief). This idea of observability, which refers to the process of using AI to turn input evidence into hypotheses, has guided our understanding as we define and describe applied MMLA research through this lens.
 
 % CHANGO: (Data Fusion)
 %   A review on data fusion in multimodal learning analytics and educational data mining
@@ -322,7 +325,7 @@ In a \citet{di_mitri_signals_2018} review, the authors proposed the Multimodal L
 %   Capture methods: webcam, eye trackers, electrodes, sensors, .csv files, software
 %   Data collected across: data source, data type, data category, capture method
 %   Fusion: early fusion (feature level, before analysis), late fusion (decision level, after analysis), hybrid
-Another influential survey is by \citet{chango_review_2022}, which focuses on fusion methodologies and practices in MMLA. In the review, the authors classify papers by data fusion technique and point, aiming to understand fusion's impact on machine learning methods in educational data mining. After generating and reading their corpus, they proposed a classification scheme defining three types of data fusion --- \textit{early}, \textit{late}, or \textit{hybrid} --- depending on the stage of integration. Early fusion involves \textit{feature-level} concatenation prior to classification, while late fusion refers to \textit{decision-level} concatenation after classification. Hybrid fusion employs a mixture of both early and late fusion.
+Another influential survey is by \citet{Chango2022}, which focuses on fusion methodologies and practices in MMLA. In the review, the authors classify papers based on the fusion method and the point in the multimodal pipeline where the fusion is performed, aiming to understand fusion's impact on machine learning methods in educational data mining. After generating and reading their corpus, they proposed a classification scheme defining three types of data fusion --- \textit{early}, \textit{late}, or \textit{hybrid} --- depending on the stage of integration. Early fusion involves \textit{feature-level} concatenation prior to classification, while late fusion refers to \textit{decision-level} concatenation after classification. Hybrid fusion employs a mixture of both early and late fusion.
 
 Combining the taxonomies from both reviews, an adapted classification scheme emerges for data fusion that centers upon the idea of \textit{feature observability}, which can be used to identify the different processes by which individuals fuse different sources of information to create unified data representations. This definition also accounts for the distinction between measurable sensory evidence and human-inferred annotations, guided by the observability line. In the upcoming section, we elaborate on this data fusion classification scheme and present our refined taxonomy.
 
@@ -362,8 +365,6 @@ Finally, feedback is the final component of our framework and represents the res
 
 % Discuss Framework graphic as a lead in to definitions
 
-% Feedback
-
 \subsection{Taxonomy}\label{subsec:taxonomy}
 Now that we have discussed our framework at a high-level, in this section we will detail each component in more depth and discuss the specific features of each component extracted during our reading our the review corpus.
 
@@ -399,7 +400,7 @@ However, it is important to note that this division isn't always clear-cut. Some
 % motion capture (posyx, accelerometer, gyroscope, magnetometer)
 % Make point that things like learning gains and performance can fall into multiple categories depending on where derived from, e.g., logs, surveys, student artifacts (which can also be demo information)
 
-The intricacies of learning gains and performance metrics underscore the diversity of sources within learning and training analytics frameworks, ranging from logs and surveys to student artifacts. A diverse range of data collection mediums plays a pivotal role in capturing a holistic picture of learners' progress, interactions, and struggles within educational and training environments. The mediums enumerated in Table \ref{tab:data_collection_mediums} (and all definitions in this section, for that matter) were identified through our qualitative analysis of the corpus.
+The intricacies of learning gains and performance metrics underscore the diversity of sources within learning and training analytics frameworks, ranging from logs and surveys to student artifacts. A diverse range of data collection mediums plays a pivotal role in capturing a holistic picture of learners' progress, interactions, and struggles within educational and training environments. For the purpose of this paper we define mediums the specific types of raw data collected. The mediums listed in Table \ref{tab:data_collection_mediums} (and all definitions in this section, for that matter) were identified through our qualitative analysis of the corpus.
 
 \begin{table}[ht]
   \centering
@@ -443,7 +444,7 @@ Researcher Produced Artifacts (RPA) can range from detailed field observation no
 \subsubsection{Modalities} \label{sec:modalities}
 % Definitions
 
-We identified several modalities used for analyzing and understanding participants' interactions with and within learning and training environments, as shown in Table \ref{tab:modalities}. 
+We previously defined medium as the type of raw data collected. Modality is an attribute defined by data from one of more data streams, conveying different information about the experiment, even if derived from the same data collection medium. We identified several modalities used for analyzing and understanding participants' interactions with and within learning and training environments, as shown in Table \ref{tab:modalities}. 
 
 \begin{table}[ht]
   \centering
@@ -511,11 +512,12 @@ Similarly, the AFFECT modality could be derived from separate audio and video da
 % Define classification for our purposes as using an algorithm to predict an output in a discrete space. Mention RL paper as using RL but falling into classification category by our definition. 
 % Add caveat that analysis methods refers to analysis only of the data and not of the actual analysis, unless analysis of the analysis provides more information about the data (show examples)
 
-The classification scheme outlined in Table \ref{tab:analysis_methods} was developed with the intent of identifying the prevalent analysis methods employed in the diverse landscape of multimodal learning and training environments. The presented analysis methods, ranging from supervised tasks like Classification (CLS) to unsupervised techniques such as Clustering (CLUST), reflect the rich variety of strategies employed in the field. Evaluating these methods is imperative within the context of this review, as they offer insights into the prevailing analysis trends in the field and help guide future research directions.
+
+In the context of this literature review, an analysis method refers to a specific approach or technique employed to extract meaningful insights from multimodal data collected within learning or training environments. These analysis methods are chosen based on the research objectives and the nature of the data being investigated. The classification scheme outlined in Table \ref{tab:analysis_methods} was developed with the intent of identifying the prevalent analysis methods employed in the diverse landscape of multimodal learning and training environments. The presented analysis methods, ranging from supervised tasks like Classification (CLS) to unsupervised techniques such as Clustering (CLUST), reflect the rich variety of strategies employed in the field. Evaluating these methods is imperative within the context of this review, as they offer insights into the prevailing analysis trends in the field and help guide future research directions.
 
 \begin{table}[ht]
 \centering
-\caption{Definitions of Analysis Methods}
+\caption{Definitions for Analysis Methods}
 \begin{tabular}{|l|p{0.82\textwidth}|}
 \hline
 \textbf{Abbreviation} & \textbf{Definition} \\
@@ -562,85 +564,103 @@ Mid-fusion represents a middle point between early fusion and late fusion, where
 
 For example, consider the same Kinect sensor discussed earlier. In this case, the raw pixel values from the camera image or the raw depth values from the depth sensor would be considered unprocessed, observable features and candidates for early fusion. However, the joint position coordinates output by the camera SDK would be considered observable, processed features, and thus candidates for mid fusion, since they are derived from other observable data but still remain directly observable. Beyond this, if a researcher used the joint position data as input to another model which estimated a measure of motivation, for example, then this motivation construct would only be a candidate for late fusion, since we have now crossed the observability line. 
 
-This classification is still somewhat qualitative and up to a researcher's interpretation. As described by Di Mitri et al., "The distinction between observable/unobservable is conceptual and can vary in practice." \cite{DiMitri2018}; however, we believe that this additional data fusion category helps to resolve some of the ambiguity related to the original categorization scheme and is useful for identifying the sub-communities of multimodal learning and training based on which methods researchers have applied. For a concrete definition of the modalities that we consider observable for the categorization in this paper, see section \ref{sec:modalities}. In addition to the early, mid, late, and hybrid data fusion categories, in this paper, following the methodology of Chango et al. \cite{Chango2022}, we add an \textit{other} category to catch studies that do not fit into one of those four groups or in which the fusion point was not specified (or fusion was not performed).
+This classification is still somewhat qualitative and up to a researcher's interpretation. As described by Di Mitri et al., "The distinction between observable/unobservable is conceptual and can vary in practice." \cite{DiMitri2018}; however, we believe that this additional data fusion category helps to resolve some of the ambiguity related to the original categorization scheme and is useful for identifying the sub-communities of multimodal learning and training based on which methods researchers have applied. For a concrete definition of the modalities that we consider observable for the categorization in this paper, see section \ref{sec:modalities}. In addition to the early, mid, late, and hybrid data fusion categories, in this paper, following the methodology of Chango et al. \cite{Chango2022}, we add an \textit{other} category to catch studies that do not fit into one of those four groups or in which the fusion point was not specified (or fusion was not performed). The data fusion categorization is summarized in Table \ref{tab:data-fusion-categories}.
+
+\begin{table}[ht]
+    \caption{Categories of Data Fusion Approaches}
+    \label{tab:data-fusion-categories}
+    \centering
+    \begin{tabular}{|c|p{0.8\textwidth}|}
+        \hline
+        \textbf{Category} & \textbf{Description} \\
+        \hline
+        Early Fusion & Combines raw data from multiple sources at the earliest stage of processing, before any modality-specific analysis. Enables joint processing of data from different sources. \\
+        \hline
+        Mid Fusion & Represents a middle point between early and late fusion. Involves combining features that have had some prior processing but stay within the input space, i.e., they are still observable features. \\
+        \hline
+        Late Fusion & Involves performing separate analyses on individual modalities and integrating their outcomes at a later stage. Features have prior processing that crosses into the hypothesis space, i.e., they are no longer directly observable. \\
+        \hline
+        Hybrid Fusion & Combines the strengths of both early and late fusion methods. Data from various sources are combined at multiple stages of processing. \\
+        \hline
+        Other & Studies that do not fit into the early, mid, late, or hybrid categories, or where the fusion point was not specified or fusion was not performed. \\
+        \hline
+    \end{tabular}
+\end{table}
+
 
 \subsubsection{Environment Setting} \label{subsec:environment_setting}
 % Confirm exact set from S18 corpus to be sure!
 % Environment Setting. Physical, virtual, blended, unspecified.
 
-Analyzing the contextual settings in which these studies unfold, we categorize the learning and training environments as: %, as shown in Table \ref{tab:environment-settings}
+Environment setting refers to the overarching context in which learning and training activities take place. Analyzing the contextual settings in which these studies unfold, we categorize the learning and training environments, based on the nature of the setting, as shown in Table \ref{tab:environment-settings}.
 
-\begin{itemize}
-    \item \textbf{Virtual (VIRT)}: Learning or training activities take place entirely within a virtual space, such as when participants engage with content and exercises within a computer-based system.  
-    \item \textbf{Physical (PHYS):} Activities unfold in a physical, real-world environment. This includes traditional classroom settings and other tangible spaces where learning or training occurs without reliance on digital technologies. 
-    \item \textbf{Blended (BLND):} Learning or training activities blend elements of both the virtual and physical realms. Environments characterized by augmented reality, mixed reality, or a combination of digital and physical components fall into this category. 
-    \item \textbf{Unspecified (UNSP):} Designated when the papers analyzed do not provide sufficient information about a study's learning environment to be conclusively categorized.    
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{Virtual (VIRT)}: Learning or training activities take place entirely within a virtual space, such as when participants engage with content and exercises within a computer-based system.  
+%     \item \textbf{Physical (PHYS):} Activities unfold in a physical, real-world environment. This includes traditional classroom settings and other tangible spaces where learning or training occurs without reliance on digital technologies. 
+%     \item \textbf{Blended (BLND):} Learning or training activities blend elements of both the virtual and physical realms. Environments characterized by augmented reality, mixed reality, or a combination of digital and physical components fall into this category. 
+%     \item \textbf{Unspecified (UNSP):} Designated when the papers analyzed do not provide sufficient information about a study's learning environment to be conclusively categorized.    
+% \end{itemize}
+
+\begin{table}[ht]
+  \centering
+  \caption{Definitions for Environment Settings}
+  \label{tab:environment-settings}
+  \begin{tabular}{|c|p{0.78\textwidth}|}
+    \hline
+    \textbf{Setting} & \textbf{Definition} \\
+    \hline
+    Virtual (VIRT) & Learning or training activities take place entirely within a virtual space, such as when participants engage with content and exercises within a computer-based system. \\
+    \hline
+    Physical (PHYS) & Activities unfold in a physical real-world environment. This could encompass traditional classroom settings or any other tangible space where learning or training occurs without reliance on digital technologies. \\
+    \hline
+    Blended (BLND) & Learning or training activities blends elements of both the virtual and physical realms. Environments characterized by augmented reality, mixed reality, or a combination of digital and physical components fall into this category. \\
+    \hline
+    Unspecified (UNSP) & Designated when the papers analyzed do not provide sufficient information about the setting to be conclusively categorized. \\
+    \hline
+  \end{tabular}
+\end{table}
 
 The reasons for analyzing the environmental settings are twofold. First, we aim to unveil the contextual relevance of multimodal learning and training, discerning how these approaches manifest in computer-based (virtual) spaces, traditional classrooms (and other physical environments), and blended scenarios combining virtual and physical elements. Additionally, our categorization acknowledges instances where information about the environment setting is not sufficiently provided, directing attention to research gaps and unexplored areas within the current literature.
-
-% Joyce: is a table better?
-% \begin{table}[h]
-%   \centering
-%   \caption{Definitions for Environment Settings}
-%   \label{tab:environment-settings}
-%   \begin{tabular}{|c|p{0.85\textwidth}|}
-%     \hline
-%     \textbf{Setting} & \textbf{Definition} \\
-%     \hline
-%     Virtual & Learning or training activities take place entirely within a virtual space, such as when participants engage with content and exercises within a computer-based system. \\
-%     \hline
-%     Physical & Activities unfold in a physical real-world environment. This could encompass traditional classroom settings or any other tangible space where learning or training occurs without reliance on digital technologies. \\
-%     \hline
-%     Blended & Learning or training activities blends elements of both the virtual and physical realms. Environments characterized by augmented reality, mixed reality, or a combination of digital and physical components fall into this category. \\
-%     \hline
-%     Unspecified & Designated when the papers analyzed do not provide sufficient information about the setting to be conclusively categorized. \\
-%     \hline
-%   \end{tabular}
-% \end{table}
 
 
 \subsubsection{Environment Subject} \label{subsec:environment_subject}
 % Confirm exact set from S18 corpus to be sure!
 % Environment Subject. STEM, humanities, psychomotor skills, other, unspecified
 
-While conducting our analysis, we recognized the importance of identifying the subject matter domains that study participants were engaged in during their educational and training experiences. This categorization not only further helps contextualize the application of multimodal learning and training analytics, but also allows for dynamically exploring how these methods intersect with a diverse array of domains. To systematize this classification, we identified five subject matter categories, which are listed below. These categories are intentionally broad, as we observed that introducing additional granularity %would not substantially contribute to a better understanding the current trends in the field of multimodal learning analytics applied to learning and training environments.
+While conducting our analysis, we recognized the importance of identifying the subject matter domains that study participants were engaged in during their educational and training experiences. This categorization not only further helps contextualize the application of multimodal learning and training analytics, but also allows for dynamically exploring how these methods intersect with a diverse array of domains. To systematize this classification, we identified five subject matter categories, defined in Table \ref{tab:environment-subjects}. These categories are intentionally broad, as we observed that introducing additional granularity %would not substantially contribute to a better understanding the current trends in the field of multimodal learning analytics applied to learning and training environments.
 % , defined in Table \ref{tab:environment-subjects}: STEM, Humanities, Psychomotor Skills, Other, and Unspecified.  
 hindered our ability to analyze and understand the current trends in the field due to the corpus's widely varied subject matter.
-\begin{itemize}
-    \item \textbf{STEM:} Participants engaged in learning or training related to Science, Technology, Engineering, and Mathematics (STEM) disciplines. In our case, this also includes applied scientific disciplines such as healthcare and medicine.
-    \item \textbf{Humanities (HUM):} Participant activities focused on disciplines such as literature, debate, oral presentation, and other humanities-related fields.
-    \item \textbf{Psychomotor Skills (PSY):}  Learning or training activities emphasizing the development of motor skills and coordination.
-    \item \textbf{Other (OTH):} Subjects that do not fall into the above categories. This could encompass a wide range of topics beyond STEM, humanities, or psychomotor skills.
-    \item \textbf{Unspecified (UNSP):} Designated when the papers analyzed did not provide sufficient information about the subject matter to be conclusively categorized.
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{STEM:} Participants engaged in learning or training related to Science, Technology, Engineering, and Mathematics (STEM) disciplines. In our case, this also includes applied scientific disciplines such as healthcare and medicine.
+%     \item \textbf{Humanities (HUM):} Participant activities focused on disciplines such as literature, debate, oral presentation, and other humanities-related fields.
+%     \item \textbf{Psychomotor Skills (PSY):}  Learning or training activities emphasizing the development of motor skills and coordination.
+%     \item \textbf{Other (OTH):} Subjects that do not fall into the above categories. This could encompass a wide range of topics beyond STEM, humanities, or psychomotor skills.
+%     \item \textbf{Unspecified (UNSP):} Designated when the papers analyzed did not provide sufficient information about the subject matter to be conclusively categorized.
+% \end{itemize}
+
+\begin{table}[ht]
+  \centering
+  \caption{Definitions for Environment Subjects}
+  \label{tab:environment-subjects}
+  \begin{tabular}{|c|p{0.73\textwidth}|}
+    \hline
+    \textbf{Subject} & \textbf{Definition} \\
+    \hline
+    STEM & Participants engaged in learning or training related to Science, Technology, Engineering, and Mathematics (STEM) disciplines. In our case, this also includes applied scientific disciplines such as healthcare and medicine.\\
+    \hline
+    Humanities (HUM) & Participant activities focused on disciplines such as literature, debate, oral presentation, and other humanities-related fields. \\
+    \hline
+    Psychomotor Skills (PSY) & Learning or training activities emphasizing the development of motor skills and coordination. \\
+    \hline
+    Other (OTH) & Subjects that do not fall into the above categories. This could encompass a wide range of topics beyond STEM, humanities, or psychomotor skills. \\
+    \hline
+    Unspecified (UNSP) & Designated when the papers analyzed did not provide sufficient information about the subject matter to be conclusively categorized. \\
+    \hline
+  \end{tabular}
+\end{table}
+
 
 Importantly, papers reporting results from multiple studies are categorized with labels corresponding to the environment subject of each study \cite{3796643912,2055153191}. 
-
-
-%Joyce: would a table be better?
-% \begin{table}[ht]
-%   \centering
-%   \caption{Definitions for Environment Subjects}
-%   \label{tab:environment-subjects}
-%   \begin{tabular}{|c|p{0.78\textwidth}|}
-%     \hline
-%     \textbf{Subject} & \textbf{Definition} \\
-%     \hline
-%     STEM & Participants engaged in learning or training related to Science, Technology, Engineering, and Mathematics (STEM) disciplines. \\
-%     \hline
-%     Humanities & Participant activities focused on disciplines such as literature and other humanities-related fields. \\
-%     \hline
-%     Psychomotor Skills & Learning or training activities emphasizing the development of motor skills and coordination. \\
-%     \hline
-%     Other & Subjects that do not fall into the above categories. This could encompass a wide range of topics beyond STEM, humanities, or psychomotor skills. \\
-%     \hline
-%     Unspecified & Designated when the papers analyzed do not provide sufficient information about the subjects to be conclusively categorized. \\
-%     \hline
-%   \end{tabular}
-% \end{table}
-
-
 
 
 \subsubsection{Participant Structure} \label{subsec:participant_structure}
@@ -650,43 +670,100 @@ Importantly, papers reporting results from multiple studies are categorized with
 % Joyce: there are no unspecified paper in the corpus
 % Clayton: awesome thanks for pointing this out!
 
-We categorized papers' participant structures based on whether the analysis of the studies focused primarily on individual or multi-person learning and training experiences. The classification comprises two primary categories: 
-\begin{itemize}
-    \item \textbf{Individual (IND)}: Environments where learning or training activities center around individual participants.
-    \item \textbf{Multi-Person (MULTI)}: Environments where learning or training activities involve multiple participants, often emphasizing collaborative or group dynamics. 
-\end{itemize}
+We categorized papers' participant structures based on whether the analysis of the studies focused primarily on individual or multi-person learning and training experiences. The classification comprises two primary categories, defined in Table \ref{tab:participant-structure}. It's noteworthy that some papers analyzed both types of environments, reflecting the diversity in studies even within individual publications \cite{1326191931, 3637456466}. This categorization illuminates the varying scopes of analysis focus, shedding light on instances where multimodal analytics are tailored to individual learners and others where collaborative (and other multi-person) learning and training experiences take precedence.
 
-It's noteworthy that some papers analyzed both types of environments, reflecting the diversity in studies even within individual publications \cite{1326191931, 3637456466}. This categorization illuminates the varying scopes of analysis focus, shedding light on instances where multimodal analytics are tailored to individual learners and others where collaborative (and other multi-person) learning and training experiences take precedence.
+% \begin{itemize}
+%     \item \textbf{Individual (IND)}: Environments where learning or training activities center around individual participants.
+%     \item \textbf{Multi-Person (MULTI)}: Environments where learning or training activities involve multiple participants, often emphasizing collaborative or group dynamics. 
+% \end{itemize}
+
+\begin{table}[ht]
+    \centering
+    \caption{Categories of Participant Structure}
+    \begin{tabular}{|c|p{0.74\textwidth}|}
+        \hline
+        \textbf{Category} & \textbf{Description} \\
+        \hline
+        \textbf{Individual (IND)} & Environments where learning or training activities center around individual participants. \\
+        \hline
+        \textbf{Multi-Person (MULTI)} & Environments where learning or training activities involve multiple participants, often emphasizing collaborative or group dynamics. \\
+        \hline
+    \end{tabular}
+    \label{tab:participant-structure}
+\end{table}
 
 \subsubsection{Didactic Nature} \label{subsec:didactic_nature}
 % Didactic Nature. Instructional, training, informal, unspecified 
 % Joyce: confirmed on S18
 
-Didactic nature refers to the ``type" of learning or training that transpires in each study's environment, which we use as yet another lens through which to understand, analyze, and differentiate learning and training environments. Our categorization scheme comprises 4 distinct categories:
+Didactic nature refers to the ``type" of learning or training that transpires in each study's environment, which we use as yet another lens through which to understand, analyze, and differentiate learning and training environments. Our categorization scheme, defined in Table \ref{tab:didatic-nature} comprises 4 distinct categories.
 
-\begin{itemize}
-    \item \textbf{Instructional (INSTR)}: Studies where the primary focus is on formal instruction, including traditional classroom settings, online courses, or any structured learning environment with clear instructional objectives.
+% \begin{itemize}
+%     \item \textbf{Instructional (INSTR)}: Studies where the primary focus is on formal instruction, including traditional classroom settings, online courses, or any structured learning environment with clear instructional objectives.
 
-    \item \textbf{Training (TRAIN)}: Studies categorized under TRAIN emphasize skill development, practical training, or professional development. This involves scenarios where participants are acquiring specific skills or competencies relevant to their profession or field.
+%     \item \textbf{Training (TRAIN)}: Studies categorized under TRAIN emphasize skill development, practical training, or professional development. This involves scenarios where participants are acquiring specific skills or competencies relevant to their profession or field.
     
-    \item \textbf{Informal (INF)}: Informal environments involve learning or training that occurs in a more unstructured manner, outside formal instructional or training environments. For instance, \citet{666050348} aimed to bridge multimodal interaction to the game Minecraft\footnote{https://www.minecraft.net/en-us} to support diverse learners in non-traditional learning environments. 
+%     \item \textbf{Informal (INF)}: Informal environments involve learning or training that occurs in a more unstructured manner, outside formal instructional or training environments. For instance, \citet{666050348} aimed to bridge multimodal interaction to the game Minecraft\footnote{https://www.minecraft.net/en-us} to support diverse learners in non-traditional learning environments. 
     
-    \item \textbf{Unspecified (UNSP)}: This category is applied when the papers do not provide sufficient information about the didactic nature of the study. It acknowledges instances where the training or educational context is not clearly defined or detailed in the literature.
-\end{itemize}
+%     \item \textbf{Unspecified (UNSP)}: This category is applied when the papers do not provide sufficient information about the didactic nature of the study. It acknowledges instances where the training or educational context is not clearly defined or detailed in the literature.
+% \end{itemize}
+
+\begin{table}[ht]
+    \caption{Categories of Didactic Nature}
+    \centering
+    \begin{tabular}{|c|p{0.75\textwidth}|}
+        \hline
+        \textbf{Category} & \textbf{Description} \\
+        \hline
+        \textbf{Instructional (INSTR)} & Studies where the primary focus is on formal instruction, including traditional classroom settings, online courses, or any structured learning environment with clear instructional objectives. \\
+        \hline
+        \textbf{Training (TRAIN)} & Studies categorized under TRAIN emphasize skill development, practical training, or professional development. This involves scenarios where participants are acquiring specific skills or competencies relevant to their profession or field. \\
+        \hline
+        \textbf{Informal (INF)} & Informal environments involve learning or training that occurs in a more unstructured manner, outside formal instructional or training environments. For instance, \citet{666050348} aimed to bridge multimodal interaction to the game Minecraft\footnote{https://www.minecraft.net/en-us} to support diverse learners in non-traditional learning environments. \\
+        \hline
+        \textbf{Unspecified (UNSP)} & This category is applied when the papers do not provide sufficient information about the didactic nature of the study. It acknowledges instances where the training or educational context is not clearly defined or detailed in the literature. \\
+        \hline
+    \end{tabular}
+    \label{tab:didatic-nature}
+\end{table}
+
 
 \subsubsection{Level of Instruction or Training} \label{subsec:level_of_instruction}
 % Confirm exact set from S18 corpus to be sure! Joyce: confirmed
 % Level of Instruction or Training. K-12, university, professional development
-We sought to delineate the level of instruction or training for participants, providing valuable insights into the educational contexts targeted by these analyses. The following categories capture the diverse training and educational levels represented in our survey:
+We sought to delineate the level of instruction or training for participants, providing valuable insights into the educational contexts targeted by these analyses. The categories defined in Table \ref{tab:level-instruction-training} capture the diverse training and educational levels represented in our literature review.
 
-\begin{itemize}
-    \item \textbf{K-12}: Participants at the primary or secondary education levels, encompassing kindergarten through 12th grade.
-    \item \textbf{University (UNI)}: Participants engaged in university-level education, including both undergraduate and graduate students.
-    \item \textbf{Professional Development (PROF)}: Participants involved in training or learning experiences specifically designed for professional development and not tied to a K-12 or university curriculum.
-    \item \textbf{Unspecified (UNSP)}: Designated when papers did not provide sufficient information about the participants' level of instruction or training.
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{K-12}: Participants at the primary or secondary education levels, encompassing kindergarten through 12th grade.
+%     \item \textbf{University (UNI)}: Participants engaged in university-level education, including both undergraduate and graduate students.
+%     \item \textbf{Professional Development (PROF)}: Participants involved in training or learning experiences specifically designed for professional development and not tied to a K-12 or university curriculum.
+%     \item \textbf{Unspecified (UNSP)}: Designated when papers did not provide sufficient information about the participants' level of instruction or training.
+% \end{itemize}
+
+\begin{table}[ht]
+    \caption{Categories of Level of Instruction or Training}
+    \label{tab:level-instruction-training}
+    \centering
+    \begin{tabular}{|c|p{0.63\textwidth}|}
+        \hline
+        \textbf{Category} & \textbf{Description} \\
+        \hline
+        \textbf{K-12} & Participants at the primary or secondary education levels, encompassing kindergarten through 12th grade. \\
+        \hline
+        \textbf{University (UNI)} & Participants engaged in university-level education, including both undergraduate and graduate students. \\
+        \hline
+        \textbf{Professional Development (PROF)} & Participants involved in training or learning experiences specifically designed for professional development and not tied to a K-12 or university curriculum. \\
+        \hline
+        \textbf{Unspecified (UNSP)} & Designated when papers did not provide sufficient information about the participants' level of instruction or training. \\
+        \hline
+    \end{tabular}
+\end{table}
+
 
 It is important to note that studies featuring multiple groups of participants, or those reporting results across various studies, may have been assigned multiple labels, reflecting the diversity inherent to the set of papers in our corpus.
+
+% TODO
+% \subsection{Feedback}
 
 \subsubsection{Analysis Approach} \label{subsec:analysis_approach}
 % MB vs MF.
@@ -803,6 +880,8 @@ To reduce our corpus to a reviewable body of works, we employed both quantitativ
 
 \subsubsection{Citation Graph Pruning (Quantitative Corpus Reduction).}\label{subsubsec:cgp}
 
+\input{data/graph_prunning_pseudocode}
+
 For visualization, analysis, and distillation purposes, we used \href{https://networkx.org/}{NetworkX} to create and display a \textit{citation graph} of the initial 2,120 works considered for inclusion in this review. The citation graph is a directed acyclic graph (DAG), where each node is a paper uniquely identifiable by its UUID (universally unique identifier) on Google Scholar, and each directed edge from A to B indicates paper A cites paper B. For the purposes of this paper, we consider the degree of each node (paper) $p$ to be the sum of both incoming and outgoing edges, i.e., papers citing $p$ and papers cited by $p$, respectively. We again used SerpAPI for collecting the list of works that cited each paper. The citation search did not need to be conducted in both directions, as any paper citing another paper in our corpus would already have been identified by the ``cited by" list of the paper being cited. Citations by papers not included in our initial search (i.e., in the DAG) were ignored. Initially, our DAG contained a 3-node cycle. This was due to preprint overlap, as papers by the same author cited each other while in progress. Once the cycle was identified, its nodes' edges were updated, and the cycle was removed. No nodes were removed as a result of correcting the cycle.
 
 Once the DAG was constructed, we removed all 0-degree nodes (Table \ref{tab:procedure}, Step ID 3) (i.e. nodes with no edges coming in or going out). We felt it reasonable that if a paper did not cite (or was not cited by) any other papers in the field as determined by our literature search, then the paper was either not relevant to the field or did not yield methods or findings referenced by subsequent works. Importantly, our approach strikes a balance between incoming and outgoing citations, as earlier works are unable to \textit{cite} many works in the corpus, and later works are unable to \textit{be cited by} many works in the corpus. For example, works from early 2017 may not have any outgoing edges simply due to being some of the earliest works in the corpus, which would have prevented them from citing papers that had not yet been published. However, these same papers had a greater opportunity to be cited by subsequent papers, which is why we felt it important to consider both incoming and outgoing edges: we expect earlier papers to have more incoming edges and later papers to have more outgoing edges. Altogether, pruning 0-degree nodes from the DAG reduced our corpus by 488, dropping our count to 1,632 works.
@@ -837,7 +916,7 @@ Evaluating the DAG's connectivity, we found one large component consisting of 1,
 
 Once we had our connected graph, we removed 1-degree nodes to further prune it. This created new 0-degree nodes, which were also subsequently removed. This process of removing 1- and 0-degree nodes was repeated iteratively four times (Table \ref{tab:procedure}, Step ID 5) until the graph was stable (i.e., removing 1-degree nodes did not create any new 0-degree nodes). By iteratively removing 1- and 0-degree nodes, we felt we could effectively identify and remove works outside the scope of our literature review without losing works directly related to multimodal learning and training environments. This is because the field of multimodal learning and training environments spans several sub-fields across computer science, education, and cyberphysical systems, and the authors agreed it was unlikely papers with so few edges would be relevant to our review if they had not cited (or been cited by) more than a few other works in our corpus. We removed 373 nodes in the first iteration (Table \ref{tab:procedure}, Step ID 5.1), 74 nodes in the second iteration (Table \ref{tab:procedure}, Step ID 5.2), 19 nodes in the third iteration (Table \ref{tab:procedure}, Step ID 5.3), and 2 nodes in the fourth and final iteration (Table \ref{tab:procedure}, Step ID 5.4). Altogether, we removed 468 papers across four iterations, which reduced our corpus from 1,531 papers to 1,063. 
 
-Manually examining the remaining 1,063 titles informed us that a large part of our corpus was still outside the scope of our review. First, we  noticed there were still many papers related to training multimodal neural networks. We also noticed many works applying multimodal methods to the medical field, usually in terms of medical imaging. To remove papers pertaining to multimodal neural network training and multimodal medical applications, we programmatically identified 217 titles via regex keyword search (Table \ref{tab:procedure}, Step ID 6) that contained at least one of the six following words: neural, deep, machine, medical, medicine, and healthcare. We then evaluated the selected titles by hand. Of the 217, 13 were kept in the corpus due to their potential relevance to our review. Papers employing deep learning methods in multimodal learning analytics (MMLA) and applying multimodal methods to medical learning or training environments were within the scope of our review, for example. As examples, we removed one paper titled, ``deep learning for object detection and scene perception in self-driving cars: survey, challenges, and open issues" \cite{gupta2021deep}; and we kept one titled, ``supervised machine learning in multimodal learning analytics for estimating success in project‐based learning" \cite{spikol2018supervised}. The remaining 204 papers were removed from the corpus, reducing it to 859 potentially relevant works.
+Manually examining the remaining 1,063 titles informed us that a large part of our corpus was still outside the scope of our review. First, we  noticed there were still many papers related to training multimodal neural networks. We also noticed many works applying multimodal methods to the medical field, usually in terms of medical imaging. To remove papers pertaining to multimodal neural network training and multimodal medical applications, we programmatically identified 217 titles via regex keyword search (Table \ref{tab:procedure}, Step ID 6) that contained at least one of the six following words: neural, deep, machine, medical, medicine, and healthcare. We then evaluated the selected titles by hand. Of the 217, 13 were kept in the corpus due to their potential relevance to our review. Papers employing deep learning methods in multimodal learning analytics (MMLA) and applying multimodal methods to medical learning or training environments were within the scope of our review, for example. As examples, we removed one paper titled, ``deep learning for object detection and scene perception in self-driving cars: survey, challenges, and open issues" \cite{gupta2021deep}; and we kept one titled, ``supervised machine learning in multimodal learning analytics for estimating success in project‐based learning" \cite{1637690235}. The remaining 204 papers were removed from the corpus, reducing it to 859 potentially relevant works.
 
 It was at this point we concluded our quantitative pruning procedure and began qualitatively reducing the corpus, which we discuss in the next subsection.
 
@@ -1234,7 +1313,7 @@ The prevalence of participant artifacts suggests a notable emphasis on utilizing
 Among these papers, an overwhelming majority --- 44 out of 45 --- incorporate more than one human-centered modality in their analyses, having multiple modalities complement or validate each other. The one exception is a journal article by \citet{3809293172} that applied clustering, NLP, and general linear modeling to a small dataset comprised of researcher artifacts that detailed students' behaviors and speech during measurement tasks to identify successful measurement strategies. Amongst the other 44 papers, there is a high variability of combinations of human-centered modalities, with the ones that appear more frequently together being Qualitative Researcher Observations \& Participant Artifacts paired in 4 papers, Participant Produced Artifacts \& Researcher Produced Artifacts paired in 4 papers, and Interview Notes \& Qualitative Researcher Observations paired in 4 papers.
 
 % SOTA
-In our analysis of 45 papers employing human-centered modalities, notable trends emerged regarding the choice of analysis methods. A predominant strategy, observed in 22 papers, involves the transformation of human-centered modalities into quantifiable data for statistical analysis. This indicates a statistically significant preference for leveraging these modalities to derive quantifiable insights. Simultaneously, a substantial subset of papers (14) distinctly focuses on qualitative analysis, underscoring a statistically significant emphasis on extracting rich, qualitative insights from human-centered data sources. Further diversifying the analytical landscape, 8 papers engage in classification methodologies, a statistically significant trend in discerning patterns and relationships. Additionally, 7 papers delve into pattern extraction, 5 into clustering, 5 into regression, and 2 into network analysis, showcasing statistically significant variations in the adoption of these diverse analysis paradigms with human-centered data.
+In our analysis of 45 papers employing human-centered modalities, notable trends emerged regarding the choice of analysis methods. A predominant strategy, observed in 22 papers, involves the transformation of human-centered modalities into quantifiable data for statistical analysis. This indicates a preference for leveraging these modalities to derive quantifiable insights. Simultaneously, a substantial subset of papers (14) distinctly focuses on qualitative analysis, underscoring a statistically significant emphasis on extracting rich, qualitative insights from human-centered data sources. Further diversifying the analytical landscape, 8 papers engage in classification methodologies, a statistically significant trend in discerning patterns and relationships. Additionally, 7 papers delve into pattern extraction, 5 into clustering, 5 into regression, and 2 into network analysis, showcasing statistically significant variations in the adoption of these diverse analysis paradigms with human-centered data.
 
 Among these 45 papers, a substantial proportion embraces the adoption of multiple analysis methods, highlighting the multi-label nature of this category. Specifically, only 16 papers exclusively employ one type of analysis method, indicating a singular analytical focus. In contrast, 15 papers engage in the integration of two distinct analysis methods, 13 papers exhibit an even more diversified analytical strategy, incorporating three distinct analysis methods. Notably, one paper by Worsley and Blikstein \cite{3095923626} stands out for its comprehensive approach, employing four types of analysis methods to identify correlations between the multimodal data, experimental condition, design quality, and learning. The approaches incorporates both the human-annotated coding of data and automatically annotated data.
 
@@ -1286,7 +1365,7 @@ Another aspect that underscores this challenge is the low adoption rate of estab
 
 In our analysis of the 73 papers within the corpus, we observed diverse approaches to data fusion in multimodal learning and training. The choice between different types of fusion depends on the characteristics of the data, the nature of the environmental task, and the desired level of integration. Each fusion strategy has its strengths and limitations, and researchers often select the most suitable approach based on the specific requirements of their study and research goals. One noteworthy observation in this corpus is that a considerable number of papers don't explicitly explain or justify their fusion choices.
 
-Of the 73 papers in the corpus, 54 perform early, mid, late, or hybrid fusion. The distribution of fusion types reveals that mid fusion is the most prevalent (employed in 27 papers (36.99\%)), showcasing its popularity in integrating information from different modalities via combining derived, observable features. Hybrid fusion follows closely, with 19 papers (26.03\%) utilizing a combination of early and late fusion strategies. Early fusion is observed in 3 papers (4.11\%), highlighting instances where feature-level integration is advantageous. Late fusion, occurring after separate models are trained, is employed in 8 papers (10.96\%). 20 papers (27.40\%) adopt other types of fusion strategies, no fusion, or do not explicitly mention data fusion.
+Of the 73 papers in the corpus, 54 perform early, mid, late, or hybrid fusion. The distribution of fusion types reveals that mid fusion is the most prevalent (employed in 27 papers (36.99\%)), showcasing its popularity in integrating information from different modalities via combining derived, observable features. Hybrid fusion follows closely, with 19 papers (26.03\%) utilizing a combination of early, mid and/or late fusion strategies. Early fusion is observed in 3 papers (4.11\%), highlighting instances where feature-level integration is advantageous. Late fusion, occurring after separate models are trained, is employed in 8 papers (10.96\%). 20 papers (27.40\%) adopt other types of fusion strategies, no fusion, or do not explicitly mention data fusion.
 
 A noteworthy aspect of our analysis is the existence of multi-label fusion in the corpus, with 4 papers (5.48\%) employing more than one fusion type. Sümer et al \cite{1315379489} employ both early and late fusion while researching the best performing engagement classifiers using facial videos collected in the classroom. Chango et al. employed mid and late fusion\cite{2936220551} while investigating which data fusion approach and classification algorithms would produce the best results from their data for predicting students’ final performance in their courses and employed hybrid and late fusion\cite{4277812050} to test whether the prediction of students' performance in intelligent tutoring systems could be improved by using attribute selection and classification ensembles. Cornide-Reyes et al. \cite{4019205162} focused on detecting important relationships and characteristics of the collaborative and non-collaborative groups using network analysis and statistics, employing both mid fusion and another type of fusion the authors performed manually (i.e., they qualitatively fused the data before analysis). This underscores the complexity and adaptability of data fusion strategies in multimodal learning and training analytics. 
 
@@ -1303,16 +1382,16 @@ In early fusion, the joint feature representation encompasses information from a
 % Research gaps
     % Discuss the need for mid-fusion relative to early fusion
 
-Mid fusion, or decision-level fusion, involves training separate models on individual modalities and combining their outputs at a later stage, typically during decision-making or inference. It is advantageous when each modality requires unique processing, and combining decisions is more effective than early feature integration. This was shown to be the case while comparing the number of papers that employed mid versus early fusion. Overall, the disparity suggests that mid fusion is currently more favored or deemed more suitable for addressing the challenges and objectives in multimodal learning and training within the corpus. 
+Mid fusion represents combining features that have had prior processing but stay within the input space (are observable features). It is advantageous when each modality requires unique processing, and combining decisions is more effective than early feature integration. This was shown to be the case while comparing the number of papers that employed mid versus early fusion. Overall, the disparity suggests that mid fusion is currently more favored or deemed more suitable for addressing the challenges and objectives in multimodal learning and training within the corpus. 
 
 \subsubsection{Late Fusion}
 % SOTA
 % Research gaps
 
-In late fusion, the models for each modality operate independently until the final decision or inference stage, where their outputs are aggregated. This approach is suitable when modalities are semantically diverse, and their contributions are better understood when combined at a later stage. In our corpus, 8 papers employed late fusion, with 3 of them also employing other types of fusion for comparative purposes \cite{1315379489,2936220551,4277812050}. With the exception of 1 paper that did regression \cite{2836996318}, the majority used fusion for classification purposes.
+In late fusion, the models for each modality operate independently until the final decision or inference stage, where their outputs are aggregated. This approach is suitable when modalities are semantically diverse, and their contributions are better understood when combined at a later stage. In our corpus, 8 papers employed late fusion, with 3 of them also employing other types of fusion for comparative purposes \cite{1315379489,2936220551,4277812050}. With the exception of 1 paper that did regression \cite{2836996318}, the majority used late fusion for classification purposes.
  
 \subsubsection{Hybrid Fusion}
-
+Hybrid fusion involves integrating information at different stages of the analysis pipeline and its design varies based on the goals of the analysis, the characteristics of the data, and the learning or training tasks being addressed. In our analysis of the corpus it was employed in 19 out of the 54 papers that performed fusion, highlighting the significance of this approach. Most papers (14 out of 19) had at least 4 modalities and classification was the predominant analysis method, being applied in 15 papers. Furthermore, amongst those 19 papers, only 1 employed multiple fusion types: hybrid and late. In this work, Chango et al. aimed to assess whether the prediction of learning performance could be improved by integrating attribute selection and classification ensembles through three experiments and the application of six classification algorithms to numerical and discretized preprocessed multimodal data\cite{4277812050}. 
 
 \subsection{Analysis}\label{subsec:findings_analysis}
 % EDUARDO
@@ -1360,13 +1439,13 @@ Indirect feedback, on the other hand, represents feedback that does not directly
 
 \section{Discussion} \label{sec:discussion}
 
-Our findings reveal several clear trends in the methods applied to multimodal learning and training environments as a whole:
+Our findings reveal clear trends in the methods applied to multimodal learning and training environments as a whole:
 \begin{itemize}
-    \item \textit{Environments}. Learning environments outnumber training environments roughly 7:2, with the majority of focusing on STEM instruction incorporating at least some virtual component (i.e., VRT or BLND environment settings).
+    \item \textit{Environments}. Learning environments outnumber training environments roughly 7:2, with the majority focusing on STEM instruction incorporating at least some virtual component (i.e., VRT or BLND environment settings).
     \item \textit{Participants}. Study participants tend to be either university or K-12 students learning or training in multi-person environments slightly more often than individual environments (3:2).
-    \item \textit{Data and Modalities}. Video, audio, environment logs, and participant produced artifacts are the most common data collection mediums; while pose, logs, affect, gaze, and prosodic speech are the most popular modalities. The vast majority of works incorporate 2-5 modalities in their multimodal pipelines, suggesting that it is more useful to focus on a few, meaningful modalities rather than several (potentially uninformative) modalities. A large majority of papers performed at least some type of vision analysis (i.e., used features derived from video or gaze). A majority also incorporated human-centered modalities (e.g., participant/researcher produced artifacts, surveys, interviews, etc.), with all but one incorporating more than one human-centered modality.
-    \item \textit{Analysis Methods and Approaches}. Classification, statistical analysis, and qualitative analysis were the most common. Classification was typically used for predicting an outcome (dependent) variable like learning or training gains, while statistical methods were often used to select and correlate features (both with each other and with outcome variables). Qualitative analyses typically involved case study observation, qualitative coding, and thematic analyses. Model-based papers outnumbered model-free ones approximately 3:1, suggesting that the community as a whole prefers to develop models to explain the learning and training processes.
-    \item \textit{Data Fusion}. Roughly 3/4 of papers performed either early, mid late, or hybrid fusion. Mid fusion was the most prevalent, followed by hybrid fusion. While not always the case, researchers often stated that fused modalities yielded results superior to unimodal or unfused features, so one should consider exploring data fusion while analyzing multimodal learning and training environments. 
+    \item \textit{Data and Modalities}. Video, audio, environment logs, and participant produced artifacts are the most common data collection mediums; while pose, logs, affect, gaze, and prosodic speech are the most popular modalities. The vast majority of works incorporate 2-5 modalities in their multimodal pipelines, suggesting that it is more useful to focus on a few, meaningful modalities rather than several (potentially uninformative) modalities. A large majority of papers performed at least some type of vision analysis (i.e., used features derived from video or gaze). A majority also incorporated human-centered modalities (e.g., participant/researcher produced artifacts, surveys, interviews, etc.), and nearly all of those papers incorporated more than one human-centered modality.
+    \item \textit{Analysis Methods and Approaches}. Classification, statistical analysis, and qualitative analysis were the most common. Classification was typically used for predicting an outcome (dependent) variable like learning or training gains, while statistical methods were often used to select features and correlate them with outcome variables. Qualitative analyses typically involved case study observation, qualitative coding, and thematic analyses. Model-based papers outnumbered model-free ones approximately 3:1, suggesting that the community as a whole prefers to develop models to help explain the learning and training processes.
+    \item \textit{Data Fusion}. Roughly 3/4 of papers performed either early, mid, late, or hybrid fusion. Mid fusion was the most prevalent, followed by hybrid fusion. While not always the case, researchers often stated that fused modalities yielded results superior to unimodal or unfused features, so one should consider exploring data fusion while analyzing multimodal learning and training environments. 
     \item  \textit{Publication Mediums}. The \textit{British Journal of Educational Technology} (BJET) and \textit{International Conference on Learning Analytics \& Knowledge} (LAK) were far and away the two most popular publication mediums represented in our corpus. 8 papers were published via BJET, while 7 were published via LAK. No other journal or conference in our corpus was represented by more than three works.
 \end{itemize}
 
@@ -1378,7 +1457,7 @@ The results of our corpus's papers illustrate that multimodal methods are often 
 
 Human-centered approaches offer researchers the opportunity to dive deeper into the learning and training processes to gain a more complete understanding of participants relative to the environment and learning/training activities. The richness innate to human-centered data --- e.g., contextual observations (QUAL), tangible artifacts (PPA/RPA), participant perspectives (INTER/SURVEY), etc. --- allows researchers to gain unique insights into participants' experiences and behaviors by identifying subtleties that more opaque (often quantitative) approaches may miss. 
 
-Our corpus's results also paint a clear picture that multimodal methods are both better-performing and more informative relative to unimodal approaches. This is largely due to the fact different modalities convey markedly different types of information and create complex representations of learners and trainers much richer than is possible by using only a single modality. Often, combining features from completely separate modalities and data collection mediums proved most effective, which Ma et al. \cite{3754172825} demonstrate via several key findings:
+Our corpus's results also paint a clear picture that multimodal methods are, generally, both better-performing and more informative relative to unimodal approaches. This is largely due different modalities conveying markedly different types of information and creating complex representations of learners and trainers much richer than is possible by using only a single modality. Often, combining features from completely separate modalities and data collection mediums proved most effective, which Ma et al. \cite{3754172825} demonstrate via several key findings:
 
 \begin{quote}
     The results showed that Linguistic + Audio + Video (F1 Score = 0.65) yielded the best impasse detection performance...\\
@@ -1388,7 +1467,7 @@ Our corpus's results also paint a clear picture that multimodal methods are both
     ...all of our multi-modal models outperformed their unimodal models...
 \end{quote}
 
-In one paper, Worsley and Blikstein's ``takeaway" is that there are several strategies for performing multimodal learning analytics, and that many approaches offer a ``meaningful glimpse" into complex datasets that may not readily appear using traditional approaches \cite{3095923626}. However, the added complexity endemic to multimodal data and environments also presents several challenges. Liu at al. \cite{3783339081} mention that ``data from different sources are often difficult to integrate." Because the majority of multimodal learning and training data is temporal, data alignment and sampling rate issues often arise. Aligning data streams, collecting data, and labeling data are (often prohibitively) time-consuming processes, and the richness of multimodal data necessitates ``significant human time and effort" to analyze \cite{3796180663}.  
+In one paper, Worsley and Blikstein's ``takeaway" is that there are several strategies for performing multimodal learning analytics, and that many approaches offer a ``meaningful glimpse" into complex datasets that may not readily appear using traditional approaches \cite{3095923626}. However, the added complexity endemic to multimodal data and environments also presents several challenges. Liu at al. \cite{3783339081} mention that ``data from different sources are often difficult to integrate." Because the majority of multimodal learning and training data is temporal, data alignment and sampling rate issues often arise. Aligning data streams, collecting data, and labeling data are (often prohibitively) time-consuming processes, and the richness of multimodal data necessitates ``significant human time and effort" \cite{3796180663} to analyze.  
 
 Perhaps the biggest challenge to the field as a whole is a lack of data. The majority of papers in our corpus performed analysis on small groups of learners or trainees, either via case studies or with classroom-sized cohorts. Small datasets such as these make it very difficult to employ many quantitative algorithms, which explains (at least partially) why few works opted for deep learning approaches. Kubsch et al. referred to the limited availability of data as ``one of the major challenges for building robust and reliable multimodal models" \cite{32184286}. These datasets are also often unrepresentative of the population as a whole, which makes it very difficult to develop scalable and generalizable approaches. Multiple researchers discussed these issues as limitations to their work:
 
@@ -1402,42 +1481,17 @@ Perhaps the biggest challenge to the field as a whole is a lack of data. The maj
     ...training a model on a reduced dataset introduces a bias to the model, affecting the validity of the model’s predictions when the data inputs come from a different distribution than the training set. \cite{32184286}
 \end{quote}
      
-Unfortunately, there is currently a lack of large, open source datasets that are curated to represent multimodal learning and training environments and their participants. This represents a major research gap in the field. Despite several papers mentioning data scarcity as a noteworthy challenge, no papers in our corpus listed compiling large, open source datasets as a research focus, and very few discussed developing generalizable methods that are designed to work with smaller datasets. Currently, the multimodal learning and training SOTA involves formulating methods in a one-off fashion by developing and leveraging approaches that are not necessarily designed to generalize to other datasets, students, age groups, or domains. Researchers in our corpus also heavily relied on derived, observable features (particularly in computer vision, e.g., affect and pose) as model input, which differs from core computer vision approaches and leaves room for exploring end-to-end model training using raw input values (e.g., pixel values) in the future.  
+Unfortunately, there is currently a lack of large, open source datasets that are curated to represent multimodal learning and training environments and their participants. This represents a major research gap in the field. Despite several papers mentioning data scarcity as a noteworthy challenge, no papers in our corpus listed compiling large, open source datasets as a research focus, and very few discussed developing generalizable methods that are designed to work with smaller datasets. Currently, the multimodal learning and training SOTA involves formulating methods in a one-off fashion by developing and leveraging approaches that are not necessarily designed to generalize to other datasets, students, age groups, or domains. Researchers in our corpus also heavily relied on derived, observable features (particularly in computer vision, e.g., affect and pose) as model input, which differs from core computer vision approaches and leaves room for exploring end-to-end model training using raw inputs (e.g., pixel values) in the future.  
 
-This indicates that the multimodal learning and training SOTA lags behind much of the core AI and ML SOTA, as many contemporary methods and models are often designed to generalize across different types of tasks, datasets, and domains. For example, GPT-4 was tested on several benchmarks, as well as dozens of AP and professional exams. \cite{openai2023gpt4}. In general, most of the SOTA core AI approaches, such as transformer models and reinforcement learning approaches, are currently not being applied to learning and training environments. Much of this is likely due to resource limitations (e.g., monetary or computational cost) or access limitations (i.e., accessing closed, privately-owned models). Additionally, there are privacy concerns with closed models, as private enterprises may opt to preserve researchers' data locally for model training and improvement. 
+All of this indicates that the multimodal learning and training SOTA lags behind much of the core AI and ML SOTA, as many contemporary methods and models are often designed to generalize across different types of tasks, datasets, and domains. For example, GPT-4 was tested on several benchmarks, as well as dozens of advanced placement (AP) and professional exams \cite{openai2023gpt4}. In general, most of the SOTA core AI approaches, such as transformer models and reinforcement learning approaches, are currently not being applied to learning and training environments. Much of this is likely due to resource limitations (e.g., monetary or computational cost) or access limitations (i.e., accessing closed, privately-owned models). Additionally, there are privacy concerns with closed models, as private enterprises may opt to preserve researchers' data locally for model training and improvement. 
 
 Another area where our field lags behind core AI is conversational agents. Despite the prevalence of core AI agent-based research, only a few papers in our corpus discussed agents. Those that did discuss agents did so in terms of evaluation and feedback using rules-based methods or other traditional approaches, and did not employ multi-turn, interactive agents (although one paper \cite{3093310941} did mention exploring this in the future). A large reason for this is that our literature search window closed right before ChatGPT's release, and generative AI was not yet ubiquitous when we conducted our search. While we had expected to see more agent-based works leveraging the previous generation of language models (e.g., BERT \cite{devlin2018bert} and GPT-2 \cite{radford2019language}), we hope that the recent proliferation in generative AI engenders a similar rise in multimodal, conversational agents tailored to learning and training environments.
 
-The lack of standardized coding practices and other protocols represents another gap in the literature. Nearly all papers used their own domain- or task-specific coding scheme to label their data, which makes it difficult for researchers to replicate and compare findings. Developing reliable methods for automating human coding procedures is also a major issue. Additionally, the creation of a standardized log format, coupled with a consistent adherence by the research community, would be of great benefit. Even in instances where industry standards are already established, there is a low adoption rate in the multimodal learning and training community. This reflects a broader issue within the community, as researchers are hesitant to align with the previously established norms of the more catholic computer science and learning science fields.  
+The lack of standardized coding practices and other protocols represents another gap in the literature. Nearly all papers used their own domain- or task-specific coding scheme to label their data, which makes it difficult for researchers to replicate and compare findings. Developing reliable methods for automating human coding procedures is also a major issue. Additionally, the creation of a standardized log format, coupled with consistent adherence by the research community, would be of great benefit. Even in instances where industry standards are already established, there is a low adoption rate in the multimodal learning and training community. This reflects a broader issue within the community, as researchers are hesitant to align with the previously established norms of the more catholic computer science and learning science fields.  
 
-There is also a relative dearth of training literature compared to learning literature. Training environments, especially physical ones like rehabilitation therapy and athletic training, were not well-represented in our corpus. This is evidenced by the 3:1 INSTR:TRAIN didactic nature ratio and the fact that only 5 papers in the corpus focused on psychomotor skills as the environment subject. Conversely, while sensor data is commonly collected in training environments, it is often not collected in learning environments. Only 20 out of the 73 papers in our corpus used sensor data in their multimodal pipelines, indicating many papers (particularly those dealing with learning environments) are leaving sensor-based features --- like pulse, blood pressure, and body temperature --- largely unexplored. Additionally, the vast majority of papers opted for either quantitative analysis with programmatically-derived features \textit{or} qualitative analysis with human-derived features. Only 20 papers employed both qualitative and quantitative analyses. We envision mixed methods approaches to be a promising research direction going forward as researchers seek to gain more comprehensive understandings of their study participants' learning and training processes. Lastly, environments focusing on professional development were also a rarity (5 papers); and no papers, to our knowledge, conducted longitudinal analyses of students or trainees across multiple tasks, assignments, or grade-levels. 
+There is also a relative dearth of training literature compared to learning literature. Training environments, especially physical ones like rehabilitation therapy and athletic training, were not well-represented in our corpus. This is evidenced by the 3:1 INSTR:TRAIN didactic nature ratio and the fact that only 5 papers in the corpus focused on psychomotor skills as the environment subject. Conversely, while sensor data is commonly collected in training environments, it is often not collected in learning environments. Only 12 learning environment papers in our corpus used sensor data in their multimodal pipelines, indicating many learning environment papers are leaving sensor-based features --- like pulse, blood pressure, and body temperature --- largely unexplored. 
 
-\subsection{Limitations}
-The major limitations of this work involve the use of Google Scholar to conduct the literature search and the use of a citation graph for programmatic corpus reduction. Both are discussed in the following paragraphs.
-
-\subsubsection{Google Scholar.} While Google Scholar is widely used by researchers across both academia and industry, it poses a challenge for reproducibility. Like Google Search, Google Scholar is a non-deterministic, proprietary search algorithm. Factors such as the individual user conducting the search, the user's geolocation, the date the search was conducted, and the user's search history may all affect how Google Scholar collates search results. Google may also perform A/B testing in live environments to determine which version of its algorithm users deem more effective. The algorithm is also (presumably) continually evolving, and users are unable to know exactly which version of the algorithm is used to conduct a particular search. As such, there is little expectation that our initial corpus will be able to be reconstructed \textit{in its exact form} without at least some degree of variability.
-
-The authors are confident the degree of variability from different Google Scholar searches does not prohibit the \textit{overall} reproducibility of the initial corpus. While SerpAPI's web scrape method is proprietary, the creators address several of our concerns in their documentation\footnote{https://serpapi.com/}. The API's search does not use information from any individual user's Google account when conducting the web scrape, as no Google account is attached to the SerpAPI account, API key, or API calls themselves. Instead, calls are made via proxy and random headers, as illustrated in Figure \ref{fig:serpAPI}. When trying to reproduce the API's results via manual search, SerpAPI recommends using the URL in the API's JSON results in ``incognito mode". 
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{img/SERP_API_diagram.drawio.png}
-    \caption{Searching Google Scholar via SerpAPI.}
-    \label{fig:serpAPI}
-\end{figure}
-
-Additionally, we reached out to SerpAPI directly and asked, ``Does SerpAPI attach personal or identifying information when making request?", to which SerpAPI responded, ``No, we don't add any personal information." SerpAPI also stated, ``...others can reproduce your results by using Google Scholar website, if they use the same search criteria...", but we believe this to be an overstatement given Google's lack of transparency with regard to exactly which algorithm is being used in any single search. While we cannot guarantee perfect reproducibility due to the aforementioned issues, we can state with a reasonable degree of confidence that our own individual search biases did not influence the initial search results (outside of the choosing of the search terms) due to how SerpAPI handles API calls to Google Scholar. For reference, this review's literature search was conducted by an author of this paper in Nashville, TN, USA on October 22, 2022.
-
-\subsubsection{Citation Graph Pruning.} 
-
-As discussed in Section \ref{subsec:study_selection}, we initially pruned our corpus using quantitative means via the use of a citation graph. In doing this, it is possible we excluded relevant works from our corpus based on them only having cited or been cited by a minimal number of other works in our corpus. This literature review is a survey of the prominent methods, practices, and approaches researchers are applying to multimodal learning and training environments. As such, the authors agreed that if a work did not utilize a large degree of previous research (i.e. cite several other works in the corpus) or serve as a base from which a large degree of other researchers have built upon (i.e. be cited by several other works in the corpus), then that work was likely outside the scope of our review. Considering our corpus was still largely comprised (over 50\%) of works later deemed to be outside the scope of this review after graph-based pruning, the authors are confident that few papers directly pertaining to multimodal learning and training environments were discarded as a result of graph-based pruning.
-
-\subsubsection{Other Limitations}.
-% Paper that was not peer reviewed (possibly) \cite{483140962}
-Other, more minor limitations are also worth mentioning. Due to the prevalence of papers being published to open, non-peer-reviewed platforms like arXiv in recent years (particularly in computer science), we did not screen for non-peer-reviewed works during study selection (i.e., we did not adopt a paper's not being peer-reviewed as an exclusion criterion). There is one paper in the corpus that was submitted to a workshop that none of the authors are familiar with. We are, therefore, unsure of whether or not the paper underwent a formal peer-review. However, the workshop includes submission, notification, and camera ready dates, so we are confident that the workshop is at least refereed to some degree. The rest of the papers in our corpus, to the best of our knowledge, all underwent formal peer-review.
-
-Another limitation is that each of our 42 literature search queries included the word ``multimodal" (in some form). It is possible that works performing multimodal analysis on learning and training environments were unintentionally excluded from our search due to the word ``multimodal" not being explicitly present in their manuscripts. Due to the opacity of Google Scholar's algorithm, we cannot be sure how reliant it is on individual keywords. 
-
-Finally, we conducted our literature search in October 2022---one month before the release of ChatGPT\footnote{\href{https://openai.com/blog/chatgpt}{https://openai.com/blog/chatgpt}}. The increasing degree to which ChatGPT (and other LLMs) are beginning to shape research methodologies is difficult to overstate. Recently (summer of 2023), publications applying LLMs to education- and training-based tasks and environments began to emerge. However, due to the timing of our literature search relative to ChatGPT's release, works in our corpus do not include LLMs in their multimodal pipelines. We anticipate that, as the prevalence of LLMs continues to grow, these powerful models will serve as a foundational piece of many multimodal analysis pipelines used to inform learning and training environments.
+Additionally, the vast majority of papers opted for either quantitative analysis with programmatically-derived features \textit{or} qualitative analysis with human-derived features. Only 20 papers employed both qualitative and quantitative analyses. We envision mixed-methods approaches as a promising research direction going forward, as researchers seek to gain more comprehensive understandings of their study participants' learning and training processes. Lastly, environments focusing on professional development were also a rarity (5 papers); and no papers, to our knowledge, conducted longitudinal analyses of students or trainees across multiple tasks, assignments, or grade-levels. 
 
 \subsection{Future Research Directions} 
 
@@ -1447,16 +1501,43 @@ The results presented in our corpus demonstrate that multimodal methods can be q
 
 \textit{Data Scarcity Mitigation}. Data scarcity is perhaps the most significant issue currently plaguing the field and is responsible for multimodal learning and training methods lagging considerably behind many SOTA core AI approaches. Compiling massively open learning and training corpora could go a long way to help mitigate this, as could designing generalizable approaches requiring limited amounts of data.
 
-\textit{Standardization}. Standardized coding conventions and practices are needed for the field as a whole, particularly for human-centered data and modalities. Establishing these standardized frameworks is paramount to improving the reliability and credibility of machine learning methods, as well as the efficiency of interpreting and utilizing human-centered data. This is also important for log data, as embracing a standardized log format could help the field overcome its reliance on setting-specific methods and improve generalizability. Additionally, it is equally important that researchers make an active effort to adhere to the standards and practices already in place. 
+\textit{Standardization}. Standardized coding conventions and practices are needed for the field as a whole, particularly for human-centered data and modalities. Establishing these conventions is paramount to improving the reliability and credibility of machine learning methods, as well as the efficiency of interpreting and utilizing human-centered data. This is also important for log data, as embracing a standardized log format could help the field overcome its reliance on setting-specific methods and improve generalizability. Additionally, it is equally important that researchers make an active effort to adhere to the standards and practices already in place. 
 
-\textit{Active Environments}. Environments where study participants are physically active provide an opportunity for researchers to incorporate motion-based modalities into their multimodal pipelines (e.g., via inertial measurement unit, IMU, sensors). This type of research was largely absent from our corpus, and we envision it being particularly useful to researchers interested in physical training and embodied learning \cite{zhou2023embodiedai}.
+\textit{Active Environments}. Environments where study participants are physically active provide an opportunity for researchers to incorporate motion-based modalities into their multimodal pipelines (e.g., via inertial measurement unit --- IMU --- sensors). This type of research was largely absent from our corpus, and we envision it being particularly useful to researchers interested in physical training and embodied learning \cite{zhou2023embodiedai}.
 
-\textit{Explainability}. Many AI and ML approaches involve black-box algorithms whose outputs lack explainability. This is problematic, as researchers (and teachers, trainers, study participants, etc.) often cannot understand the model's decision-making processes. This can both hinder teachers' and trainers' ability to guide their pupils, and foment distrust in AI algorithms and systems. Prior works have sought to create more explainable systems via data visualization tools that help make participants' learning and training processes more transparent \cite{hutchins2022co,vatral2023comparative,davalos2023chimerapy}. Some works in our corpus did so as well \cite{2609260641,2879332689}, but more research is needed. We also recognize the potential for LLMs to contribute to enhancing explainability. For example, \textit{Chain-of-Thought} prompting \cite{wei2022chain,cohn2023chain} elicits reasoning chains from the LLM alongside the model's responses.
+\textit{Explainability}. Many AI and ML approaches involve black-box algorithms whose outputs lack explainability. This is problematic, as researchers (and teachers, trainers, study participants, etc.) often cannot understand the model's decision-making processes. This can both hinder teachers' and trainers' ability to guide their pupils, and foment distrust in AI algorithms and systems. Prior works have sought to create more explainable systems via data visualization tools that help make participants' learning and training processes more transparent \cite{hutchins2022co,vatral2023comparative,davalos2023chimerapy}. Some works in our corpus did so as well \cite{2609260641,2879332689}, but more research is needed. We also recognize the potential for LLMs to contribute to enhancing explainability. For example, \textit{Chain-of-Thought} prompting \cite{wei2022chain} elicits reasoning chains from the LLM alongside the model's responses.
 
-\textit{Longitudinal Analyses}. The vast majority of studies focus on using multimodality to either predict overall learning and training outcomes or identify the features that correlate with those outcomes; however, these types of approaches to not consider how students and trainees evolve over time. Conducting longitudinal studies would provide insight into how study participants' behaviors and abilities develop as they progress in their learning or training. 
+\textit{Longitudinal Analyses}. The vast majority of studies focus on using multimodality to either predict overall learning and training outcomes or identify the features that correlate with those outcomes; however, these types of approaches do not consider how students and trainees evolve over time. Conducting longitudinal studies and analyses would provide insight into how study participants' behaviors and abilities develop as they progress in their learning or training. 
+
+\subsection{Limitations}
+The major limitations of this work involve the use of Google Scholar to conduct the literature search and the use of a citation graph for programmatic corpus reduction. Both are discussed in the following paragraphs, as well as a few others.
+
+\subsubsection{Google Scholar.} While Google Scholar is widely used by researchers across both academia and industry, it poses a challenge for reproducibility. Like Google Search, Google Scholar is a non-deterministic, proprietary search algorithm. Factors such as the individual user conducting the search, the user's geolocation, the date the search was conducted, and the user's search history may all affect how Google Scholar collates search results. Google may also perform A/B testing in live environments to determine which version of its algorithm users deem more effective. The algorithm is also (presumably) continually evolving, and users are unable to know exactly which version of the algorithm was used to conduct a particular search. As such, there is little expectation that our initial corpus will be able to be reconstructed \textit{in its exact form} without at least some degree of variability.
+
+However, the authors are confident the degree of variability from different Google Scholar searches does not prohibit the \textit{overall} reproducibility of the initial corpus. While SerpAPI's web scraping method is proprietary, its creators address several of our concerns in their documentation\footnote{\href{https://serpapi.com/}{https://serpapi.com/}}. The API's search does not use information from any individual user's Google account when conducting the web scrape, as no Google account is attached to the SerpAPI account, API key, or API calls themselves. Instead, calls are made via proxy and random headers, as illustrated in Figure \ref{fig:serpAPI}. When trying to reproduce the API's results via manual search, SerpAPI recommends using the URL in the API's JSON results in ``incognito mode". 
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{img/SERP_API_diagram.drawio.png}
+    \caption{Searching Google Scholar via SerpAPI.}
+    \label{fig:serpAPI}
+\end{figure}
+
+Additionally, we reached out to SerpAPI directly and asked, ``Does SerpAPI attach personal or identifying information when making request?", to which SerpAPI responded, ``No, we don't add any personal information." SerpAPI also stated, ``...others can reproduce your results by using Google Scholar website, if they use the same search criteria...", but we believe this to be an overstatement given Google's lack of transparency with regard to exactly which algorithm is being used in any single search. While we cannot guarantee perfect reproducibility due to the aforementioned issues, we can state with a reasonable degree of confidence that our own individual search biases did not influence the initial search results (outside of the choosing of the search terms) due to how SerpAPI handles API calls to Google Scholar. For reference, this review's literature search was conducted by an author of this paper in [Anonymous City], [Anonymous State], [Anonymous Country] on October 22, 2022.
+
+\subsubsection{Citation Graph Pruning.} 
+
+As discussed in Section \ref{subsubsec:cgp}, we initially distilled our corpus quantitatively via citation graph pruning. In doing this, it is possible we excluded relevant works from our corpus based on them only having cited or been cited by a minimal number of other works in our corpus. However, this paper is a literature review of the prominent methods researchers are applying to multimodal learning and training environments. As such, the authors agreed that if a work did not utilize a large degree of previous research (i.e., cite several other works in the corpus) or serve as a base from which a large degree of other researchers have built upon (i.e., be cited by several other works in the corpus), then that work was likely outside the scope of our review. Considering our corpus was still largely comprised (over 50\%) of works later deemed to be outside the scope of this review after CGP, the authors are confident that few papers directly pertaining to multimodal learning and training environments were discarded as a result of CGP.
+
+\subsubsection{Other Limitations}.
+% Paper that was not peer reviewed (possibly) \cite{483140962}
+Other, more minor limitations are also worth mentioning. Due to the prevalence of papers being published to open, non-peer-reviewed platforms like arXiv in recent years (particularly in computer science), we did not screen for non-peer-reviewed works during study selection (i.e., we did not adopt a paper's not being peer-reviewed as an exclusion criterion). To the best of our knowledge, all papers in our corpus underwent formal peer-review, with one possible exception. There is one paper in the corpus that was submitted to a workshop that none of this review's authors are familiar with. We are, therefore, unsure of whether or not the paper underwent formal peer review. However, the workshop includes submission, notification, and camera ready dates, so we are confident that the workshop is at least refereed to some degree. 
+
+Another limitation is that each of our 42 literature search queries included the word ``multimodal" (in some form). It is possible that works performing multimodal analysis on learning and training environments were unintentionally excluded from our search due to the word ``multimodal" not being explicitly present in their manuscripts. Due to the opacity of Google Scholar's algorithm, however, we cannot be sure how reliant it is on the presence or absence of individual keywords. 
+
+Finally, we conducted our literature search in October 2022 --- one month before the release of ChatGPT\footnote{\href{https://openai.com/blog/chatgpt}{https://openai.com/blog/chatgpt}}. The increasing degree to which ChatGPT (and other LLMs) are shaping research methodologies is difficult to overstate. Recently (summer of 2023), publications applying LLMs to education- and training-based tasks and environments began to emerge. However, due to the timing of our literature search relative to ChatGPT's release, works in our corpus do not include LLMs in their multimodal pipelines. We anticipate that, as the prevalence of LLMs continues to grow, these powerful models will serve as a foundational piece of many multimodal analysis pipelines used to inform learning and training environments.
 
 \section{Conclusion}
-In this paper, we conducted a comprehensive literature review of the research methods currently being applied to multimodal learning and training environments. In doing so, we developed a novel, programmatic approach to literature review corpus reduction, \textit{citation graph pruning}. We presented a taxonomy and framework reflecting the current advances in multimodal learning and training research, and identified and analyzed five subdomains of multimodal data (Natural Language, Vision, Sensors, Human-Centered, and Logs). We presented descriptive statistics, performed a qualitative thematic analysis, and discussed our findings with respect to the current SOTA, results achieved, challenges faced, and research gaps for both the subdomains and the corpus as a whole. Consequently, we identified the need for a new type of data fusion, \textit{mid fusion}, which is characterized by fusing derived, observable features. We concluded by presenting the limitations of our work and offered several promising avenues for further research exploration. As the field of multimodal learning and training analytics continues to expand with the advent of the generative AI era, it is our sincerest hope that this literature review will serve as a springboard for new multimodal learning and training methods and research.
+In this paper, we conducted a comprehensive literature review of the research methods currently being applied to multimodal learning and training environments. In doing so, we developed a novel, programmatic approach to literature review corpus reduction, \textit{citation graph pruning}. We presented a taxonomy and framework reflecting the current advances in multimodal learning and training research, and identified and analyzed five subdomains of multimodal data (Natural Language, Vision, Sensors, Human-Centered, and Logs). We presented descriptive statistics, performed a qualitative thematic analysis, and discussed our findings with respect to the current SOTA, results achieved, challenges faced, and research gaps for both the subdomains and the corpus as a whole. Consequently, we identified the need for a new type of data fusion, \textit{mid fusion}, which is characterized by fusing derived, observable features. We concluded by offering several promising avenues for further research exploration and presented the limitations to our work. As the field of multimodal learning and training analytics continues to expand with the advent of the generative AI era, it is our sincerest hope that this literature review will serve as a springboard for new multimodal learning and training methods and research.
 
 \section*{Conflict of Interest Statement}
 The authors have no known conflicts of interest to declare. 

@@ -1,0 +1,42 @@
+\begin{algorithm}
+\caption{Citation Graph Pruning Algorithm}
+\begin{algorithmic}[1]
+\Require Acyclic directed graph $G=(V, E)$
+\Procedure{Degree Trimming}{$G, n$}
+\State $S, D \gets \{\}, \{\}$
+\ForAll{$v \in V$}
+    \If{$\deg(v) <= n$}
+        $S = S \cup \{v\}$
+    \EndIf
+\EndFor
+\ForAll{$v \in S$}
+    \ForAll{$e \in E$}
+        \If{$v \in e \land e \notin D$}
+            $D = D \cup \{e\}$
+        \EndIf
+    \EndFor
+\EndFor
+\State \Return $\left(V \setminus S, E \setminus D\right)$
+\EndProcedure
+
+\Procedure{Subconnected Graph Trimming}{$G$}
+    \State $\left[S_1, S_2, S_3,..., S_n \right] = \text{ConnectedComponent}(G), \text{where each } S_i = (V_i, E_i)$
+    \State $j = \arg \max\{ |V_1|, |V_2|, |V_3|, ..., |V_n| \}$
+    \State \Return $\left(V_j, E_j\right)$
+\EndProcedure
+
+\Procedure{Iterative Trimming}{$G$}
+    \While{True}
+        \State $G' = \text{DegreeTrimming}(G, 1), \text{where } G'=(V', E')$
+        \If{$|V| == |V'|$}
+            \State \textbf{break}
+        \EndIf
+    \EndWhile
+    \State \Return $\left(V', E'\right)$
+\EndProcedure
+\State $G' = \text{DegreeTrimming}(G, 0)$ \Comment{Remove 0-deg vertices}
+\State $G' = \text{SubconnectedGraphTrimming}(G')$ \Comment{Keep largest connected subgraph}
+\State $G' = \text{IterativeTrimming}(G')$ \Comment{Iteratively remove 1-deg vertices until equilibrium}
+\State \Return $G'$
+\end{algorithmic}
+\end{algorithm}
